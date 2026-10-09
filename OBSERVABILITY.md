@@ -5,6 +5,10 @@ ratio, DNS rcodes, recursion timeouts (where provided by installed version),
 memory, load and service restarts. Never emits query names/client histories.
 Run locally every 60 seconds using an approved collector; do not expose the
 control socket or metrics dashboard publicly. No paid collector is provisioned.
+`sudo python3 scripts/monitor.py` persists previous aggregate counters and emits
+structured service/low-memory/SERVFAIL/rate-limit alerts to stdout. Schedule it
+in an approved local timer/collector after deployment; alert transport and
+heartbeat monitoring still need explicit configuration and delivery validation.
 
 Compute counter deltas between samples; detect reset on restart. Alert on:
 - failed low-volume localhost UDP/TCP health probe for 2 samples;
