@@ -1,0 +1,26 @@
+name: Validate DNS development policy
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y unbound dns-root-data nftables shellcheck
+      - run: pip install -r requirements-test.txt -r requirements-discovery.txt
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python scripts/render.py config.example.json
+      - run: sudo install -o unbound -g unbound /usr/share/dns/root.key /var/lib/unbound/root.key && unbound-checkconf artifacts/rendered/unbound.conf
+      - run: shellcheck scripts/*.sh tests/*.sh
+      - run: python tests/local_runtime.py
+      - run: sudo bash tests/firewall_lab.sh
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+      - run: terraform -chdir=terraform fmt -check && terraform -chdir=terraform init -backend=false && terraform -chdir=terraform validate
+      - run: python -m compileall -q scripts tests
+# No credentials, deploy, Terraform apply, Spectrum mutation, or live DNS writes.

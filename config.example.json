@@ -1,0 +1,8 @@
+{
+  "listen": "127.0.0.1",
+  "clients": [],
+  "ssh_clients": ["192.0.2.1/32"],
+  "ip_ratelimit": 20,
+  "monthly_budget_myr": 0,
+  "ipv6": false
+}

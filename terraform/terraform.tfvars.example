@@ -1,0 +1,11 @@
+compartment_id = "REPLACE_DISCOVERED_ROOT_COMPARTMENT_OCID"
+subnet_id = "REPLACE_VERIFIED_SUBNET_OCID"
+availability_domain = "REPLACE_CAPACITY_REPORT_AD"
+image_id = "REPLACE_VERIFIED_UBUNTU_24_04_ARCH_MATCHING_IMAGE"
+ssh_public_key = "ssh-ed25519 REPLACE_PUBLIC_KEY"
+create_instance = false
+human_creation_approval = false
+billing_eligibility_verified = false
+monthly_budget_myr = 0
+approved_estimated_monthly_myr = -1
+assign_public_ip = false

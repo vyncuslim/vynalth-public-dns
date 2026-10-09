@@ -1,0 +1,11 @@
+[Unit]
+Description=Vynalth DNS dedicated firewall table
+Before=unbound.service
+After=network-pre.target
+Wants=network-pre.target
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /usr/local/lib/vynalth-dns/firewall-load.sh
+RemainAfterExit=yes
+[Install]
+WantedBy=multi-user.target
