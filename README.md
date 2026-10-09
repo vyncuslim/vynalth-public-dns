@@ -23,6 +23,7 @@ See [architecture](ARCHITECTURE.md), [security](SECURITY.md), [cost controls](CO
 [deployment commands](DEPLOYMENT.md), [rollback](ROLLBACK.md),
 [test matrix](tests/README.md), [observability](OBSERVABILITY.md) and
 [current discovery evidence](DISCOVERY.md).
+See [validation evidence and unexecuted checks](VALIDATION.md).
 
 This is not yet a replacement for 1.1.1.1: no verified static edge IP entitlement,
 SLA, failover, DDoS guarantee or production acceptance. Conventional OS DNS clients
