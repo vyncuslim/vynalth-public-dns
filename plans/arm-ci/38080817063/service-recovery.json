@@ -1,0 +1,40 @@
+{
+  "pass": true,
+  "scope": "hosted ARM unique actual service; local fixture; NOT production recovery",
+  "original": {
+    "pid": 3267,
+    "profile": "unbound (enforce)",
+    "unit_limits": {
+      "MemoryMax": "268435456",
+      "TasksMax": "32",
+      "LimitNOFILE": "512"
+    },
+    "cgroup_memory_max": "268435456",
+    "cgroup_pids_max": "32",
+    "open_files": "Max open files            512                  512                  files     "
+  },
+  "candidate": {
+    "pid": 3360,
+    "profile": "unbound (enforce)",
+    "unit_limits": {
+      "MemoryMax": "402653184",
+      "TasksMax": "64",
+      "LimitNOFILE": "1024"
+    },
+    "cgroup_memory_max": "402653184",
+    "cgroup_pids_max": "64",
+    "open_files": "Max open files            1024                 1024                 files     "
+  },
+  "restored": {
+    "pid": 3467,
+    "profile": "unbound (enforce)",
+    "unit_limits": {
+      "MemoryMax": "268435456",
+      "TasksMax": "32",
+      "LimitNOFILE": "512"
+    },
+    "cgroup_memory_max": "268435456",
+    "cgroup_pids_max": "32",
+    "open_files": "Max open files            512                  512                  files     "
+  }
+}

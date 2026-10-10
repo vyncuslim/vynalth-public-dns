@@ -18,7 +18,7 @@
   "latest_full_linux_arm_transaction": "NOT RETESTED after stop",
   "local_unbound_engine": "PASS: local WSL Unbound 1.19.2 network namespace; both exact synthetic source IPs; no live devices",
   "shellcheck": "PASS: private deploy/confirm/rollback and local rollback harness",
-  "github_ci": "Scheduling resumed without billing change; native81c8cf8 PASS; x86 missing privsep dir fixed atf4a6f15, current runs pending",
+  "github_ci": "Native ARM and retained x86 PASS atf4a6f15 in runs38080815044/38080817063; later heads must be inspected separately; no billing change",
   "approvals_required": [
     "Scoped read-only Oracle status/impact review",
     "Itemized cleanup after review",

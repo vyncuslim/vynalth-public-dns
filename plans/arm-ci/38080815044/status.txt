@@ -1,0 +1,5 @@
+ARM tests: NOT EXECUTED until individual logged steps succeed.
+Production recovery: PENDING; no Oracle/VPN access.
+All preceding ARM CI steps completed successfully; inspect individual receipts.
+Production recovery and live Windows/Android acceptance remain PENDING.
+job.status=success

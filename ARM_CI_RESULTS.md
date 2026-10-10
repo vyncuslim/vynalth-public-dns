@@ -53,3 +53,17 @@ unresolved historical production DNSSEC timeout, protected Windows acceptance
 and separate post-confirmation Android<45s acceptance remain PENDING. No deployment
 or PR merge is authorized by a green ARM job.180s rollback/<140s global safeguards
 and unchanged configuration/service hashes remain intact.
+
+## Retained x86 and native ARM completed after dependency fix
+
+At f4a6f15f47ed4baf2169b831f118606a26e7ce26, both jobs completed SUCCESS in
+push38080815044 and PR38080817063, including all retained x86 tests and new ARM
+checks. Verified native artifacts for both runs are also in plans/arm-ci/.
+The later evidence-only commits are assessed by their own checks; no implicit
+latest-head PASS or source rewrite is inferred. Archive retrieval metadata is
+generated with LF, while original runner payload bytes are preserved using
+.gitattributes -text; every artifact and committed manifest is reverified.
+
+The isolated service fixture uses a root test identity with enforcing Unbound
+profile; exact production unbound-user permissions/paths and management continuity
+remain separate acceptance gates. No production recovery or Oracle/VPN action.

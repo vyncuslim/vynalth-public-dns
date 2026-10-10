@@ -1,0 +1,9 @@
+{"mode": "success", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "locked", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "active-timer", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "pending", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "hash-mismatch", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "bad-timer", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "listener-failure", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "restart-failure", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
+{"mode": "interrupt", "pass": true, "scope": "actual deploy/rollback; OS and timer shims; private files"}
