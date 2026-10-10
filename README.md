@@ -7,11 +7,12 @@ No cloud resources, live DNS records, or Spectrum applications are created by CI
 ## Quick start (no cloud resources)
 
 ```sh
-python3 -m pip install -r requirements-test.txt
-python3 -m unittest discover -s tests -p 'test_*.py' -v
-python3 scripts/render.py config.example.json
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-test.txt
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+.venv/bin/python scripts/render.py config.example.json
 # Ubuntu 24.04 with Unbound and dns-root-data installed:
-python3 tests/local_runtime.py
+sudo .venv/bin/python tests/local_runtime.py --require-apparmor
 ```
 
 The example listens on localhost, allows no external DNS clients and uses a
@@ -24,6 +25,9 @@ See [architecture](ARCHITECTURE.md), [security](SECURITY.md), [cost controls](CO
 [test matrix](tests/README.md), [observability](OBSERVABILITY.md) and
 [current discovery evidence](DISCOVERY.md).
 See [validation evidence and unexecuted checks](VALIDATION.md).
+The existing Oracle VM has a separately reviewed [Phase B private service plan](PHASE_B.md).
+Its service and firewall changes are pending explicit approval; use the service-only
+procedure there rather than the full installer on this Tailscale-managed VM.
 
 This is not yet a replacement for 1.1.1.1: no verified static edge IP entitlement,
 SLA, failover, DDoS guarantee or production acceptance. Conventional OS DNS clients

@@ -11,6 +11,7 @@ import tempfile
 import time
 import socket
 import threading
+import argparse
 import dns.flags
 import dns.message
 import dns.query
@@ -80,9 +81,20 @@ class Authority:
         self.sock.close()
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--work-dir', type=Path, help='Parent of disposable test directory')
+    parser.add_argument('--require-apparmor', action='store_true')
+    args = parser.parse_args()
+    # Packaged Ubuntu profile already allows owner files beneath /var/lib/unbound.
+    # Do not copy the binary, change profiles, or share production runtime files.
+    parent = args.work_dir
+    if parent is None and Path('/etc/apparmor.d/usr.sbin.unbound').exists():
+        parent = Path('/var/lib/unbound')
+    if parent is not None and not os.access(parent, os.W_OK):
+        raise SystemExit(f'Test needs write access to {parent}; run using sudo and the test venv Python. AppArmor is never disabled.')
     cfg = json.loads((ROOT / 'config.example.json').read_text())
     conf, _ = render(cfg)
-    with tempfile.TemporaryDirectory() as folder:
+    with tempfile.TemporaryDirectory(prefix='vynalth-test-', dir=parent) as folder:
         base = Path(folder)
         # Preserve security settings; substitute writable paths and high loopback port.
         conf = conf.replace('username: "unbound"', 'username: ""')
@@ -91,7 +103,8 @@ def main():
         data_dir = Path(os.environ.get('DNS_ROOT_DATA', '/usr/share/dns'))
         conf = conf.replace('/usr/share/dns/root.hints', str(data_dir / 'root.hints'))
         conf = conf.replace('/var/lib/unbound/root.key', str(base / 'root.key'))
-        conf = conf.replace('/run/unbound/control.sock', str(base / 'control.sock'))
+        # Production socket path is deliberately not used by the fixture.
+        conf = conf.replace('control-enable: yes', 'control-enable: no')
         conf += '\nserver:\n    pidfile: "' + str(base / 'unbound.pid') + '"\n'
         conf += '    use-syslog: no\n    ip-ratelimit: 0\n'
         conf += '    local-zone: "fixture.test." static\n'
@@ -115,23 +128,34 @@ def main():
             proc = subprocess.Popen(['unbound', '-d', '-c', str(path)], stdout=log, stderr=log)
             for _ in range(50):
                 if proc.poll() is not None:
+                    log.close()
                     raise RuntimeError((base / 'unbound.log').read_text())
                 try:
                     query('a.fixture.test.', 'A')
+                    label_path = Path(f'/proc/{proc.pid}/attr/current')
+                    label = label_path.read_text().strip() if label_path.exists() else 'unavailable'
+                    if args.require_apparmor and label != 'unbound (enforce)':
+                        proc.terminate()
+                        proc.wait(timeout=5)
+                        log.close()
+                        raise RuntimeError(f'Expected packaged enforcing profile; got {label}')
+                    print(f'fixture_pid={proc.pid} confinement={label}')
                     return proc, log
                 except (OSError, dns.exception.Timeout):
                     time.sleep(0.1)
             proc.terminate()
             proc.wait()
+            log.close()
             raise RuntimeError('Resolver did not become ready')
         def query(name, kind, tcp=False, payload=1232):
             q = dns.message.make_query(name, kind, use_edns=True, payload=payload, want_dnssec=True)
             return (dns.query.tcp if tcp else dns.query.udp)(q, '127.0.0.1', port=15353, timeout=0.3)
         authority = Authority()
         (base / 'fixture.key').write_text(authority.keys.to_text() + '\n')
-        subprocess.run(['unbound-checkconf', str(path)], check=True)
-        proc, log = start()
+        proc, log = None, None
         try:
+            subprocess.run(['unbound-checkconf', str(path)], check=True)
+            proc, log = start()
             for tcp in (False, True):
                 for kind in ('A', 'AAAA'):
                     r = query('a.fixture.test.', kind, tcp)
@@ -185,9 +209,12 @@ def main():
             assert dropped > 0, 'Per-client rate limit did not drop any excess packet'
             print('PASS: isolated UDP/TCP A/AAAA, DNSSEC valid/bogus, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit')
         finally:
-            proc.terminate()
-            proc.wait(timeout=5)
-            log.close()
+            if proc is not None:
+                if proc.poll() is None:
+                    proc.terminate()
+                proc.wait(timeout=5)
+            if log is not None:
+                log.close()
             authority.close()
 
 if __name__ == '__main__':

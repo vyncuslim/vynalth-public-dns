@@ -3,11 +3,12 @@
 ## Phase A: development
 
 ```sh
-python3 -m pip install -r requirements-test.txt -r requirements-discovery.txt
-python3 -m unittest discover -s tests -p 'test_*.py' -v
-python3 scripts/render.py config.example.json
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-test.txt -r requirements-discovery.txt
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+.venv/bin/python scripts/render.py config.example.json
 # On Ubuntu with tools installed, isolated loopback process:
-python3 tests/local_runtime.py
+sudo .venv/bin/python tests/local_runtime.py --require-apparmor
 shellcheck scripts/*.sh
 terraform -chdir=terraform init -backend=false
 terraform -chdir=terraform fmt -check
@@ -53,6 +54,11 @@ operator attestations, not billing API verification. Plans may expose IDs:
 keep them private. State must be protected, backed up and locked for team use.
 
 ## Phase B: only after exact saved plan approval
+
+For the existing Tailscale-managed Oracle VM, follow [PHASE_B.md](PHASE_B.md).
+The private service-only plan is separate from the full installer below and
+requires its own exact configuration approval. Do not apply that VM's firewall
+or run the full installer while recovery and network review remain incomplete.
 
 Recheck capacity/prices immediately before execution. A public IP needs separate
 verified billing and approval. Never create a NAT, reservation, LB or paid fallback.

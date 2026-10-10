@@ -7,5 +7,6 @@
 .terraform/
 artifacts/
 __pycache__/
+.venv/
 *.pem
 *.key

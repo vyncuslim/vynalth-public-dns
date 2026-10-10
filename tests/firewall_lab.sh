@@ -18,7 +18,10 @@ ip link set origin0 up
 ip netns exec client ip addr add 198.18.0.2/24 dev client0
 ip netns exec client ip link set client0 up
 ip netns exec client ip link set lo up
-lab=$(mktemp -d)
+# Already permitted by Ubuntu's enforcing Unbound profile. No profile changes.
+lab_parent=/var/lib/unbound
+[[ -d $lab_parent ]] || lab_parent=/tmp
+lab=$(mktemp -d "$lab_parent/vynalth-net-test.XXXXXX")
 dns_pid=''
 ssh_pid=''
 cleanup() {
@@ -33,7 +36,8 @@ python3 "$repo/scripts/render.py" "$lab/config.json" --out "$lab"
 # No RFC5011 state writes in shared host filesystem.
 data_dir=${DNS_ROOT_DATA:-/usr/share/dns}
 cp "$data_dir/root.key" "$lab/root.key"
-sed -i "s|/var/lib/unbound/root.key|$lab/root.key|; s|username: \"unbound\"|username: \"\"|; s|/run/unbound/control.sock|$lab/control.sock|" "$lab/unbound.conf"
+sed -i "s|/var/lib/unbound/root.key|$lab/root.key|; s|username: \"unbound\"|username: \"\"|" "$lab/unbound.conf"
+sed -i 's|control-enable: yes|control-enable: no|' "$lab/unbound.conf"
 sed -i "s|/usr/share/dns/root.hints|$data_dir/root.hints|" "$lab/unbound.conf"
 sed -i "s|directory: \"/etc/unbound\"|directory: \"$lab\"|" "$lab/unbound.conf"
 printf '\nserver:\n    pidfile: "%s/unbound.pid"\n    use-syslog: no\n    local-zone: "fixture.test." static\n    local-data: "a.fixture.test. 300 IN A 203.0.113.7"\n' "$lab" >> "$lab/unbound.conf"

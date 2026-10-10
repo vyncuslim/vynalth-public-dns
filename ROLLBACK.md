@@ -1,5 +1,12 @@
 # Rollback and backup
 
+The existing VM's service-only path is documented in [PHASE_B.md](PHASE_B.md).
+Its `service-only` snapshot restores the main config and prior private drop-in;
+it never invokes nftables. The installed `/var/lib/vynalth-dns/rollback.sh` copy
+is used by the timer so a later repository edit cannot change pending recovery.
+Confirmation and recovery hold the same lock while handling snapshots. A live
+systemd recovery drill for this new path is pending deployment approval.
+
 Installation records previous Unbound config and dedicated firewall table,
 systemd policy and persistence files. An independent systemd timer restores
 them in 180 seconds unless a new SSH session confirms the policy. Existing

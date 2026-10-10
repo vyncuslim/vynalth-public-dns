@@ -2,6 +2,7 @@
 import argparse
 import ipaddress
 import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +29,27 @@ def render(config):
     rate = config.get("ip_ratelimit", 20)
     if type(rate) is not int or not 1 <= rate <= 100:
         raise ValueError("ip_ratelimit must be 1..100")
+    tailscale = config.get('tailscale')
+    interface = None
+    if tailscale:
+        interface = tailscale.get('interface', 'tailscale0')
+        if not re.fullmatch(r'[a-zA-Z0-9_.-]{1,15}', interface):
+            raise ValueError('Invalid Tailscale interface')
+        if addr not in ipaddress.ip_network('100.64.0.0/10'):
+            raise ValueError('Tailscale deployment must use a specific Tailscale IPv4 listener')
+        if any(x.version != 4 or x.network_address not in ipaddress.ip_network('100.64.0.0/10') for x in clients + ssh):
+            raise ValueError('Tailscale SSH/DNS clients must be individual tailnet IPv4 hosts')
+        port = tailscale.get('udp_port', 41641)
+        if type(port) is not int or not 1024 <= port <= 65535:
+            raise ValueError('Invalid observed Tailscale transport port')
+    dhcp = config.get('dhcp4')
+    if dhcp:
+        if not re.fullmatch(r'[a-zA-Z0-9_.-]{1,15}', dhcp['interface']):
+            raise ValueError('Invalid DHCP interface')
+        dhcp_server = ipaddress.IPv4Address(dhcp['server'])
+    preserve_ssh = config.get('preserve_existing_public_ssh', False)
+    if type(preserve_ssh) is not bool:
+        raise ValueError('Public SSH preservation must be boolean')
     conf = (ROOT / "unbound/base.conf").read_text()
     conf += '\nserver:\n    interface: ' + str(addr) + '\n'
     if not addr.is_loopback:
@@ -40,13 +62,24 @@ def render(config):
              '  iifname "lo" accept', '  ct state invalid drop',
              '  ct state established,related accept',
              '  ip protocol icmp accept', '  meta l4proto ipv6-icmp accept']
+    if tailscale:
+        # Encrypted WireGuard transport, NOT recursive DNS authorization.
+        rules.append(f'  iifname != "{interface}" udp dport {port} accept')
+    if dhcp:
+        rules.append(f'  iifname "{dhcp["interface"]}" ip saddr {dhcp_server} udp sport 67 udp dport 68 accept')
+    if preserve_ssh:
+        # Review-only migration option, preserves existing host exposure.
+        physical_only = f'iifname != "{interface}" ' if interface else ''
+        rules.append(f'  {physical_only}tcp dport 22 ct state new accept comment "preserve existing SSH pending recovery review"')
+    prefix = f'iifname "{interface}" ' if interface else ''
     for x in ssh:
         family = 'ip' if x.version == 4 else 'ip6'
-        rules.append(f'  {family} saddr {x} tcp dport 22 ct state new accept')
+        rules.append(f'  {prefix}{family} saddr {x} tcp dport 22 ct state new accept')
     for x in clients:
         family = 'ip' if x.version == 4 else 'ip6'
         for protocol in ('udp', 'tcp'):
-            rules.append(f'  {family} saddr {x} {protocol} dport 53 limit rate {rate}/second burst {rate * 2} packets accept')
+            destination = f'ip daddr {addr} ' if interface else ''
+            rules.append(f'  {prefix}{family} saddr {x} {destination}{protocol} dport 53 limit rate {rate}/second burst {rate * 2} packets accept')
     rules.extend([' }', '}'])
     return conf, '\n'.join(rules) + '\n'
 

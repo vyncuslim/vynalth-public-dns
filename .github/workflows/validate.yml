@@ -16,8 +16,10 @@ jobs:
       - run: python scripts/render.py config.example.json
       - run: sudo install -o unbound -g unbound /usr/share/dns/root.key /var/lib/unbound/root.key && unbound-checkconf artifacts/rendered/unbound.conf
       - run: shellcheck scripts/*.sh tests/*.sh
-      - run: python tests/local_runtime.py
+      - run: sudo $(which python) tests/local_runtime.py --require-apparmor
       - run: sudo bash tests/firewall_lab.sh
+      - run: sudo bash tests/tailscale_firewall_lab.sh
+      - run: sudo bash tests/service_rollback_lab.sh
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: '1.9.8'

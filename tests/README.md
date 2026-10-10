@@ -6,6 +6,34 @@ editing the host service or firewall. `acceptance.py` sends at most seven ordina
 queries to an explicitly authorized resolver; root/authoritative queries are the
 resolver's normal DNS operation, not attacks or benchmark load.
 
+On Ubuntu with an enforcing packaged AppArmor profile, use:
+
+```sh
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-test.txt
+.venv/bin/python -m unittest discover -s tests -p 'test_*.py' -v
+sudo .venv/bin/python tests/local_runtime.py --require-apparmor
+sudo bash tests/firewall_lab.sh
+sudo bash tests/tailscale_firewall_lab.sh
+sudo bash tests/service_rollback_lab.sh  # actual 180s timer; isolated files/stub service calls
+```
+
+The runtime uses a 0700 disposable directory inside `/var/lib/unbound`, which
+the existing Ubuntu profile already permits. It checks each child process's
+`/proc/PID/attr/current` for `unbound (enforce)`. Config, fixture trust anchor,
+PID and logs are isolated; remote control is disabled so the production socket
+is never used. Children are terminated and the directory removed. No profile
+edit, permissions broadening, production restart or firewall modification.
+`--work-dir` is for explicitly permitted lab paths; it is not an AppArmor bypass.
+
+The Tailscale firewall lab uses veth devices to simulate `tailscale0` and a
+physical interface, plus a later broad accept chain. It verifies approved
+UDP/TCP DNS and SSH port access, physical-interface source spoof rejection and
+unapproved tailnet rejection. It is not a real Tailscale/WireGuard recovery test.
+The rollback lab restores a copy of the actual main config and simulated prior
+systemd drop-in, including originally absent drop-in removal. Service calls are
+strictly stubbed; it cannot establish production restart success.
+
 | Property | Executable / procedure | Required evidence |
 |---|---|---|
 | A/AAAA UDP/TCP, NXDOMAIN | local_runtime.py + acceptance.py | valid answer/rcode |

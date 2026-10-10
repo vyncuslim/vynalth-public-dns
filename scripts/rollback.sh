@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
+# Confirmation must never move a snapshot while rollback is restoring it.
+exec 9>/var/lib/vynalth-dns/transaction.lock
+flock -x 9
 backup=/var/lib/vynalth-dns/rollback
 test -d "$backup" || exit 0
+if [[ -e $backup/service-only ]]; then
+  cp -a "$backup/unbound.conf" /etc/unbound/unbound.conf
+  if [[ -f $backup/unbound-private-limits.conf ]]; then
+    cp -a "$backup/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf
+  else
+    rm -f /etc/systemd/system/unbound.service.d/private.conf
+  fi
+  systemctl daemon-reload
+  timeout 40 systemctl restart unbound
+  mv "$backup" "/var/lib/vynalth-dns/rolled-back-$(date +%s)"
+  exit 0
+fi
 batch=$(mktemp)
 if nft list table inet vynalth_dns >/dev/null 2>&1; then
   echo 'delete table inet vynalth_dns' > "$batch"

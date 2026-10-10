@@ -1,5 +1,11 @@
 # Security policy
 
+This describes the repository's desired deployment policy, not a declaration
+that an existing VM already enforces every control. See VALIDATION.md for the
+observed VM state and PHASE_B.md for its pending service-only change. In
+particular, its current host SSH rule is broad, root key login/forwarding remain
+enabled and the dedicated firewall has not been applied.
+
 No public recursion in development. Renderer allows individual hosts only;
 default Unbound ACL refuses all other clients. Host policy drops ingress except
 loopback, established replies, ICMP and named SSH/DNS test clients. Existing

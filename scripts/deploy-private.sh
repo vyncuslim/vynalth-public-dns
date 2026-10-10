@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Service-only deployment after explicit approval of the exact rendered hash.
+# Never updates packages, firewall rules, SSH, Tailscale, trust anchors or hints.
+set -euo pipefail
+[[ $EUID == 0 && $# == 2 ]] || { echo 'Usage: sudo bash scripts/deploy-private.sh RENDERED_DIR APPROVED_CONFIG_SHA256'; exit 1; }
+root=$(cd "$(dirname "$0")/.." && pwd)
+rendered=$(realpath "$1")
+# Review commits include a checksum manifest for config, limits and transaction code.
+(cd "$root" && sha256sum --check plans/phase-b-service.sha256)
+sha256sum --check "$root/plans/phase-b-active.sha256"
+[[ $(find /etc/unbound/unbound.conf.d -maxdepth 1 -name '*.conf' | wc -l) == 2 ]] || { echo 'Active include set changed; re-review required'; exit 1; }
+[[ -z $(systemctl show unbound -p DropInPaths --value) ]] || { echo 'Active unit drop-ins changed; re-review required'; exit 1; }
+[[ $(sha256sum "$rendered/unbound.conf" | cut -d ' ' -f1) == "$2" ]] || { echo 'Approved hash mismatch'; exit 1; }
+cmp "$rendered/unbound.conf" "$root/plans/phase-b-unbound.conf"
+unbound-checkconf "$rendered/unbound.conf"
+test -S /run/unbound.ctl
+systemctl is-active --quiet unbound
+systemctl is-active --quiet tailscaled
+ip -4 addr show dev tailscale0 | grep -q '100.95.65.20/'
+# Avoid timer/confirmation races: never reuse a pending deployment snapshot.
+backup=/var/lib/vynalth-dns/rollback
+mkdir -p /var/lib/vynalth-dns
+[[ ! -e $backup ]] || { echo 'Pending deployment exists'; exit 1; }
+mkdir -m 0700 "$backup"
+touch "$backup/service-only"
+cp -a /etc/unbound/unbound.conf "$backup/unbound.conf"
+if [[ -f /etc/systemd/system/unbound.service.d/private.conf ]]; then
+  cp -a /etc/systemd/system/unbound.service.d/private.conf "$backup/unbound-private-limits.conf"
+fi
+cp -a "$root/scripts/rollback.sh" /var/lib/vynalth-dns/rollback.sh
+systemd-run --unit=vynalth-rollback --on-active=180s --timer-property=AccuracySec=1s /bin/bash /var/lib/vynalth-dns/rollback.sh
+trap '/bin/bash /var/lib/vynalth-dns/rollback.sh' ERR
+install -m 0644 "$rendered/unbound.conf" /etc/unbound/unbound.conf
+mkdir -p /etc/systemd/system/unbound.service.d
+install -m 0644 "$root/scripts/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf
+systemctl daemon-reload
+timeout 40 systemctl restart unbound
+dig @127.0.0.1 localhost +time=2 +tries=1 | grep -q 'status: NOERROR'
+echo 'Verify Windows private UDP/TCP DNS and fresh SSH within 180s, then run scripts/confirm.sh.'
