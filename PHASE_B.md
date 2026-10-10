@@ -1,6 +1,9 @@
 # Existing Oracle VM: private service approval plan
 
-Status on 2026-10-10: prepared and syntax-checked, **not deployed**.
+Status on 2026-10-10: the approved `036575d` service bundle was attempted once
+at 13:47 MYT and **rolled back after a DNSSEC test timeout**. Private DNS is not
+active. See VALIDATION.md for the latest result. No confirmation or automatic
+retry occurred; another attempt requires renewed explicit authorization.
 No firewall, SSH, Tailscale, OCI, DNS record or package changes are authorized by
 this plan. Public recursive service remains blocked.
 
@@ -56,10 +59,12 @@ private drop-in and arms an independent 180-second systemd rollback timer.
 Failure also invokes rollback. Rollback restores only service files, reloads
 systemd and restarts Unbound; it does not modify host firewall or remote access.
 Confirmation and rollback serialize with `flock` to avoid snapshot races.
-The production service transaction has not been executed yet. The rollback lab
+The initially isolated rollback lab
 uses a real 180-second transient systemd timer, disposable mount namespace and
 stub service commands. It checks exact file restoration and drop-in removal
-without reloading/restarting the production service; see VALIDATION.md.
+without reloading/restarting the production service. A later authorized service
+attempt restored the real production config/drop-in state after test failure;
+successful private-service acceptance remains incomplete. See VALIDATION.md.
 
 Within 180 seconds, verify fresh Windows SSH, low-volume UDP/TCP DNSSEC and cache
 checks to `100.95.65.20`. Confirm only after success:

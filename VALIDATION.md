@@ -151,3 +151,69 @@ The user explicitly deferred deployment pending code review and tests.
 Existing A1 1 OCPU / 6 GiB shape and public IP are user-supplied inventory;
 no new resources/charges were incurred by these actions, but the existing bill
 and Always Free eligibility remain unverified. Monthly target is RM0.
+
+## Authorized service attempt: FAILED, rolled back — 2026-10-10 13:47 MYT
+
+The user explicitly approved only commit
+`036575dfcf7ee1c9e5f0a15d8b7a4ab061b4ca97` and config SHA256
+`204aca36bc268e83e9878426605692b8c7f04b142fa0b0f8956c6d7e3486d2e7`.
+Before execution, Windows and VM HEAD/clean working tree, all six bundle hashes,
+three active config baseline hashes, rendered/reviewed config byte equality,
+Unbound syntax, Tailscale Running/online state and fresh SSH source
+`100.85.132.14 -> 100.95.65.20` were verified. Existing SSH remained open.
+
+Only the reviewed `scripts/deploy-private.sh` was executed, once, with the
+approved hash. It armed the actual 180-second rollback timer, installed the
+config and reviewed systemd drop-in, and restarted Unbound at 13:47:29 MYT
+(05:47:29 UTC), new PID 13235. Its localhost readiness check passed.
+No full installer, package upgrade, Terraform, OCI, SSH, Tailscale or firewall
+configuration operation was executed.
+
+| Windows private acceptance from 100.85.132.14 | Result |
+|---|---|
+| Fresh private key-authenticated SSH | passed; Unbound and tailscaled active |
+| example.com A / UDP | NOERROR + AD |
+| example.com AAAA / UDP | NOERROR + AD |
+| example.com A / TCP | NOERROR + AD |
+| cloudflare.com A / UDP | NOERROR + AD |
+| dnssec-failed.org A / UDP | **FAIL: timeout at 5 seconds**, not observed SERVFAIL |
+| Bogus TCP, CD diagnostic, NXDOMAIN, root DNSKEY | not executed; stopped at first failure |
+| Post-deploy cache, negative ACL, effective limit/port assertions | not executed; stopped at first failure |
+
+The client bound its real Windows Tailscale source IP. Each query was attempted
+once; no automatic retry, relaxed timeout, alternate upstream or bypass.
+Acceptance deliberately stopped on the first timeout and did not run confirm.sh.
+The timeout's cause is unconfirmed. Reviewed logs show normal starts/stops and
+the distro's unset DAEMON_OPTS warning; no matching Unbound AppArmor/OOM event
+was found in the inspected kernel window. This evidence does not prove an
+upstream fault or a configuration defect.
+
+Immediate rollback ran the installed approved `/var/lib/vynalth-dns/rollback.sh`.
+At 13:47:37 MYT (05:47:37 UTC) it restarted the original service with PID 13423.
+The original main config and both include hashes passed; private.conf was
+removed, DropInPaths empty, and effective settings restored to MemoryMax
+infinity / TasksMax 6964 / LimitNOFILE 524288. Recovery snapshot retained at
+`/var/lib/vynalth-dns/rolled-back-1791611257`.
+
+Current verified state after rollback:
+
+- Unbound active/running, PID 13423, NRestarts 0, `unbound (enforce)`.
+- Unbound UDP/TCP listeners only `127.0.0.1:53` and `[::1]:53`.
+- No Unbound Tailscale or public DNS listener. systemd-resolved retains its
+  separate pre-existing 127.0.0.53/127.0.0.54 stub listeners.
+- Unbound config syntax and all original baseline hashes restored; approved
+  repository bundle hashes remain unchanged.
+- Fresh Tailscale SSH still succeeds; Unbound, tailscaled and ssh active.
+- No pending rollback snapshot/confirmation; the timer had not fired and was
+  stopped only after verifying restoration. Final timer state inactive.
+- No network-policy command was executed by the service-only transaction or
+  its service-only rollback branch. The post-deployment before/after network
+  hash comparison was not reached; do not report that comparison as passed.
+
+The attempted private service is **not deployed successfully**. The prior eight/
+eleven unit tests and isolated runtime/rollback evidence remain historical
+passes, not substitutes for this failed live acceptance. No second attempt.
+Structured sanitized transaction evidence is retained in
+`plans/phase-b-deployment-result.json`. Existing cloud billing assumptions and
+GitHub runner billing lock are unchanged. A new attempt requires root-cause
+investigation, a complete acceptance plan and renewed human authorization.

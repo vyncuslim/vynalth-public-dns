@@ -1,0 +1,58 @@
+[
+  {
+    "check": "preflight",
+    "result": {
+      "commit": "036575dfcf7ee1c9e5f0a15d8b7a4ab061b4ca97",
+      "source": "100.85.132.14 56177 100.95.65.20 22\nvynalthai-dns\n100.95.65.20\nactive",
+      "checks": "plans/phase-b-unbound.conf: OK\nplans/phase-b-active.sha256: OK\nscripts/unbound-private-limits.conf: OK\nscripts/deploy-private.sh: OK\nscripts/rollback.sh: OK\nscripts/confirm.sh: OK\n/etc/unbound/unbound.conf: OK\n/etc/unbound/unbound.conf.d/remote-control.conf: OK\n/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf: OK\nunbound-checkconf: no errors in artifacts/private/unbound.conf"
+    }
+  },
+  {
+    "check": "deployment",
+    "result": "plans/phase-b-unbound.conf: OK\nplans/phase-b-active.sha256: OK\nscripts/unbound-private-limits.conf: OK\nscripts/deploy-private.sh: OK\nscripts/rollback.sh: OK\nscripts/confirm.sh: OK\n/etc/unbound/unbound.conf: OK\n/etc/unbound/unbound.conf.d/remote-control.conf: OK\n/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf: OK\nunbound-checkconf: no errors in /home/ubuntu/vynalth-public-dns/artifacts/private/unbound.conf\nVerify Windows private UDP/TCP DNS and fresh SSH within 180s, then run scripts/confirm.sh."
+  },
+  {
+    "check": "fresh_private_SSH",
+    "result": "100.85.132.14 17211 100.95.65.20 22\nactive\nactive"
+  },
+  {
+    "check": "example.com./A/UDP",
+    "result": {
+      "rcode": "NOERROR",
+      "AD": true,
+      "CD": false
+    }
+  },
+  {
+    "check": "example.com./AAAA/UDP",
+    "result": {
+      "rcode": "NOERROR",
+      "AD": true,
+      "CD": false
+    }
+  },
+  {
+    "check": "example.com./A/TCP",
+    "result": {
+      "rcode": "NOERROR",
+      "AD": true,
+      "CD": false
+    }
+  },
+  {
+    "check": "cloudflare.com./A/UDP",
+    "result": {
+      "rcode": "NOERROR",
+      "AD": true,
+      "CD": false
+    }
+  },
+  {
+    "check": "FAILED",
+    "result": "The DNS operation timed out."
+  },
+  {
+    "check": "rollback",
+    "result": "/etc/unbound/unbound.conf: OK\n/etc/unbound/unbound.conf.d/remote-control.conf: OK\n/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf: OK\nMainPID=13423\nActiveState=active\nDropInPaths=\n/var/lib/vynalth-dns/rolled-back-1791611257"
+  }
+]
