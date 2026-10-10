@@ -217,3 +217,145 @@ Structured sanitized transaction evidence is retained in
 `plans/phase-b-deployment-result.json`. Existing cloud billing assumptions and
 GitHub runner billing lock are unchanged. A new attempt requires root-cause
 investigation, a complete acceptance plan and renewed human authorization.
+
+## DNSSEC timeout investigation — 2026-10-10, no production redeployment
+
+Starting HEAD was `ba6d457`. All work used the existing Windows OpenSSH client
+with strict host-key checking and the key filename only. Fresh SSH again proved
+`100.85.132.14 -> 100.95.65.20`; the original SSH session stayed open. Production
+was not restarted, reconfigured or cache-flushed. No private deployment
+acceptance was performed against its inactive Tailscale listener. No
+firewall, SSH, Tailscale, OCI, Cloudflare, DNS record, package or OS change.
+
+### Confirmed mechanism and diagnostic defect
+
+The old `tests/acceptance.py` and the original operator transaction used a fixed
+5s client timeout without a cold-cache latency rationale. This is the client's
+reply wait, not the validator's deadline. It did not retain enough structured
+information to distinguish missing UDP replies, TCP EOF, validation failure and
+latency failure. The new function requires a timeout; the CLI emits exact
+question/ID, DO/CD, transport/source, UTC timestamp, monotonic elapsed time,
+RCODE, AD/CD/TC/EDE, typed exception, outcome and attempt count. An absent reply
+has null response fields. Correct late replies stay failed. No automatic retry.
+
+Installed Ubuntu package is **1.19.2-1ubuntu3.10**. Despite the upstream version
+banner, its changelog includes the DNSBomb mitigation backport. Read-only
+`unbound-control get_option discard-timeout` returns **1900 ms**. The previously
+reviewed config inherited this default. `wait-limit=1000`, cookie limit=10000,
+validator restart limit=5, bogus cache TTL=60s and serve-expired=no were observed.
+The reply expiry mechanism is independently documented in
+[NLnet Labs' release notes](https://nlnetlabs.nl/news/2024/May/08/unbound-1.20.0-released/);
+[Ubuntu's CVE record](https://ubuntu.com/security/CVE-2024-33655) confirms the
+Noble backport. These are not reasons to disable the mitigation with zero.
+[dnspython query documentation](https://dnspython.readthedocs.io/en/stable/query.html)
+defines the separate client timeout. Newer upstream TCP behavior must not be
+assumed to match this installed backport; the TCP outcomes below were measured.
+
+All listed experiments were separate predeclared fresh processes on loopback
+15355, enforcing `unbound (enforce)`, with zero initial client queries, 1024
+descriptors and a systemd scope capped at 384MiB/64 tasks. They used disposable
+0700 files, copied public trust anchors and isolated Unix control sockets.
+No AppArmor profile or permission broadening occurred. The deterministic
+six-second local authority fixture uses only its pinned zone trust anchor and
+never needs Internet DNS. Each cold failure suppresses its warm case.
+
+| Experiment | Cold result | Warm result / conclusion |
+|---|---|---|
+| Real recursion, inherited 1900ms, valid cloudflare.com UDP/TCP | NOERROR + AD, 0.648s / 0.525s | <1ms, cache hit increment 1 each |
+| Real recursion, inherited 1900ms, bogus dnssec-failed.org UDP | no response after 20.010s observation | skipped, not SERVFAIL |
+| Same baseline, fresh process, bogus TCP | EOF at 5.792s, no DNS response | skipped; transport error preserved |
+| Local 6s authority, explicit 1900ms, valid/bogus UDP | no response at ~20s | expected negative-control reproduction |
+| Same local authority/control, valid/bogus TCP | EOF at ~6s | expected negative-control reproduction |
+| Local 6s authority, finite 15000ms, declared 5s threshold | correct replies at ~6.01s, **latency_exceeded** | skipped; a longer observation does not turn FAIL into PASS |
+| Same finite window, declared 15s threshold, valid/bogus UDP/TCP | NOERROR + AD / SERVFAIL without AD at ~6.01s | <1ms, hit increment 1 each |
+| Real recursion, finite 15000ms, bogus UDP/TCP | SERVFAIL without AD at 6.070s / 2.584s | <1ms, hit increment 1 each |
+| Final rendered config, no experimental override, valid UDP/TCP | NOERROR + AD at 0.484s / 0.690s | <1ms, hit increment 1 each |
+| Final rendered config, no override, bogus UDP/TCP | SERVFAIL without AD at 2.664s / 2.404s | <1ms, hit increment 1 each |
+| Final rendered config, local delayed fixture UDP/TCP | valid and bogus expected replies at 6.009–6.016s | <1ms, hit increment 1 each |
+
+The controlled A/B changed the finite discard window with the same authority
+delay and validation setup. Extending client observation alone did not fix the
+missing replies; changing the server reply-age bound did. Isolated bogus logs
+show DNSKEY/DS mismatch against authoritative servers and correct validation
+failure. No alternate forwarder was introduced. Independent iterator, root
+hints and empty `list_forwards` were verified in every recursive child; earlier
+recorded root/TLD/authoritative packet evidence remains applicable to the design.
+This investigation did not capture the historical failed packet.
+
+**Confidence:** reply expiry plus the arbitrary 5s acceptance budget is a
+confirmed reproducible defect and a high-confidence explanation of the original
+failure. Original PID 13235 had verbosity zero and no packet capture, so the
+exact historical packet path/delay cannot be proved retrospectively. Upstream
+delay variance, packet loss and Tailscale-path latency in that one event remain
+possible contributors. The observed 2.4–6.1s bogus validation variability is not
+a service latency guarantee. Warm success does not erase a cold failure.
+
+### Read-only production and resource evidence
+
+Production remained PID **13423**, NRestarts 0, active and enforcing. Original
+main/include baseline hashes passed, no systemd drop-in, and listeners remained
+only 127.0.0.1/[::1] UDP/TCP 53. systemd-resolved's existing stub is separate.
+The inspected production receipt contains 15 queries, 9 cache hits and 6 misses;
+aggregate counters do not identify their source and do not attest cold state.
+No individual production query logging was enabled. Main config,
+PID/restart count, stateless nftables and effective SSH hashes match across all
+isolated before/after receipts. The root anchor refreshed normally at 06:15 UTC
+between experiments (last_success/query_failed=0); no operator anchor edit.
+NTP is synchronized, both root KSKs remain valid, root hints readable. No
+matching Unbound AppArmor denial or OOM event was found in the inspected kernel
+window. These are bounded observations, not proof that no packet was lost.
+
+Current available memory was ~5340MiB and production MemoryCurrent 8937472 bytes.
+Original systemd settings remain MemoryMax=infinity/TasksMax=6964/NOFILE=524288;
+the daemon's own descriptor limit is 4152. Successful isolated children instead
+ran with 1024 descriptors and the proposed cgroup caps. This argues against
+those proposed resource caps causing this reproduced failure; no sustained load
+or public abuse capacity claim is made. Current SSH/firewall risks and incomplete
+OCI ingress inventory/recovery are unchanged from the preceding audit.
+
+Committed receipts under `plans/investigation/`:
+
+- `dnssec-recursive.json`: inherited-default real-recursion failures retained.
+- `dnssec-fixture-control.json`: four explicit 1900ms negative controls; missing
+  replies are expected experiment outcomes, not DNS acceptance passes.
+- `dnssec-fixture-fixed.json`: eight separate 5s/15s finite-window experiments;
+  four deliberate 5s latency failures preserved.
+- `dnssec-recursive-fixed.json`: first finite-window real-recursion comparison.
+- `dnssec-reviewed-recursion.json`: final config's four cold/warm pairs.
+- `dnssec-reviewed-fixture.json`: final config, including measured cgroup caps.
+- `dnssec-production-readonly.json` and `dnssec-system-readonly.json`: effective
+  service, ports, hashes, anchor metadata, package, resources and service logs.
+
+### Validation and revised procedure
+
+All **23 unit tests passed** on Windows Python 3.12 and the real ARM64 VM,
+including the original eight. Full `local_runtime.py --require-apparmor` passed
+UDP/TCP A/AAAA, signed/bogus DNSSEC, NXDOMAIN, ACL, truncation/TCP fallback, cache,
+rebinding, isolated authority outage/recovery, child restart and bounded rate
+limiting; all three children reported enforcing confinement. Rendered Unbound
+syntax passed. Python compilation, YAML parsing, Git whitespace and shell syntax
+checks passed. Shellcheck is absent on the VM; it was not installed, and a fresh
+Shellcheck pass is not claimed. Transaction shell code is unchanged from its
+earlier validation. Terraform/network/rollback labs are unchanged; their earlier
+results remain historical. The successful real rollback remains retained.
+
+Proposed config SHA256:
+`d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`.
+The complete config/diff and expanded bundle checksum manifest are committed.
+The revised [PHASE_B.md](PHASE_B.md) procedure requires fresh review/approval at
+the new exact commit, rechecks baseline/source/hash, and uses the existing 180s
+automatic rollback. Acceptance is capped at 100s, cold 15s/warm 2s, standard/CD
+5s and negative ACL 2s. Confirmation additionally requires transaction elapsed
+<140s. Diagnostic labs may observe for 20s but still fail beyond 15s; production
+acceptance uses no extended observation. Controller tests prove first-failure
+stop, missing cache evidence failure, source/listener rejection and deadline
+failure without sending a next query. It has no deployment/confirmation calls.
+
+**Decision:** the correction is supported for a newly authorized, rollback-
+protected private trial. It is not deployed or production-ready. The Windows
+Tailscale path under the new config, complete live acceptance and a real second
+unapproved tailnet client's rejection remain unverified. Public service remains
+blocked. The longer finite reply window needs a separate abuse/capacity review
+before broader exposure. RM0 remains a target, existing billing unverified;
+no resources or paid services were created. GitHub Actions remain subject to
+the account billing lock; no CI execution success is claimed.

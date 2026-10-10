@@ -28,8 +28,10 @@ from render import render
 
 class Authority:
     """Private fixture only. Never sends network queries."""
-    def __init__(self):
+    def __init__(self, delay_seconds=0):
         self.count = 0
+        self.delay_seconds = delay_seconds
+        self.delay_used = False
         self.key = ec.generate_private_key(ec.SECP256R1())
         self.dnskey = dns.dnssec.make_dnskey(self.key.public_key(), 'ECDSAP256SHA256', flags=257)
         self.keys = dns.rrset.from_rdata('signed-fixture.test.', 300, self.dnskey)
@@ -61,6 +63,10 @@ class Authority:
             elif signed and kind == dns.rdatatype.A:
                 rrset = dns.rrset.from_text(name, 300, 'IN', 'A', '203.0.113.9')
             if rrset is not None:
+                # Explicit isolated latency experiment; normal runtime default is zero.
+                if kind == dns.rdatatype.A and not self.delay_used and self.delay_seconds:
+                    self.delay_used = True
+                    time.sleep(self.delay_seconds)
                 sig = dns.dnssec.sign(rrset, self.key, 'signed-fixture.test.', self.dnskey,
                                       inception=int(time.time()) - 3600, expiration=int(time.time()) + 86400)
                 if name.startswith('bogus.'):

@@ -81,7 +81,7 @@ sudo nft --check --file artifacts/rendered/firewall.nft
 # HUMAN APPROVAL REQUIRED for VM service/firewall changes
 sudo bash scripts/install.sh artifacts/rendered
 # From a FRESH SSH session and approved client, within three minutes:
-python3 tests/acceptance.py --server ORIGIN_IP --authorized-target
+python3 tests/acceptance.py --server ORIGIN_IP --authorized-target --timeout 5 --out artifacts/acceptance.json
 sudo bash scripts/confirm.sh
 sudo sshd -T | grep -E 'passwordauthentication|kbdinteractiveauthentication|permitrootlogin|allowusers'
 sudo python3 scripts/metrics.py

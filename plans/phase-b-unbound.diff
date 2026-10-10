@@ -1,6 +1,6 @@
 --- /etc/unbound/unbound.conf (active)
 +++ artifacts/private/unbound.conf (proposed)
-@@ -1,10 +1,61 @@
+@@ -1,10 +1,64 @@
 -# Unbound configuration file for Debian.
 -#
 -# See the unbound.conf(5) man page.
@@ -24,6 +24,9 @@
 +    rrset-cache-size: 32m
 +    outgoing-range: 256
 +    num-queries-per-thread: 128
++    # Finite DNSBomb reply age bound, reviewed for the private single-client phase.
++    # Ubuntu's 1900ms default can discard a cold DNSSEC result before validation ends.
++    discard-timeout: 15000
 +    incoming-num-tcp: 32
 +    outgoing-num-tcp: 16
 +    edns-buffer-size: 1232

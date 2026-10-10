@@ -1,9 +1,11 @@
 # Existing Oracle VM: private service approval plan
 
-Status on 2026-10-10: the approved `036575d` service bundle was attempted once
-at 13:47 MYT and **rolled back after a DNSSEC test timeout**. Private DNS is not
-active. See VALIDATION.md for the latest result. No confirmation or automatic
-retry occurred; another attempt requires renewed explicit authorization.
+Status on 2026-10-10: the `036575d` attempt **failed and rolled back**; production
+remains localhost-only. The subsequent investigation reproduced reply expiry at
+the packaged 1900ms discard timeout and tested a finite 15000ms correction in
+isolated enforcing processes. This revised bundle is **awaiting fresh approval**.
+The previous authorization/hash does not cover it. See VALIDATION.md and the
+committed `plans/investigation/` receipts. No redeployment or restart occurred.
 No firewall, SSH, Tailscale, OCI, DNS record or package changes are authorized by
 this plan. Public recursive service remains blocked.
 
@@ -29,11 +31,16 @@ settings are explicitly preserved in the proposed config. The main changes are:
 - DNSSEC, explicit packaged root hints, independent iterator, QNAME minimisation,
   rebinding protection, 1232-byte UDP responses and 20 queries/sec/client.
 - 16/32 MiB caches; process memory 384 MiB, 64 tasks and 1024 descriptors.
+- Finite `discard-timeout: 15000` ms, preserving a response-age bound. It retains
+  pending replies longer than the DNSBomb mitigation's 1900ms default, increasing
+  resource/abuse exposure; the one approved private client, 20 qps/client,
+  128 query slots and process limits are essential. Never set this to zero or
+  carry it into public service without a separate abuse/capacity review.
 - No individual query/reply logging; local Unix control socket `/run/unbound.ctl`.
 - One Unbound restart; brief private/local DNS interruption is possible.
 
 Rendered configuration SHA256:
-`204aca36bc268e83e9878426605692b8c7f04b142fa0b0f8956c6d7e3486d2e7`.
+`d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`.
 Approval covers this config and the reviewed service-only scripts/drop-in, not
 arbitrary future branch changes. Re-render and compare the hash before use.
 The [checksum manifest](plans/phase-b-service.sha256) covers the complete config,
@@ -51,7 +58,7 @@ sha256sum --check plans/phase-b-service.sha256
 sudo unbound-checkconf artifacts/private/unbound.conf
 # HUMAN APPROVAL REQUIRED before this command:
 sudo bash scripts/deploy-private.sh artifacts/private \
-  204aca36bc268e83e9878426605692b8c7f04b142fa0b0f8956c6d7e3486d2e7
+  d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7
 ```
 
 Before editing active files, the script backs up the main config and previous
@@ -66,19 +73,94 @@ without reloading/restarting the production service. A later authorized service
 attempt restored the real production config/drop-in state after test failure;
 successful private-service acceptance remains incomplete. See VALIDATION.md.
 
-Within 180 seconds, verify fresh Windows SSH, low-volume UDP/TCP DNSSEC and cache
-checks to `100.95.65.20`. Confirm only after success:
+## Revised acceptance and rollback gates (not authorized to execute yet)
+
+Keep the existing SSH session open. Before any future deployment, require clean
+Windows/VM worktrees at the exact newly reviewed full commit, bundle SHA256
+verification, active baseline verification, byte-equal rendering, config syntax,
+unchanged service/drop-in baseline, Tailscale Running/online status, and a fresh
+SSH connection proving source `100.85.132.14` and destination `100.95.65.20`.
+Do not proceed on drift or unverified connectivity. Verify that no pending
+snapshot exists and the retained rollback backup is available. No package or
+management-network mutation belongs in this procedure.
+
+The transaction arms its 180s timer before changes; restart is limited to 40s.
+Start a Windows stopwatch **before** launching it. After successful readiness,
+run the committed read-only controller once, with a 100s total acceptance deadline.
+Only a complete PASS receipt and elapsed transaction time below 140s allow
+confirmation. Otherwise immediately run the installed service-only rollback;
+never cancel its timer for incomplete tests. The >=40s reserve allows recovery.
+Transport errors, timeouts, excessive latency, missing AD, incorrect RCODE,
+lost SSH, restart, cache-hit or ACL failure, hash drift and an absent/expired
+timer are all rollback conditions. No retries, larger ad-hoc timeout or CD bypass.
+
+| Scenario, in order | Per-query limit | Required result |
+|---|---:|---|
+| First-use valid + bogus DNSSEC, UDP | 15s | NOERROR + AD; SERVFAIL without AD |
+| Warm valid + bogus, UDP and TCP | 2s | same codes/flags, >=4 measured cache hits |
+| Standard A/AAAA UDP, A TCP, signed/bogus, NXDOMAIN, root DNSKEY TCP | 5s | full standard scenario |
+| Bogus checking-disabled, UDP/TCP | 5s | NOERROR, CD, no AD; diagnostic only |
+| Unapproved 127.0.0.2 source, UDP/TCP | 2s | REFUSED both transports |
+
+Initial client query count must be exactly one (deployment's localhost readiness
+query) at a new process. These are first-use **name** cold cases; the shared
+root/TLD cache may warm between names. Fully empty-process cold UDP and TCP
+are proven separately by the isolated harness, not by flushing the active service.
+Warm cases are distinct declared tests after successful cold cases, not retries.
+The controller verifies the real private SSH source, enforcing profile, exact
+listeners, config hash, 384MiB/64/1024 limits, finite discard window, absence of
+forwarders, unchanged PID/restart count and SSH/firewall fingerprints.
+
+After fresh explicit approval only, in Windows PowerShell from this repository
+with Python test dependencies installed, run the following transaction. Set
+`$reviewedCommit` to the exact full commit approved by the user and verify both
+worktrees manually before using this block; the placeholder must never be used.
+
+```powershell
+$reviewedCommit = '<REVIEWED_FULL_COMMIT>'
+$configHash = 'd2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7'
+$keyPath = 'C:\Users\lynne\Downloads\ssh-key-2026-10-09 (1).key'
+$sshArgs = @('-i', $keyPath, '-o', 'IdentitiesOnly=yes', '-o', 'StrictHostKeyChecking=yes',
+             '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=4', 'ubuntu@100.95.65.20')
+if ((git rev-parse HEAD) -ne $reviewedCommit -or (git status --porcelain)) { throw 'Local review drift' }
+$preflight = 'cd /home/ubuntu/vynalth-public-dns && test "$(git rev-parse HEAD)" = ' + $reviewedCommit +
+  ' && test -z "$(git status --porcelain)" && .venv/bin/python scripts/prepare-private.py' +
+  ' && sha256sum --check plans/phase-b-service.sha256 && sha256sum --check plans/phase-b-active.sha256' +
+  ' && sudo -n unbound-checkconf artifacts/private/unbound.conf'
+& ssh @sshArgs $preflight
+if ($LASTEXITCODE -ne 0) { throw 'Preflight failed; do not deploy' }
+# Also inspect Tailscale status/source, effective baseline and retained recovery as above.
+$elapsed = [Diagnostics.Stopwatch]::StartNew()
+try {
+  & ssh @sshArgs ('cd /home/ubuntu/vynalth-public-dns && sudo -n bash scripts/deploy-private.sh artifacts/private ' + $configHash)
+  if ($LASTEXITCODE -ne 0) { throw 'Deployment failed' }
+  & python scripts/private-acceptance.py --ssh-key $keyPath --config-sha256 $configHash `
+    --authorized-target --deadline-seconds 100 --out artifacts/private-acceptance.json
+  if ($LASTEXITCODE -ne 0 -or $elapsed.Elapsed.TotalSeconds -ge 140) { throw 'Acceptance failed or transaction budget exhausted' }
+  & ssh @sshArgs 'cd /home/ubuntu/vynalth-public-dns && sudo -n bash scripts/confirm.sh'
+  if ($LASTEXITCODE -ne 0) { throw 'Confirmation failed; inspect rollback state' }
+} catch {
+  & ssh @sshArgs 'sudo -n bash /var/lib/vynalth-dns/rollback.sh'
+  throw
+}
+```
+
+The controller never deploys, confirms, stops a timer or rolls back. A missing
+receipt or killed controller is failure; independent timer recovery remains
+armed if SSH is unavailable. Verify restored baseline hashes, original drop-in
+state, localhost-only listeners and SSH after rollback. Retain all snapshots.
+
+Manual recovery command (only within an approved active transaction):
 
 ```sh
-sudo bash scripts/confirm.sh
-# Immediate recovery instead of confirmation:
 sudo bash /var/lib/vynalth-dns/rollback.sh
 ```
 
 Do not cancel the timer for incomplete testing. Retain snapshots. The service
 plan leaves the existing host firewall unchanged, including current SSH access.
 An actual unapproved second tailnet client is unavailable; its live test remains
-pending. Isolated tests establish ACL behavior but cannot replace that evidence.
+pending. The loopback negative test and prior isolated ACL tests prove resolver
+ACL logic only. This scoped private trial cannot establish public readiness.
 
 ## Separate firewall proposal: not approved for application
 

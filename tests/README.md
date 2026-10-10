@@ -2,8 +2,8 @@
 
 CI/unit checks are not production acceptance. No public load/attack tests.
 `local_runtime.py` starts a high-port loopback process and terminates it, without
-editing the host service or firewall. `acceptance.py` sends at most seven ordinary
-queries to an explicitly authorized resolver; root/authoritative queries are the
+editing the host service or firewall. Each `acceptance.py` scenario sends at most
+seven one-shot queries to an explicitly authorized resolver; root/authoritative queries are the
 resolver's normal DNS operation, not attacks or benchmark load.
 
 On Ubuntu with an enforcing packaged AppArmor profile, use:
@@ -55,3 +55,40 @@ strictly stubbed; it cannot establish production restart success.
 No missing test should be treated as PASS. Phase D requires runtime evidence for
 every row, effective OCI rules and live edge acceptance. Never report an
 unexecuted drill as successful. Static checks cannot establish network behavior.
+
+## DNSSEC timeout investigation
+
+`acceptance.py` requires an explicit observation timeout. It preserves transport,
+question, elapsed time, RCODE, AD/CD/TC, EDE and exception type. Null response
+means no reply was observed, not SERVFAIL. A correct reply exceeding the declared
+latency limit remains failed. There are no retries or automatic UDP/TCP fallback.
+Cold and warm scenarios must be identified explicitly; CLI cache evidence is an
+operator attestation. The isolated harness proves cold process query count zero
+and warm cache-hit increments through its own control socket.
+
+Run the deterministic six-second signed authority A/B tests on the authorized VM:
+
+```sh
+sudo systemd-run --scope --unit=dnssec-default-control -p MemoryMax=384M -p TasksMax=64 \
+  .venv/bin/python tests/isolated_dnssec.py --mode fixture --discard-timeout 1900 \
+  --require-apparmor --out artifacts/dnssec-control.json
+sudo systemd-run --scope --unit=dnssec-finite-window -p MemoryMax=384M -p TasksMax=64 \
+  .venv/bin/python tests/isolated_dnssec.py --mode fixture --discard-timeout 15000 \
+  --legacy-comparison --require-apparmor --out artifacts/dnssec-fixed.json
+# Low-volume independent recursion: explicit authorized lab only, never CI load.
+sudo systemd-run --scope --unit=dnssec-recursion -p MemoryMax=384M -p TasksMax=64 \
+  .venv/bin/python tests/isolated_dnssec.py --mode recursive --authorized-recursion \
+  --require-apparmor --out artifacts/dnssec-recursion.json
+```
+
+Each experiment creates a fresh enforcing Unbound process on 127.0.0.1:15355,
+1024 descriptors, an isolated trust anchor/control socket and disposable files.
+The fixture uses only a local test trust anchor and authority; no Internet DNS
+queries are needed. Recursive mode copies the production public root anchor;
+its normal resolver traffic is limited to four declared cold/warm cases. It never
+flushes production caches or uses the production control socket for mutation.
+Production service, config, trust anchor, SSH and firewall fingerprints must stay
+unchanged. Diagnostic observation is 20s, acceptance threshold 15s, warm 2s.
+The declared 5s comparison must FAIL late replies; no warm retry follows failure.
+Negative-control PASS means the expected missing reply was reproduced, not that
+DNS service passed. See [the private acceptance procedure](../PHASE_B.md).

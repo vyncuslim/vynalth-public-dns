@@ -26,8 +26,9 @@ See [architecture](ARCHITECTURE.md), [security](SECURITY.md), [cost controls](CO
 [current discovery evidence](DISCOVERY.md).
 See [validation evidence and unexecuted checks](VALIDATION.md).
 The existing Oracle VM has a separately reviewed [Phase B private service plan](PHASE_B.md).
-Its authorized private-service attempt was rolled back after a test timeout;
-another deployment and all firewall changes need explicit approval. Use the
+Its authorized private-service attempt was rolled back after a test timeout.
+The DNSSEC reply-expiry correction and cold/warm diagnostics passed isolated
+tests; the new private trial and all firewall changes need explicit approval. Use the
 service-only procedure rather than the full installer on this Tailscale-managed VM.
 
 This is not yet a replacement for 1.1.1.1: no verified static edge IP entitlement,
