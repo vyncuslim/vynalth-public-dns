@@ -115,3 +115,10 @@ covered by `tests/two_client_runtime.py` in a local network namespace using
 synthetic exact source addresses and a signed local authority. Run as root
 on an isolated Linux test host; CI requires `--require-apparmor`. No live
 phone, Tailscale tunnel or public recursion is certified by this test.
+
+## Negative-response compatibility update
+
+See [negative DNS/DNSSEC investigation](../DNS_NEGATIVE_INVESTIGATION.md). NOERROR with no requested
+RRset can be legitimate NODATA; timeout is never SERVFAIL. Local signed/unsigned
+and Compact Denial fixtures now cover provider-style differences; both device
+ACLs/listeners/PTR remain unchanged. Real phone acceptance is still PENDING.

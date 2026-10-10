@@ -55,6 +55,7 @@ class ConfirmationTests(unittest.TestCase):
 
     def test_missing_failed_timed_out_or_wrong_ptr_blocks(self):
         mutations = [lambda r: r['queries'].pop(),
+                     lambda r: r['queries'][0].update({'expected_nodata': True}),
                      lambda r: r['queries'][0].update({'pass': False, 'response': None}),
                      lambda r: r['queries'][0]['response'].update({'ptr_targets': ['wrong.test.']}),
                      lambda r: r['after']['local_refused'].pop(),

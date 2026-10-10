@@ -34,8 +34,8 @@ branch HEAD and review that full SHA before approval. No old approval carries ov
 
 Unchanged Unbound configuration SHA256:
 `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
-Unchanged21-file service manifest SHA256:
-`d9e34e90e734fb0ca07ddf3a3e415bc2f35df28b10565d5a9af678b4068dd965`.
+Current21-file service manifest SHA256:
+`39d1d897e63bb87ff52195ce07ef77c219dff2def100e44249ae72071182ffc2`.
 
 The existing baseline SHA256
 `cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b`
@@ -110,3 +110,25 @@ current ARM/AppArmor/real timer validation, unstaged/unverified VM source and
 private packet path, Windows/phone acceptance, CI account billing lock. Local
 two-client simulation PASS does not clear these gates. No resources/cost changes;
 RM0 target and existing invoice/free eligibility remain unverified.
+
+## Negative-response/DNSSEC investigation update
+
+See [DNS_NEGATIVE_INVESTIGATION.md](DNS_NEGATIVE_INVESTIGATION.md) for attributed
+production observations, exact external authority comparisons and deterministic
+local evidence. No new Oracle access occurred. NOERROR/NODATA is preserved,
+including signed Compact Denial; no heuristic NXDOMAIN rewrite is introduced.
+The unchanged Windows query inventory now correctly omits an AD requirement for
+built-in `.invalid` local NXDOMAIN. Real signed-domain/root AD and bogus SERVFAIL
+checks remain mandatory. Positive A/AAAA checks require the requested RRset, not
+just CNAME. Authority/flags/negative TTL diagnostics were added.
+
+Configuration SHA remains unchanged. The21-file service manifest now pins the
+updated acceptance helper; review the new bundle and actual full commit before
+any approval.61 Windows and61 local Linux unit tests PASS; local signed negative,
+Compact Denial, bogus negative, delayed1900/15000 comparison and both-client
+regressions PASS in their isolated scope. Oracle timeout cause remains unresolved
+although the reply-age mechanism is reproduced. No candidate deployment or live
+Windows/Android success is claimed. Current ARM/AppArmor/real timer/baseline,
+residue impact/recovery/private packet path and CI limitations remain blockers.
+No extra queries or time are added to the <140s protected transaction; independent
+180s rollback and separately approved post-confirmation Android<45s remain.

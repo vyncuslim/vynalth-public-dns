@@ -33,6 +33,7 @@ def validate(receipt, transaction, now, boot_id, config_hash, pid):
     for row, (name, kind, tcp, rcode, ad, cd, scenario, limit) in zip(rows, expected):
         response = row['response']
         if (row.get('pass') is not True or row['attempts'] != 1 or row['error'] is not None
+                or row.get('expected_nodata', False) is not False
                 or row['query']['name'] != name or row['query']['type'] != kind
                 or row['transport'] != ('TCP' if tcp else 'UDP') or row['scenario'] != scenario
                 or row['server'] != '100.95.65.20' or row['source'] != '100.85.132.14'

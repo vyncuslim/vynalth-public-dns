@@ -130,3 +130,16 @@ Reboot required, maintenance activity/schedule uncertainty, drift, public bindin
 unknown residue impact, failed recovery or pending protection blocks deployment.
 Do not disable upgrades, relax checks, cancel timers or automatically retry.
 Next gates are in [PHASE_B_APPROVAL_CHECKLIST.md](PHASE_B_APPROVAL_CHECKLIST.md).
+
+## Additional DNSSEC scope to review, not executed
+
+Owner review6099493372 supplies partial Gate A observations; it does not approve
+new host access or clear all recovery/impact gates. See DNS_NEGATIVE_INVESTIGATION.md.
+A future separately authorized audit can include current effective include hashes,
+`sudo unbound-checkconf -o discard-timeout`, configured trust-anchor status,
+read-only `stats_noreset` through the actual configured control socket, service
+queue/limits and a bounded validation journal window. Missing control support is
+UNKNOWN; do not enable it or log browsing histories. No cache flush/restart or
+extra DNS probe is implicit. Cold-cache queries need an explicitly scoped fresh
+isolated environment. Review exact query counts/transports/CD/deadlines before
+any later live comparison. Old15s timeout is not a validation PASS.

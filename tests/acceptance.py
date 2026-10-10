@@ -14,9 +14,27 @@ import dns.rcode
 import dns.rdatatype
 
 
+def response_shape(reply, kind):
+    """Describe wire semantics, never infer existence from a random-looking name."""
+    matching = any(rr.rdtype == dns.rdatatype.from_text(kind) for rr in reply.answer)
+    soa = any(rr.rdtype == dns.rdatatype.SOA for rr in reply.authority)
+    if reply.rcode() == dns.rcode.NXDOMAIN:
+        return 'NXDOMAIN'
+    if reply.rcode() != dns.rcode.NOERROR:
+        return dns.rcode.to_text(reply.rcode())
+    if matching:
+        return 'ANSWER'
+    if soa:
+        return 'NODATA'
+    if any(rr.rdtype == dns.rdatatype.NS for rr in reply.authority) and not reply.answer:
+        return 'REFERRAL'
+    return 'NOERROR_WITHOUT_MATCHING_RRSET'
+
+
 def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
                 expected='NOERROR', ad=False, cd=False, timeout,
-                latency_limit=None, scenario='standard', cache_evidence='unknown', expected_ptr=None):
+                latency_limit=None, scenario='standard', cache_evidence='unknown', expected_ptr=None,
+                expected_nodata=False):
     """Exactly one transmission; observation can outlast the acceptance threshold.
 
     A late correct response is still FAIL. No fallback, retry, cache flush or
@@ -25,6 +43,8 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
     limit = timeout if latency_limit is None else latency_limit
     if not 0 < limit <= timeout <= 30:
         raise ValueError('Require 0 < latency limit <= observation timeout <= 30s')
+    if expected_nodata and (expected != 'NOERROR' or expected_ptr is not None):
+        raise ValueError('Explicit NODATA requires NOERROR and no positive PTR expectation')
     query = dns.message.make_query(name, kind, use_edns=True, payload=1232, want_dnssec=True)
     if cd:
         query.flags |= dns.flags.CD
@@ -34,6 +54,7 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
            'transport': 'TCP' if tcp else 'UDP', 'scenario': scenario,
            'cache_evidence': cache_evidence, 'expected_rcode': expected,
            'require_AD': ad, 'observation_timeout_seconds': timeout,
+           'expected_nodata': expected_nodata,
            'latency_limit_seconds': limit,
            'started_utc': datetime.now(timezone.utc).isoformat(),
            'elapsed_seconds': None, 'response': None, 'error': None,
@@ -47,7 +68,13 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
                            'AD': bool(reply.flags & dns.flags.AD),
                            'CD': bool(reply.flags & dns.flags.CD),
                            'TC': bool(reply.flags & dns.flags.TC),
+                           'AA': bool(reply.flags & dns.flags.AA),
+                           'RA': bool(reply.flags & dns.flags.RA),
+                           'shape': response_shape(reply, kind),
                            'answers': [rrset.to_text() for rrset in reply.answer],
+                           'authority': [rrset.to_text() for rrset in reply.authority],
+                           'SOA_negative_ttls': [min(rrset.ttl, item.minimum) for rrset in reply.authority
+                                                if rrset.rdtype == dns.rdatatype.SOA for item in rrset],
                            'ptr_targets': [item.target.to_text() for rrset in reply.answer
                                            if rrset.rdtype == dns.rdatatype.PTR for item in rrset],
                            'EDE': [str(o) for o in reply.options if int(o.otype) == 15]}
@@ -66,7 +93,10 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
         elif expected_ptr is not None and [(rrset.name.to_text(), rrset.rdtype, item.target.to_text())
                 for rrset in reply.answer if rrset.rdtype == dns.rdatatype.PTR for item in rrset] != [(query.question[0].name.to_text(), dns.rdatatype.PTR, expected_ptr)]:
             outcome = 'unexpected_PTR'
-        elif expected == 'NOERROR' and kind in ('A', 'AAAA', 'PTR') and not reply.answer:
+        elif expected_nodata and row['response']['shape'] != 'NODATA':
+            outcome = 'expected_NODATA'
+        elif not expected_nodata and expected == 'NOERROR' and kind in ('A', 'AAAA', 'PTR') and not any(
+                rrset.rdtype == dns.rdatatype.from_text(kind) for rrset in reply.answer):
             outcome = 'missing_answer'
         else:
             outcome = 'pass'
@@ -99,7 +129,8 @@ def case_plan(scenario):
             ('example.com.', 'A', True, 'NOERROR', False, False),
             ('cloudflare.com.', 'A', False, 'NOERROR', True, False),
             ('dnssec-failed.org.', 'A', False, 'SERVFAIL', False, False),
-            ('vynalth-acceptance.invalid.', 'A', False, 'NXDOMAIN', True, False),
+            # Built-in RFC6761 local denial is authoritative, not DNSSEC signed.
+            ('vynalth-acceptance.invalid.', 'A', False, 'NXDOMAIN', False, False),
             ('.', 'DNSKEY', True, 'NOERROR', True, False)]
 
 

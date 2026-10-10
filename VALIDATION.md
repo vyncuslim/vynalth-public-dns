@@ -665,3 +665,47 @@ focused retained lab inventory. PHASE_B_APPROVAL_CHECKLIST.md separates audit,
 cleanup, readiness validation, exact approved service trial, mobile gate and
 settings gates. Config/21-file service manifest bytes remain unchanged; review
 checksums cover this documentation update. Live acceptance stays PENDING.
+
+## 2026-10-11 negative-response and DNSSEC investigation (local only)
+
+Starting actual local/origin HEAD c289395c4457f6fe1ebb710fd682f81a73006324.
+User-provided review6099493372 reports baseline8808b474 localhost results: three
+exact example.com/cloudflare.com/github.com names NOERROR,zero ANSWER,zone SOA
+(AD true/true/false), invalid NXDOMAIN+AA without AD, bogus UDP15s TIMEOUT.
+TIMEOUT is FAIL, not SERVFAIL. No Oracle SSH/serial/files/tests/cleanup/changes.
+See DNS_NEGATIVE_INVESTIGATION.md for exact table, source and standards links.
+
+- PASS:61 Windows unit tests and61 local WSL Linux tests.
+- PASS: real local Unbound1.19.2,54 traditional signed/unsigned/compact negative
+  and wildcard/CNAME/empty-node/unsupported-type UDP/TCP cases,6 negative cache
+  measurements, real upstream TCP fallback, tampered-negative SERVFAIL both
+  transports, local invalid NXDOMAIN/AA/noAD. No public traffic in namespace.
+- PASS: expected reply-age A/B mechanism.1900 client UDP tests themselves FAIL
+  by8s timeout; TCP tests FAIL by EOF near6s.15000 cold signed/bogus returns
+  NOERROR+AD/SERVFAIL near6s; warm/CD PASS. Full raw response/error/latency
+  records in plans/investigation/negative-runtime.json. No silent client retries.
+- PASS: two-source Windows/Android Unbound regression, full local runtime,
+  file rollback4 variants and no-snapshot no-op, Shellcheck all shell files,
+  compilation and config-byte equality. Fresh real180s timer NOT TESTED.
+- EXTERNAL OBSERVATION: two bounded24-query local Windows public comparison
+  runs; all replied. Exact authoritative names match NODATA shapes across
+  Cloudflare/NS1/AWS samples. Cloudflare signed compact NSEC/NXNAME observed.
+  No Oracle/network-path/complete-delegation validation is implied.
+- NOT TESTED: enforcing AppArmor locally (kernel unavailable), current ARM,
+  actual full baseline runtime, negative-cache expiry, production queue/trust
+  anchor/path/fragmentation conditions, fresh real timer, actual devices.
+- PENDING SEPARATE APPROVAL: live baseline diagnostics and protected deployment
+  under existing approval gates. Candidate configuration unchanged; manifest
+  changed for acceptance fixes. Current production timeout exact cause remains
+  UNRESOLVED. No resolver RCODE mutation or speculative production fix.
+
+Two confirmed acceptance defects fixed: AD wrongly required for built-in invalid
+local NXDOMAIN; positive address test wrongly passed CNAME-only negative result.
+Explicit NODATA mode and full authority/AA/RA/SOA TTL diagnostics added without
+relaxing defaults, signed validation or confirmation/rollback deadlines.
+
+Confirmation additionally rejects explicit NODATA-mode rows, so diagnostic
+negative expectations cannot replace the protected positive acceptance checks.
+This guard and existing global deadline/one-shot/receipt protections pass the
+61-unit suite. Current configuration SHA256: `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
+Current21-file service manifest SHA256: `39d1d897e63bb87ff52195ce07ef77c219dff2def100e44249ae72071182ffc2`.

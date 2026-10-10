@@ -1,0 +1,632 @@
+{
+  "scope": "EXTERNAL LOCAL HOST; no Oracle access",
+  "elapsed_seconds": 3.156,
+  "queries": [
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "test-nx-20261010.example.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.087242+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "example.com. 1800 IN SOA elliott.ns.cloudflare.com. dns.cloudflare.com. 2416374680 10000 2400 604800 1800",
+          "example.com. 1800 IN RRSIG SOA 13 2 1800 20261011172124 20261009152124 34505 example.com. fMv7ryn75Q4or08Ch4nSwOYba0/ACByV t8jY/zAEEHTJiVcQrjzF3kTzu4IIRGXS HoJIZH2RjXX4WZ1dK6DPEQ==",
+          "test-nx-20261010.example.com. 1800 IN NSEC \\000.test-nx-20261010.example.com. RRSIG NSEC NXNAME",
+          "test-nx-20261010.example.com. 1800 IN RRSIG NSEC 13 3 1800 20261011172124 20261009152124 34505 example.com. VZhc/YJIDQ5GuXXMJmkId4pCX001Vt6P o/wagNE/FgsazsT0PHvdyVkh7Y1339Yi +iWJ2fkumZ+Tzn0A9owA7A=="
+        ]
+      },
+      "elapsed_seconds": 0.109
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "example.com.",
+      "type": "NS",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.189577+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "example.com. 86400 IN NS hera.ns.cloudflare.com.\nexample.com. 86400 IN NS elliott.ns.cloudflare.com.",
+          "example.com. 86400 IN RRSIG NS 13 2 86400 20261011172124 20261009152124 34505 example.com. ugTLy4iWyB2TGCn9FsJLP/tvsFqd+D70 V6vscbggJUGwLU5PAEASZWl4UXBSC1yy Uzc4p44hyuA5v8mOvlPE/g=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.141
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "hera.ns.cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.326585+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "hera.ns.cloudflare.com. 86353 IN A 108.162.192.162\nhera.ns.cloudflare.com. 86353 IN A 172.64.32.162\nhera.ns.cloudflare.com. 86353 IN A 173.245.58.162",
+          "hera.ns.cloudflare.com. 86353 IN RRSIG A 13 4 86353 20261011172124 20261009152124 34505 cloudflare.com. ervCXbXfPJFBavLrBFu97dodYbo1vT9P p82RFYihw8Vh7nGKjFe4rithH0Kxek78 l5NrzA8vBf+q6rTgq+2zQA=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "108.162.192.162",
+      "name": "test-nx-20261010.example.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.347727+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "example.com. 1800 IN SOA elliott.ns.cloudflare.com. dns.cloudflare.com. 2416374680 10000 2400 604800 1800",
+          "test-nx-20261010.example.com. 1800 IN NSEC \\000.test-nx-20261010.example.com. RRSIG NSEC NXNAME",
+          "test-nx-20261010.example.com. 1800 IN RRSIG NSEC 13 3 1800 20261011172124 20261009152124 34505 example.com. 2QxMSIrZkgYmN74/phU9UXsaIA4rrWGE YMUxSkqYicbdtnYHiZCsrDXUCCIjO14B vP7UTi7SwYw/OOO4mrN1uw==",
+          "example.com. 1800 IN RRSIG SOA 13 2 1800 20261011172124 20261009152124 34505 example.com. oU/T06g9V54Alj8JMriIATgrFeMFt2PN DMiZlCkPDb17Pc0j+uwsKbULQXmJt2VY OzajVonTNQbEhxtL3j/Jtw=="
+        ]
+      },
+      "elapsed_seconds": 0.141
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "elliott.ns.cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.490033+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "elliott.ns.cloudflare.com. 86353 IN A 108.162.195.228\nelliott.ns.cloudflare.com. 86353 IN A 162.159.44.228\nelliott.ns.cloudflare.com. 86353 IN A 172.64.35.228",
+          "elliott.ns.cloudflare.com. 86353 IN RRSIG A 13 4 86353 20261011172124 20261009152124 34505 cloudflare.com. lcm6vPR1k8fRk8E1ww5yiNMgv+93LLOH hkk48/MyMx/YnTq+5MtHqso4ONbOpj32 +Wjj/d58TBRAgWdNApBKbw=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "108.162.195.228",
+      "name": "test-nx-20261010.example.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.512493+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "example.com. 1800 IN SOA elliott.ns.cloudflare.com. dns.cloudflare.com. 2416374680 10000 2400 604800 1800",
+          "test-nx-20261010.example.com. 1800 IN NSEC \\000.test-nx-20261010.example.com. RRSIG NSEC NXNAME",
+          "example.com. 1800 IN RRSIG SOA 13 2 1800 20261011172124 20261009152124 34505 example.com. eYshvomGiolSNMpVDIKlE2zZ/upRwG2n p7CzyBXbYP0OVMWbRhbLEbw+Fm4JSfih bQwFasiziJ3G+kEDexaCcQ==",
+          "test-nx-20261010.example.com. 1800 IN RRSIG NSEC 13 3 1800 20261011172124 20261009152124 34505 example.com. 2Fi02YPcYxlHYN1v+ABEhzD9gopbQO93 jZOhf9/9wzfoQp02TpGWGZcsh68tnAfs nQc+E6+QSjwhO+uN6Jq7ow=="
+        ]
+      },
+      "elapsed_seconds": 0.141
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "test-nx-20261010.cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.653252+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "cloudflare.com. 300 IN SOA ns3.cloudflare.com. dns.cloudflare.com. 2416724497 10000 2400 604800 300",
+          "cloudflare.com. 300 IN RRSIG SOA 13 2 300 20261011172124 20261009152124 34505 cloudflare.com. 22jr4ApbU/X5hGF9RJG1sG16IU4WTEhY GVxj9hXg6KcyFGtQJBKhwriiBfcDJegy TgZfyosLXeCAVwXxfAog7g==",
+          "test-nx-20261010.cloudflare.com. 300 IN NSEC \\000.test-nx-20261010.cloudflare.com. RRSIG NSEC NXNAME",
+          "test-nx-20261010.cloudflare.com. 300 IN RRSIG NSEC 13 3 300 20261011172124 20261009152124 34505 cloudflare.com. Or7BQ4BSyFqrcbDnHax7j4Ck8sfjrH4E eY+V/MLnLEAXYdiq7Nc1KKzgZ2nKrJOu hozZ79qiXOjIdz2RVd2r4A=="
+        ]
+      },
+      "elapsed_seconds": 0.031
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "cloudflare.com.",
+      "type": "NS",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.684426+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "cloudflare.com. 86400 IN NS ns3.cloudflare.com.\ncloudflare.com. 86400 IN NS ns4.cloudflare.com.\ncloudflare.com. 86400 IN NS ns5.cloudflare.com.\ncloudflare.com. 86400 IN NS ns6.cloudflare.com.\ncloudflare.com. 86400 IN NS ns7.cloudflare.com.",
+          "cloudflare.com. 86400 IN RRSIG NS 13 2 86400 20261011172124 20261009152124 34505 cloudflare.com. 4GfPzU4eVELf0HR9cWa7iImtp+8rD37y mvELy/KL1lY6dJqBGVwmlkc1xRIQt4nw zte+l3gU9fONr6p2PwztMg=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "ns3.cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:24.702798+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "ns3.cloudflare.com. 86353 IN A 162.159.0.33\nns3.cloudflare.com. 86353 IN A 162.159.7.226",
+          "ns3.cloudflare.com. 86353 IN RRSIG A 13 3 86353 20261011172124 20261009152124 34505 cloudflare.com. gGH1K8Usiw6H5KVm1bmKLyO4JZi+3vOg n9Utheyk6Yprc1q1grCm8a8K83gLF1yt dnUnxyC6fVtFsc4uNe03JQ=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.312
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "162.159.0.33",
+      "name": "test-nx-20261010.cloudflare.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.021317+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "cloudflare.com. 300 IN SOA ns3.cloudflare.com. dns.cloudflare.com. 2416724497 10000 2400 604800 300",
+          "test-nx-20261010.cloudflare.com. 300 IN NSEC \\000.test-nx-20261010.cloudflare.com. RRSIG NSEC NXNAME",
+          "test-nx-20261010.cloudflare.com. 300 IN RRSIG NSEC 13 3 300 20261011172125 20261009152125 34505 cloudflare.com. xBHhLKKX931GqJrQ6OphZw1Lx2Y3AGB5 Mi85jkx6KxnPLZp/TP2g/TlzyCFdELFX i758YRu+zXxqfllH4z++MA==",
+          "cloudflare.com. 300 IN RRSIG SOA 13 2 300 20261011172125 20261009152125 34505 cloudflare.com. TwgeHHPe+f+AHy0knkUHk+CKyVdYjvxK IF1VdWClKJXcrbtDleN7IyvT99sK03ie F2th8QhqiM8fJHhnC4QHvg=="
+        ]
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "ns4.cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.038037+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "ns4.cloudflare.com. 86353 IN A 162.159.1.33\nns4.cloudflare.com. 86353 IN A 162.159.8.55",
+          "ns4.cloudflare.com. 86353 IN RRSIG A 13 3 86353 20261011172125 20261009152125 34505 cloudflare.com. BYCzpjderBq3IYihYvcYLBBstQfuT6qB urR993FbAaANKR+TzkfRFcEmCStmu33d O0gs6L/p7Yp8w7+c27Pumw=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "162.159.1.33",
+      "name": "test-nx-20261010.cloudflare.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.052052+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "cloudflare.com. 300 IN SOA ns3.cloudflare.com. dns.cloudflare.com. 2416724497 10000 2400 604800 300",
+          "test-nx-20261010.cloudflare.com. 300 IN NSEC \\000.test-nx-20261010.cloudflare.com. RRSIG NSEC NXNAME",
+          "cloudflare.com. 300 IN RRSIG SOA 13 2 300 20261011172125 20261009152125 34505 cloudflare.com. r6XWAsA/ldK4/H4IuMkbi9jzN4cgT5SU jOmDhPZWK1PKP+SkesdL6whVKK/4NQi+ E/rWEBfJtP+VN9720uq9aw==",
+          "test-nx-20261010.cloudflare.com. 300 IN RRSIG NSEC 13 3 300 20261011172125 20261009152125 34505 cloudflare.com. TckCpjuSv3DlBK2OPBeRy12XimcbI8CR FXcszl1cB7C3MBAoLs9C+BK1FMNJ8hmG uWpUnT94xEt0N7ZJRAIO3w=="
+        ]
+      },
+      "elapsed_seconds": 0.157
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "test-nx-20261010.github.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.200718+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "github.com. 900 IN SOA ns-1707.awsdns-21.co.uk. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+        ]
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "github.com.",
+      "type": "NS",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.225167+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": false,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "github.com. 1560 IN NS dns1.p08.nsone.net.\ngithub.com. 1560 IN NS dns2.p08.nsone.net.\ngithub.com. 1560 IN NS dns3.p08.nsone.net.\ngithub.com. 1560 IN NS dns4.p08.nsone.net.\ngithub.com. 1560 IN NS ns-1283.awsdns-32.org.\ngithub.com. 1560 IN NS ns-1707.awsdns-21.co.uk.\ngithub.com. 1560 IN NS ns-421.awsdns-52.com.\ngithub.com. 1560 IN NS ns-520.awsdns-01.net."
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dns1.p08.nsone.net.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.242716+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "dns1.p08.nsone.net. 81287 IN A 198.51.44.8",
+          "dns1.p08.nsone.net. 81287 IN RRSIG A 13 4 86400 20261011155611 20261010135611 12196 nsone.net. QtM3Pd5fPvhdMIcDCEtYBYNuTf9va0nG jQ2OdDruaYf2u9vTUeQeUhCufkhOINXT VzM3jrFlD85AmBQEOWiQCg=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "198.51.44.8",
+      "name": "test-nx-20261010.github.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.366452+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "github.com. 3600 IN SOA dns1.p08.nsone.net. hostmaster.nsone.net. 1656468023 43200 7200 1209600 3600"
+        ]
+      },
+      "elapsed_seconds": 0.031
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dns2.p08.nsone.net.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.400454+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "dns2.p08.nsone.net. 86400 IN A 198.51.45.8",
+          "dns2.p08.nsone.net. 86400 IN RRSIG A 13 4 86400 20261011172125 20261010152125 12196 nsone.net. sqTjd/maHeTYEycgoAjc1XIMUcP7JaGy caqifW/BMh2fOTgP9w1boZY76jwg4IDf 1mv43nQeMecsifx+Pc61/w=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.141
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "198.51.45.8",
+      "name": "test-nx-20261010.github.com.",
+      "type": "A",
+      "RD": false,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.540973+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "NODATA",
+        "AD": false,
+        "AA": true,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": [
+          "github.com. 3600 IN SOA dns1.p08.nsone.net. hostmaster.nsone.net. 1656468023 43200 7200 1209600 3600"
+        ]
+      },
+      "elapsed_seconds": 0.031
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.559390+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "cloudflare.com. 184 IN A 104.16.132.229\ncloudflare.com. 184 IN A 104.16.133.229",
+          "cloudflare.com. 184 IN RRSIG A 13 2 300 20261011171920 20261009151920 34505 cloudflare.com. E910u9UotdW1qGmRMybUZQSNV/qRuQzC MA0RWeU2to+BDCeLs61eXxiaJWbKdX8+ XduiVMw4SyqWTTQI+0P73A=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dnssec-failed.org.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:25.573273+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "SERVFAIL",
+        "shape": "SERVFAIL",
+        "AD": false,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": []
+      },
+      "elapsed_seconds": 0.656
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dnssec-failed.org.",
+      "type": "A",
+      "RD": true,
+      "CD_query": true,
+      "transport": "UDP",
+      "started_utc": "2026-10-10T16:21:26.229723+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": false,
+        "AA": false,
+        "CD": true,
+        "TC": false,
+        "answers": [
+          "dnssec-failed.org. 300 IN A 96.99.227.255",
+          "dnssec-failed.org. 300 IN RRSIG A 13 2 300 20261015015706 20261007225206 32784 dnssec-failed.org. na2euGmlBvOYfQ6l1qd9k6gzzAEMh7nI 4wuIbjQJ5HoELOkd1ZuiMPqA1D+QEnBL epCjDkoK+PZ84UFOaF1wcA=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.61
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "cloudflare.com.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "TCP",
+      "started_utc": "2026-10-10T16:21:26.838234+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": true,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [
+          "cloudflare.com. 184 IN A 104.16.133.229\ncloudflare.com. 184 IN A 104.16.132.229",
+          "cloudflare.com. 184 IN RRSIG A 13 2 300 20261011171930 20261009151930 34505 cloudflare.com. zHFccfjKFc0Zw1/F6TZdVgMqKRu5Mo2V P5AE1kIpTfjdix4ugSszWBltY4DPHJ+L PycMNnNtB5HYz5YTsP4Z6g=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.25
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dnssec-failed.org.",
+      "type": "A",
+      "RD": true,
+      "CD_query": false,
+      "transport": "TCP",
+      "started_utc": "2026-10-10T16:21:27.075276+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "SERVFAIL",
+        "shape": "SERVFAIL",
+        "AD": false,
+        "AA": false,
+        "CD": false,
+        "TC": false,
+        "answers": [],
+        "authority": []
+      },
+      "elapsed_seconds": 0.109
+    },
+    {
+      "scope": "EXTERNAL LOCAL HOST, not Oracle",
+      "server": "1.1.1.1",
+      "name": "dnssec-failed.org.",
+      "type": "A",
+      "RD": true,
+      "CD_query": true,
+      "transport": "TCP",
+      "started_utc": "2026-10-10T16:21:27.198159+00:00",
+      "attempts": 1,
+      "error": null,
+      "response": {
+        "rcode": "NOERROR",
+        "shape": "ANSWER",
+        "AD": false,
+        "AA": false,
+        "CD": true,
+        "TC": false,
+        "answers": [
+          "dnssec-failed.org. 300 IN A 96.99.227.255",
+          "dnssec-failed.org. 300 IN RRSIG A 13 2 300 20261015015706 20261007225206 32784 dnssec-failed.org. na2euGmlBvOYfQ6l1qd9k6gzzAEMh7nI 4wuIbjQJ5HoELOkd1ZuiMPqA1D+QEnBL epCjDkoK+PZ84UFOaF1wcA=="
+        ],
+        "authority": []
+      },
+      "elapsed_seconds": 0.031
+    }
+  ]
+}

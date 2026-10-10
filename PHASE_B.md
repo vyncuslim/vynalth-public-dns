@@ -185,3 +185,25 @@ The two-client private proposal may admit twice the aggregate per-client query
 budget. Existing queue, process and timeout bounds remain intact; 15000ms is
 not approved for public service. Fresh commit/config/bundle/baseline approval
 is mandatory. Earlier evidence for e20308ba describes the old configuration.
+
+## Negative-response/DNSSEC investigation update
+
+See [DNS_NEGATIVE_INVESTIGATION.md](DNS_NEGATIVE_INVESTIGATION.md) for attributed
+production observations, exact external authority comparisons and deterministic
+local evidence. No new Oracle access occurred. NOERROR/NODATA is preserved,
+including signed Compact Denial; no heuristic NXDOMAIN rewrite is introduced.
+The unchanged Windows query inventory now correctly omits an AD requirement for
+built-in `.invalid` local NXDOMAIN. Real signed-domain/root AD and bogus SERVFAIL
+checks remain mandatory. Positive A/AAAA checks require the requested RRset, not
+just CNAME. Authority/flags/negative TTL diagnostics were added.
+
+Configuration SHA remains unchanged. The21-file service manifest now pins the
+updated acceptance helper; review the new bundle and actual full commit before
+any approval.61 Windows and61 local Linux unit tests PASS; local signed negative,
+Compact Denial, bogus negative, delayed1900/15000 comparison and both-client
+regressions PASS in their isolated scope. Oracle timeout cause remains unresolved
+although the reply-age mechanism is reproduced. No candidate deployment or live
+Windows/Android success is claimed. Current ARM/AppArmor/real timer/baseline,
+residue impact/recovery/private packet path and CI limitations remain blockers.
+No extra queries or time are added to the <140s protected transaction; independent
+180s rollback and separately approved post-confirmation Android<45s remain.

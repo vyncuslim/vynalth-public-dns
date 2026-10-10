@@ -133,3 +133,10 @@ If management is lost, follow the approved recovery plan; no automatic root
 firewall/SSH/network edits. Retain failure evidence and request human review.
 
 Current device acceptance/system-wide DNS are **PENDING LIVE ACCEPTANCE**.
+
+## Negative-response compatibility update
+
+See [negative DNS/DNSSEC investigation](DNS_NEGATIVE_INVESTIGATION.md). NOERROR with no requested
+RRset can be legitimate NODATA; timeout is never SERVFAIL. Local signed/unsigned
+and Compact Denial fixtures now cover provider-style differences; both device
+ACLs/listeners/PTR remain unchanged. Real phone acceptance is still PENDING.
