@@ -496,3 +496,118 @@ and receipts are in plans/post-maintenance/. No deploy-private/install/confirm/
 production rollback, firewall/SSH/Tailscale/OCI/Spectrum/public-DNS mutation,
 Terraform operation or paid-resource creation occurred. Further deployment is
 stopped awaiting fresh explicit authorization after prerequisites are satisfied.
+
+## 2026-10-10 integrated private identity and post-boot candidate (development only)
+
+Actual remote starting HEAD9bc27af72a1a2229d440f025caf2aefa777a784e was inspected
+and safely fast-forwarded, preserving the newer PTR proposal and Issue2 scope.
+No force push or merge. PTR is now generated from the private JSON policy at the
+single owner20.65.95.100.in-addr.arpa., returning exactly dns.vynalthai.com.
+New actual config SHA256:
+`e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b`.
+UTF-8/LF writes prevent Windows newline drift; rendered bytes equal reviewed
+config. The old hash above remains historical. Source guards, reviewed candidate
+baseline and all runtime imports are covered by the updated18-file manifest.
+
+Original post-boot evidence was present on Oracle; actual retrieval matched
+5e1b72073fa74dbd975601a513fa1b5c9e34ac773b45ebdc88863239d82bc4b3.
+Both samples match, no operational failures/reboot flag, kernel7.0.0-1013,
+PID984, boot ID06c41b28-e22e-4540-8bd7-61b91fcaf465 and enforcing AppArmor.
+Candidate baseline SHA256cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b
+is review-only and requires human approval. Fresh10:50:09UTC read-only sample
+matched, NTP=yes, no maintenance failure/pending reboot. An initial read-only
+invocation emitted a generic failure without field evidence; its precise cause
+is unproven. Preserve it as failure, not PASS. Checker now fixes repository cwd
+and emits failure fields; a direct updated invocation passed. No auto-approval.
+
+Testing used a separate0700 temporary checkout and high loopback ports. Oracle
+working HEAD remained24aa2d0; its repository was not staged. Production
+PID984/invocation/config/nft/sshd stayed unchanged. No production restart/reload,
+/etc/unbound write, reboot, OS/update-policy change, SSH/firewall/Tailscale/OCI/
+Spectrum/public DNS mutation, install.sh or Terraform operation occurred.
+
+Real enforcing runtime passed exact PTR UDP/TCP, unrelated reverse with/without
+identity, A/AAAA, valid/bogus/CD DNSSEC, NXDOMAIN, approved-loopback/unapproved
+A+PTR REFUSED, cache, rebinding, truncation/TCP fallback, local outage/recovery,
+child restart and bounded40-packet loopback rate limiting. Local6s signed/bogus
+UDP/TCP cold cases passed at6.008725–6.016141s with finite15000ms; distinct warm
+cases passed with one measured hit each. Fixture and low-volume recursive
+children used384MiB/64-task scopes,1024 descriptors, enforcing profiles and no
+forwarders. Valid cloudflare.com NOERROR+AD UDP/TCP1.111152/0.521043s; bogus
+dnssec-failed.org SERVFAIL without AD UDP/TCP2.468710/2.941162s. Timeout never
+counts as successful DNSSEC rejection. Original live timeout cause remains
+uncertain; earlier1900ms mechanism evidence is retained, not reinterpreted.
+
+Actual timer readiness180s PASS;60s and missing/stopped timers correctly rejected.
+Actual180s isolated restoration passed after181s observation: config/prior limits
+restored, unrelated drop-in retained and originally absent private.conf removed;
+production unchanged. Current actual shell scripts passed private-mount/strict
+shim tests with synthetic receipts: success, bad timer before writes, missing
+receipt and>=140s deadline. These are contract tests, not live DNS PASS records.
+A test import, initial-budget assertion and fixture rendered-path error were
+fixed during development; no security threshold or live deployment was retried.
+
+Confirmation validates complete inventory/PTR/flags/cache/ACL evidence, current
+config/process/AppArmor/listeners/limits/management state and boot-bound
+monotonic<140s transaction. It retains the independent timer through atomic
+snapshot confirmation; the timer then no-ops at180s if confirmed. Errors/signals
+invoke rollback. Changed design and<120s Windows submission reserve are explicit
+in POST_BOOT_REVIEW.md and require new exact approval.
+
+Raw outputs/original capture/baseline comparison/DNSSEC latency/cache/resource/
+timer/rollback receipts are under plans/integration/. Final counts/checks are in
+the candidate report. Windows PTR/nslookup display, actual Tailscale DNS and a
+second unapproved tailnet client remain NOT TESTED / PENDING LIVE ACCEPTANCE.
+Final Windows Python3.12 and real Ubuntu ARM64 each passed38unit tests. Exact
+rendered bytes,18-file bundle,syntax,Python compilation,YAML and Bash syntax
+passed. Shellcheck was absent and is NOT TESTED. Root unit/script manifests and
+the original capture hashes were verified on actual bytes. CI remains blocked.
+CI is billing-blocked, not passed. Shellcheck availability/pass is not assumed.
+RM0 remains an unverified target; no paid resources were created. Stop before
+live changes until exact new commit/config/baseline/bundle authorization.
+
+## User STOP revision: boundary deviation, local-only follow-up
+
+The earlier "isolated" development environment was on the LIVE Oracle VM.
+Creating/transferring test files, launching processes/scopes/transient units and
+removing the first checkout deviated from the development-only boundary. Private
+mounts/shims do not make this compliant. The user stopped further VM writes/tests/
+cleanup/timer operations. No new Oracle command was sent after that instruction;
+only buffered output from pre-existing SSH session8534 was read. It reported0,
+unchanged production fingerprints and an updated180s restoration PASS (181.403s
+monotonic,182s integer observation). Its embedded automatic cleanup may have
+already executed; exact ordering/current residual status is NOT REINSPECTED.
+
+LIVE_VM_IMPACT.md inventories paths/processes/units, prior deletion and retained
+second checkout /var/lib/unbound/vynalth-dev.PMaPSc. Current active status/full
+resource impact are unknown. Do not infer no impact from PID/hash equality, or
+delete artifacts/stop timers. Separate approval is required for scoped read-only
+audit and then itemized cleanup if requested. Original config remains last
+observed8808b474..., PID984; no production deploy/restart was observed.
+
+After the stop all changes/tests were Windows/local WSL only. The old server-local
+140s origin was insufficient for end-to-end timing. New client coordinator T0
+precedes ALL commands/network/verification and shares one140s budget. Its
+conservative monotonic/boot probe maps remaining global time to the server;
+server confirmation also requires this deadline and never resets140s after
+preflight. Missing context/NaN/delay/exhausted budget fail closed. Lost confirmation
+reply is UNKNOWN and not retried. Independent180s protection is never stopped by
+confirmation. Source staging/deployment is not authorized by this implementation.
+
+Private rollback calls now force --service-only even if the marker disappears,
+and installed rollback is root-owned0700. Local WSL real-file restore initially
+failed on a same-second archive collision; PID-suffixed atomic archive naming
+fixed it. Four present/absent drop-in/marker cases then passed with strict service
+shims and nft prohibited; no-snapshot callback passed without service calls.
+This is file/contract validation, not AppArmor or production restart evidence.
+
+Latest local Windows suite:48unit tests PASS, including global command/network
+budget, long verification, acceptance/transfer delays, missing server deadline,
+complete mocked flow and lost confirmation response/no retry. Python compile,
+local WSL Bash syntax, YAML, exact rendered bytes and current20-file bundle
+checks are recorded in final local evidence. Latest source was NOT retested on
+Oracle; historical38ARM/38Windows/18-file results above are not current candidate
+validation. Original configuration content/hash e20308ba...d6c5b1b is unchanged.
+Local WSL has no Unbound; latest full timing/service ARM runtime is NOT TESTED.
+Windows live acceptance and second tailnet client remain PENDING. CI billing
+lock and absent Shellcheck are NOT PASS. No new live status/recovery guarantee.

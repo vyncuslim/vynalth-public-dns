@@ -1,0 +1,4 @@
+{"mode": "success", "pass": true, "scope": "private mounts / strict service shims / synthetic receipt"}
+{"mode": "bad-timer", "pass": true, "scope": "private mounts / strict service shims / synthetic receipt"}
+{"mode": "missing-receipt", "pass": true, "scope": "private mounts / strict service shims / synthetic receipt"}
+{"mode": "deadline", "pass": true, "scope": "private mounts / strict service shims / synthetic receipt"}

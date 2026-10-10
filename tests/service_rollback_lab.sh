@@ -19,7 +19,7 @@ if [[ ${1:-} == --inside ]]; then
   mount --bind "$lab/system-units" /etc/systemd/system
   mount --bind "$lab/var-lib" /var/lib
   export PATH="$lab/bin:$PATH"
-  bash "$lab/rollback.sh"
+  bash "$lab/rollback.sh" --service-only
   exit 0
 fi
 systemctl is-active --quiet unbound

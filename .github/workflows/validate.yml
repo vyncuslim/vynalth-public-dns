@@ -21,6 +21,9 @@ jobs:
       - run: sudo bash tests/firewall_lab.sh
       - run: sudo bash tests/tailscale_firewall_lab.sh
       - run: sudo bash tests/service_rollback_lab.sh
+      - run: sudo $(which python) tests/timer_guard_lab.py
+      - run: sudo $(which python) tests/private_transaction_lab.py
+      - run: sudo bash tests/local_rollback_files.sh
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: '1.9.8'

@@ -1,4 +1,4 @@
-"""Proposed read-only gate, NOT integrated into the approved deployment script.
+"""Historical proposal; canonical integrated gate is scripts/check-rollback-timer.py.
 
 Check the actual independent monotonic timer before any active file write.
 Only systemd property reads; no arming, stopping, cleanup or service changes.

@@ -10,8 +10,8 @@ def main():
     out = ROOT / 'artifacts/private'
     out.mkdir(parents=True, exist_ok=True)
     conf, firewall = render(json.loads((ROOT / 'config.private.example.json').read_text()))
-    (out / 'unbound.conf').write_text(conf)
-    (out / 'firewall.nft').write_text(firewall)
+    (out / 'unbound.conf').write_bytes(conf.encode('utf-8'))
+    (out / 'firewall.nft').write_bytes(firewall.encode('utf-8'))
     active = Path('/etc/unbound/unbound.conf').read_text()
     diff = ''.join(difflib.unified_diff(active.splitlines(True), conf.splitlines(True),
                                        fromfile='/etc/unbound/unbound.conf (active)',

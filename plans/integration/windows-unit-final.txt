@@ -1,0 +1,53 @@
+test_bogus_cannot_return_success_or_ad (test_acceptance.AcceptanceTests.test_bogus_cannot_return_success_or_ad) ... ok
+test_cd_diagnostic_cannot_count_as_validation (test_acceptance.AcceptanceTests.test_cd_diagnostic_cannot_count_as_validation) ... ok
+test_late_correct_response_stays_failed (test_acceptance.AcceptanceTests.test_late_correct_response_stays_failed) ... ok
+test_observation_must_cover_explicit_latency_budget (test_acceptance.AcceptanceTests.test_observation_must_cover_explicit_latency_budget) ... ok
+test_scenarios_preserve_tests_and_transport (test_acceptance.AcceptanceTests.test_scenarios_preserve_tests_and_transport) ... ok
+test_tcp_timeout_keeps_exact_context_and_one_attempt (test_acceptance.AcceptanceTests.test_tcp_timeout_keeps_exact_context_and_one_attempt) ... ok
+test_valid_requires_ad (test_acceptance.AcceptanceTests.test_valid_requires_ad) ... ok
+test_at_140_or_changed_boot_pid_blocks (test_confirmation.ConfirmationTests.test_at_140_or_changed_boot_pid_blocks) ... ok
+test_complete_receipt_before_140_passes (test_confirmation.ConfirmationTests.test_complete_receipt_before_140_passes) ... ok
+test_global_budget_cannot_restart_after_remote_preflight (test_confirmation.ConfirmationTests.test_global_budget_cannot_restart_after_remote_preflight) ... ok
+test_missing_failed_timed_out_or_wrong_ptr_blocks (test_confirmation.ConfirmationTests.test_missing_failed_timed_out_or_wrong_ptr_blocks) ... ok
+test_missing_global_deadline_fails_closed (test_confirmation.ConfirmationTests.test_missing_global_deadline_fails_closed) ... ok
+test_acceptance_or_transfer_delay_prevents_confirmation_and_recovers_once (test_global_deadline.GlobalDeadlineTests.test_acceptance_or_transfer_delay_prevents_confirmation_and_recovers_once) ... ok
+test_command_latency_consumes_global_deadline_and_sends_no_deploy (test_global_deadline.GlobalDeadlineTests.test_command_latency_consumes_global_deadline_and_sends_no_deploy) ... ok
+test_complete_mock_trial_includes_all_command_and_network_time (test_global_deadline.GlobalDeadlineTests.test_complete_mock_trial_includes_all_command_and_network_time) ... ok
+test_long_verification_prevents_deployment (test_global_deadline.GlobalDeadlineTests.test_long_verification_prevents_deployment) ... ok
+test_lost_confirmation_reply_is_unknown_never_retried (test_global_deadline.GlobalDeadlineTests.test_lost_confirmation_reply_is_unknown_never_retried) ... ok
+test_network_reply_delay_makes_server_deadline_earlier (test_global_deadline.GlobalDeadlineTests.test_network_reply_delay_makes_server_deadline_earlier) ... ok
+test_no_budget_or_nan_probe_is_rejected (test_global_deadline.GlobalDeadlineTests.test_no_budget_or_nan_probe_is_rejected) ... ok
+test_timeout_during_verification_never_starts_confirmation (test_global_deadline.GlobalDeadlineTests.test_timeout_during_verification_never_starts_confirmation) ... ok
+test_exact_rendered_bytes_and_narrow_owner (test_identity.IdentityTests.test_exact_rendered_bytes_and_narrow_owner) ... ok
+test_identity_mismatch_injection_or_public_listener_is_rejected (test_identity.IdentityTests.test_identity_mismatch_injection_or_public_listener_is_rejected) ... ok
+test_wrong_or_missing_ptr_cannot_pass (test_identity.IdentityTests.test_wrong_or_missing_ptr_cannot_pass) ... ok
+test_failures_and_reset (test_monitor.MonitorTests.test_failures_and_reset) ... ok
+test_default_closed (test_policy.PolicyTests.test_default_closed) ... ok
+test_host_acl (test_policy.PolicyTests.test_host_acl) ... ok
+test_independent_dns (test_policy.PolicyTests.test_independent_dns) ... ok
+test_ipv6_opt_in (test_policy.PolicyTests.test_ipv6_opt_in) ... ok
+test_no_injection (test_policy.PolicyTests.test_no_injection) ... ok
+test_no_network_wide_recursion (test_policy.PolicyTests.test_no_network_wide_recursion) ... ok
+test_rate_bounds (test_policy.PolicyTests.test_rate_bounds) ... ok
+test_active_upgrade_service_blocks (test_post_maintenance.MaintenanceReadinessTests.test_active_upgrade_service_blocks) ... ok
+test_busctl_scalar_property_and_wrapped_method_results (test_post_maintenance.MaintenanceReadinessTests.test_busctl_scalar_property_and_wrapped_method_results) ... ok
+test_empty_process_list_does_not_hide_occupied_lock (test_post_maintenance.MaintenanceReadinessTests.test_empty_process_list_does_not_hide_occupied_lock) ... ok
+test_idle_scheduled_window_passes_operational_gate (test_post_maintenance.MaintenanceReadinessTests.test_idle_scheduled_window_passes_operational_gate) ... ok
+test_inactive_service_does_not_hide_package_process (test_post_maintenance.MaintenanceReadinessTests.test_inactive_service_does_not_hide_package_process) ... ok
+test_shutdown_helper_is_distinct_from_upgrade (test_post_maintenance.MaintenanceReadinessTests.test_shutdown_helper_is_distinct_from_upgrade) ... ok
+test_unknown_or_near_timer_fails_closed (test_post_maintenance.MaintenanceReadinessTests.test_unknown_or_near_timer_fails_closed) ... ok
+test_cold_failure_after_ptr_never_runs_warm (test_private_acceptance.PrivateAcceptanceTests.test_cold_failure_after_ptr_never_runs_warm) ... ok
+test_complete_receipt_needs_cache_and_acl_evidence (test_private_acceptance.PrivateAcceptanceTests.test_complete_receipt_needs_cache_and_acl_evidence) ... ok
+test_first_failure_prevents_warm_query_and_confirmation (test_private_acceptance.PrivateAcceptanceTests.test_first_failure_prevents_warm_query_and_confirmation) ... ok
+test_missing_acl_records_never_produce_complete_pass (test_private_acceptance.PrivateAcceptanceTests.test_missing_acl_records_never_produce_complete_pass) ... ok
+test_missing_deadline_sends_no_dns_query (test_private_acceptance.PrivateAcceptanceTests.test_missing_deadline_sends_no_dns_query) ... ok
+test_public_listener_or_wrong_ssh_source_fails_before_dns (test_private_acceptance.PrivateAcceptanceTests.test_public_listener_or_wrong_ssh_source_fails_before_dns) ... ok
+test_warm_cache_claim_requires_measured_hits (test_private_acceptance.PrivateAcceptanceTests.test_warm_cache_claim_requires_measured_hits) ... ok
+test_private_identity_and_transport (test_tailscale_policy.TailscalePolicyTests.test_private_identity_and_transport) ... ok
+test_public_listener_or_client_rejected (test_tailscale_policy.TailscalePolicyTests.test_public_listener_or_client_rejected) ... ok
+test_unsafe_interface_port_rejected (test_tailscale_policy.TailscalePolicyTests.test_unsafe_interface_port_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 48 tests in 0.084s
+
+OK

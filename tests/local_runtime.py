@@ -98,8 +98,9 @@ def main():
         parent = Path('/var/lib/unbound')
     if parent is not None and not os.access(parent, os.W_OK):
         raise SystemExit(f'Test needs write access to {parent}; run using sudo and the test venv Python. AppArmor is never disabled.')
-    cfg = json.loads((ROOT / 'config.example.json').read_text())
+    cfg = json.loads((ROOT / 'config.private.example.json').read_text())
     conf, _ = render(cfg)
+    conf = conf.replace('    interface: 100.95.65.20\n', '')
     with tempfile.TemporaryDirectory(prefix='vynalth-test-', dir=parent) as folder:
         base = Path(folder)
         # Preserve security settings; substitute writable paths and high loopback port.
@@ -163,6 +164,12 @@ def main():
             subprocess.run(['unbound-checkconf', str(path)], check=True)
             proc, log = start()
             for tcp in (False, True):
+                identity = query('20.65.95.100.in-addr.arpa.', 'PTR', tcp)
+                assert identity.rcode() == dns.rcode.NOERROR
+                assert len(identity.answer) == 1 and len(identity.answer[0]) == 1
+                assert identity.answer[0][0].target.to_text() == 'dns.vynalthai.com.'
+                unrelated = query('21.65.95.100.in-addr.arpa.', 'PTR', tcp)
+                assert not unrelated.answer and unrelated.rcode() == dns.rcode.NXDOMAIN
                 for kind in ('A', 'AAAA'):
                     r = query('a.fixture.test.', kind, tcp)
                     assert r.rcode() == 0 and r.answer
@@ -172,9 +179,10 @@ def main():
             assert r.flags & dns.flags.TC
             assert query('large.fixture.test.', 'TXT', tcp=True).answer
             for tcp in (False, True):
-                request = dns.message.make_query('a.fixture.test.', 'A')
-                response = (dns.query.tcp if tcp else dns.query.udp)(request, '127.0.0.1', port=15353, source='127.0.0.2', timeout=1)
-                assert response.rcode() == dns.rcode.REFUSED
+                for name, kind in [('a.fixture.test.', 'A'), ('20.65.95.100.in-addr.arpa.', 'PTR')]:
+                    request = dns.message.make_query(name, kind)
+                    response = (dns.query.tcp if tcp else dns.query.udp)(request, '127.0.0.1', port=15353, source='127.0.0.2', timeout=1)
+                    assert response.rcode() == dns.rcode.REFUSED
             response = query('cached.authority.test.', 'A')
             assert response.answer, response.to_text() + f' authority_requests={authority.count}'
             first = authority.count
@@ -185,6 +193,11 @@ def main():
             signed = query('valid.signed-fixture.test.', 'A')
             assert signed.answer and signed.flags & dns.flags.AD, signed.to_text()
             assert query('bogus.signed-fixture.test.', 'A').rcode() == dns.rcode.SERVFAIL
+            for tcp in (False, True):
+                q = dns.message.make_query('bogus.signed-fixture.test.', 'A', want_dnssec=True)
+                q.flags |= dns.flags.CD
+                r = (dns.query.tcp if tcp else dns.query.udp)(q, '127.0.0.1', port=15353, timeout=1)
+                assert r.rcode() == dns.rcode.NOERROR and r.flags & dns.flags.CD and not r.flags & dns.flags.AD
             authority.close()
             # Uncached name against unavailable local authority must not return NOERROR answer.
             try:
@@ -199,6 +212,19 @@ def main():
             log.close()
             proc, log = start()
             assert query('a.fixture.test.', 'A').answer
+            # Compare unrelated reverse behavior with/without the identity override.
+            proc.terminate()
+            proc.wait(timeout=5)
+            log.close()
+            without_identity = '\n'.join(line for line in conf.splitlines()
+                if '20.65.95.100.in-addr.arpa.' not in line) + '\n'
+            path.write_text(without_identity)
+            proc, log = start()
+            for tcp in (False, True):
+                r = query('21.65.95.100.in-addr.arpa.', 'PTR', tcp)
+                assert r.rcode() == dns.rcode.NXDOMAIN and not r.answer
+                assert query('20.65.95.100.in-addr.arpa.', 'PTR', tcp).rcode() == dns.rcode.NXDOMAIN
+            print('PASS unrelated reverse responses unchanged with/without single-owner identity')
             # Rate simulation is bounded to loopback, 40 packets; no third-party queries.
             proc.terminate()
             proc.wait(timeout=5)
@@ -213,7 +239,7 @@ def main():
                 except dns.exception.Timeout:
                     dropped += 1
             assert dropped > 0, 'Per-client rate limit did not drop any excess packet'
-            print('PASS: isolated UDP/TCP A/AAAA, DNSSEC valid/bogus, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit')
+            print('PASS: isolated PTR identity/unrelated reverse, UDP/TCP A/AAAA, DNSSEC valid/bogus/CD, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit')
         finally:
             if proc is not None:
                 if proc.poll() is None:

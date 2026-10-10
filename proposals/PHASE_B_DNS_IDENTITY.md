@@ -1,73 +1,44 @@
-# Phase B optional DNS identity — review-only proposal
+# Phase B private DNS identity: implemented candidate, not deployed
 
-Status: **proposed, NOT integrated or authorized for deployment**.
-Product label: **Vynalth AI DNS**.
-Resolver display hostname: **dns.vynalthai.com**.
-Existing private service IPv4: **100.95.65.20**.
-Existing approved client (not newly authorized here): **100.85.132.14/32**.
+Product: **Vynalth AI DNS — Vynalth AI Secure Recursive DNS Resolver**.
+Hostname **dns.vynalthai.com**, private server100.95.65.20 and approved Windows
+client100.85.132.14/32 remain unchanged. See [current candidate review](../POST_BOOT_REVIEW.md).
 
-## Scope and expected behavior
+The generator and full proposed config now contain only PTR owner
+20.65.95.100.in-addr.arpa. -> dns.vynalthai.com. The fragment documents those
+lines; do not apply it separately. No broad reverse override, public A/AAAA/PTR,
+authoritative DNS, MagicDNS, OS hostname, routing, SSH or firewall change.
+The nslookup Server label is informational and client-dependent, not authenticated
+identity. Keep hide-identity/hide-version; do not expose CHAOS identity/version.
 
-When a Windows client runs `nslookup vyncuslim.com 100.95.65.20`,
-nslookup commonly tries a reverse PTR lookup of the **specified DNS server's IP**
-to populate the `Server:` field. The private PTR answer would map
-`20.65.95.100.in-addr.arpa.` to `dns.vynalthai.com.`.
-The display is client-dependent and is not cryptographic server identity.
+New config SHA256:
+`e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b`.
+The old d2e4c258 hash did not cover PTR and is historical. The updated18-file
+manifest covers the full config and integrated timer/confirmation/baseline guards.
+Default-refuse ACLs, private listeners, DNSSEC/iterator/root hints, AppArmor,
+rebinding protection, bounded resources/timeouts and private-only15000ms remain.
 
-The proposal only teaches the **private Unbound resolver** one reverse DNS
-record for its own Tailscale IP. No public authoritative DNS zone, NIC, routing,
-Tailscale MagicDNS, OCI DNS, firewall or new public TCP/UDP port 53 changes.
-Keep original default-deny client ACLs, DNSSEC validator, `hide-identity: yes`
-and `hide-version: yes` unchanged. Do **not** expose a CHAOS TXT identity
-as a substitute for PTR.
+Isolated Ubuntu ARM64 tests cover syntax, exact UDP/TCP PTR, unrelated reverse
+with/without identity, approved loopback and unauthorized A/PTR refusal, A/AAAA,
+valid/bogus/CD DNSSEC, NXDOMAIN, cache and timeout behavior. Production is unchanged.
+Actual Windows display, Tailscale DNS access and a second unapproved tailnet
+client remain **NOT TESTED / PENDING LIVE ACCEPTANCE**.
 
-See [phase-b-dns-identity.conf](phase-b-dns-identity.conf) for the candidate
-`server:` fragment. The zone is intentionally scoped to the full **single
-reverse record owner**, not all of `100.64.0.0/10`. Do not add a public
-`dns.vynalthai.com A/AAAA` pointing at the private address, nor claim public
-reverse DNS delegation of the RFC 6598 Tailscale address. A forward record is
-not necessary for the intended display behavior; separately evaluate forward
-resolution and DNSSEC effects if forward/reverse consistency is later needed.
+After separate deployment approval and protected acceptance/confirmation only:
 
-## Review and validation gates
+```powershell
+nslookup -timeout=2 -retry=1 -type=PTR 20.65.95.100.in-addr.arpa. 100.95.65.20
+nslookup -timeout=5 -retry=1 vyncuslim.com 100.95.65.20
+```
 
-1. Review the intended private IP, name and reverse octet order; check that
-   `dns.vynalthai.com` is not already used for something incompatible.
-2. In an **isolated Unbound process/test config only**, append the fragment to
-   a copy of the reviewed private config. Run `unbound-checkconf` on that
-   copy, and exercise the exact PTR and unrelated reverse lookups with UDP/TCP.
-   Do not touch `/etc/unbound`, live DNS listeners, systemd or the VM network
-   during this review.
-3. Validate answers for `dig @127.0.0.1 -x 100.95.65.20` in the isolated
-   resolver context. Expected: `NOERROR`, one PTR
-   `dns.vynalthai.com.`; unrelated PTR resolution must remain unchanged.
-   If the test resolver uses a nonstandard IP or port, target that endpoint
-   instead of the live production listener.
-4. When the private service is separately approved and successfully deployed,
-   Windows acceptance should include `nslookup vyncuslim.com 100.95.65.20`
-   and `nslookup -type=PTR 20.65.95.100.in-addr.arpa. 100.95.65.20`.
-   Expect the PTR answer and, on clients honoring reverse lookup, a
-   `Server: dns.vynalthai.com` label. The label is **not** a security
-   guarantee, and it must not be treated as a prerequisite to trust.
-5. Extend the one-shot bounded acceptance controller/checklist **before**
-   any implementation approval. Preserve the hard 180-second independent
-   rollback and the strictly-under-140-second confirmation bound; no
-   extra unbudgeted retries, ad-hoc confirmations or CD bypass. Re-run all
-   existing DNSSEC valid/bogus, timeout, ACL-denial and transport tests.
+Expected PTR dns.vynalthai.com.; expected Server label on clients honoring PTR.
+A/AAAA answers are dynamic, never hardcoded. Extra manual queries must run after
+first-use acceptance; the controller itself checks both PTR transports without
+warming root/TLD caches. Wrong/missing/timed-out identity never counts as PASS.
 
-## Immutable approval boundary
-
-The existing reviewed `plans/phase-b-unbound.conf` and 13-file
-`plans/phase-b-service.sha256` are **unchanged** by this proposal. Its
-old rendered config SHA256
-`d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`
-**does not include the PTR record**. Do not deploy the snippet separately,
-manually edit production Unbound, or falsely claim the old hash covers it.
-
-To implement, first integrate the fragment into the proposed full config and
-rendering source, regenerate both configuration hash and bundle manifest,
-extend repeatable tests/acceptance scripts, validate rollback and capture a
-new reviewed post-reboot fingerprint. Then review exact GitHub/Windows/VM
-commit and obtain **fresh explicit authorization** for one private-only trial.
-No deployment, automatic merge, reload, restart, reboot or public DNS is
-authorized by adding this proposal to GitHub.
+No prior approval covers these changes. Review the actual full GitHub/Windows/VM
+commit, new config hash, reviewed post-boot baseline,18-file bundle, one-shot
+acceptance and explicit changed timer/confirmation design. Independent180s
+rollback before writes,100s acceptance, full PASS and strict<140s confirmation
+remain mandatory. No deployment, merge, reload, restart, reboot, paid resource
+or public DNS action is authorized by this document.

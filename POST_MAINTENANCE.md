@@ -1,4 +1,6 @@
-# Post-maintenance review: deployment remains blocked
+# Historical pre-reboot review (24aa2d0)
+
+Current candidate/status: [POST_BOOT_REVIEW.md](POST_BOOT_REVIEW.md). The pending-reboot statements and unapplied-patch status below describe the earlier captured state. Its 20-file review manifest applies at commit24aa2d0, not to subsequently edited documents. Keep the receipts as historical evidence; do not use the pre-reboot baseline for authorization.
 
 This review does **not** deploy, restart production services or grant permission.
 The second trial stopped at preflight. The new read-only baseline is stable, but

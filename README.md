@@ -1,4 +1,9 @@
-# Vynalth AI Public DNS
+# Vynalth AI DNS
+
+**Vynalth AI Secure Recursive DNS Resolver** — `dns.vynalthai.com`.
+The private candidate includes single-owner PTR identity, DNSSEC and checked
+rollback/confirmation gates. See [post-boot candidate review](POST_BOOT_REVIEW.md).
+It has not been deployed; every live trial requires separate exact authorization.
 
 Independent Unbound recursion on Ubuntu 24.04, targeting OCI Singapore.
 **Development policy only. Public service and Spectrum integration remain blocked.**

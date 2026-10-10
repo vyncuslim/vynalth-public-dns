@@ -1,0 +1,32 @@
+{
+  "starting_commit": "9bc27af72a1a2229d440f025caf2aefa777a784e",
+  "config_sha256": "e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b",
+  "baseline_sha256": "cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b",
+  "service_manifest_sha256": "bcc50c8f77d4c3dbfcfb2903f4263619da305ae5e557e6cd5469c02c4576c6a2",
+  "service_files_verified_locally": 20,
+  "latest_windows_unit_tests": 48,
+  "latest_local_linux_file_restore": "4 variants PASS plus no-snapshot no-op PASS; strict service shims/no nft",
+  "historical_arm_unit_tests": "38 PASS before stop; not latest code validation",
+  "historical_dns_config_tests": "Actual enforcing Unbound config e20308ba... tested on LIVE VM: acknowledged boundary deviation",
+  "historical_real_timer": "180s restore PASS; existing SSH job final output181.403042465s; not newly launched after stop",
+  "oracle_after_stop": "No new commands/transfers/test launches/cleanup/timer changes; current residual status not reinspected",
+  "current_live_process_status": "UNKNOWN; see LIVE_VM_IMPACT.md",
+  "production_deployment_executed": false,
+  "new_clock_global_protocol_live_acceptance": "NOT TESTED / separate approval required",
+  "windows_live_dns_and_display": "NOT TESTED / PENDING LIVE ACCEPTANCE",
+  "second_unapproved_tailnet_client": "NOT TESTED / PENDING LIVE ACCEPTANCE",
+  "latest_full_linux_arm_transaction": "NOT RETESTED after stop",
+  "local_unbound_engine": "NOT TESTED: Unbound absent in local WSL",
+  "shellcheck": "NOT TESTED: absent",
+  "github_ci": "Billing blocked; not PASS",
+  "approvals_required": [
+    "Scoped read-only Oracle status/impact review",
+    "Itemized cleanup after review",
+    "Exact commit/config/baseline/bundle approval and source staging before any future trial"
+  ],
+  "global_confirmation_limit_seconds": 140,
+  "global_origin": "before all command/network/verification time",
+  "server_deadline": "conservative mapping of global remaining time with boot binding; never reset to local start+140 only",
+  "configuration_promotion": "Private single-client only; no public15000ms rollout",
+  "cloud_costs": "No resources created; RM0 target/invoice/free eligibility unverified"
+}

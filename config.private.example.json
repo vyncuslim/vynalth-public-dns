@@ -1,5 +1,6 @@
 {
   "listen": "100.95.65.20",
+  "dns_identity": {"address": "100.95.65.20", "hostname": "dns.vynalthai.com."},
   "clients": ["100.85.132.14/32"],
   "ssh_clients": ["100.85.132.14/32"],
   "tailscale": {"interface": "tailscale0", "udp_port": 41641},

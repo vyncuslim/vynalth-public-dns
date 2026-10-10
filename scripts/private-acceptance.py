@@ -62,13 +62,22 @@ def accept(args, inspect=inspect_remote, query=check_query, clock=time.monotonic
             raise RuntimeError('Insufficient acceptance deadline; no next query attempted')
 
     try:
-        budget(8)
+        budget(27)  # Initial SSH + two PTR cases + first cold-case reservation.
         before = receipt['before'] = inspect(args.ssh_key)
         validate_state(before, args.config_sha256)
         # Deployment readiness sends exactly one localhost query. Any other
         # client query means we cannot attest first-use cold state; fail closed.
         if float(before['stats']['total.num.queries']) != 1:
             raise RuntimeError('First-use cache state unavailable: unexpected prior queries')
+        # Local PTR must not prime any root/TLD cache; both are separate one-shot cases.
+        for tcp in (False, True):
+            budget(2)
+            row = query(SERVER, '20.65.95.100.in-addr.arpa.', 'PTR', source=SOURCE,
+                        tcp=tcp, expected='NOERROR', expected_ptr='dns.vynalthai.com.',
+                        timeout=2, scenario='private-server-identity')
+            receipt['queries'].append(row)
+            if not row['pass']:
+                raise RuntimeError('Private PTR identity failed; no retry')
         for scenario, timeout in [('dnssec-cold', 15), ('dnssec-warm', 2),
                                   ('standard', 5), ('diagnostic-cd', 5)]:
             for name, kind, tcp, rcode, ad, cd in case_plan(scenario):
@@ -98,8 +107,10 @@ def accept(args, inspect=inspect_remote, query=check_query, clock=time.monotonic
         for field in ('MainPID', 'NRestarts'):
             if before['unit'][field] != after['unit'][field]:
                 raise RuntimeError(f'Unbound changed during acceptance: {field}')
-        if not all(row['pass'] for row in after['local_refused']):
+        if len(after.get('local_refused', [])) != 2 or not all(row['pass'] for row in after['local_refused']):
             raise RuntimeError('Unapproved loopback ACL test failed')
+        if clock() - started > args.deadline_seconds:
+            raise RuntimeError('Acceptance deadline exceeded; never confirm')
         receipt['pass'] = True
     except Exception as exc:
         receipt['error'] = {'type': type(exc).__module__ + '.' + type(exc).__name__, 'message': str(exc)}

@@ -8,7 +8,7 @@ from unittest.mock import patch
 spec = importlib.util.spec_from_file_location('readiness', Path(__file__).resolve().parents[1] / 'scripts/post-maintenance-readiness.py')
 readiness = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(readiness)
-guard_spec = importlib.util.spec_from_file_location('timer_guard', Path(__file__).resolve().parents[1] / 'proposals/check-rollback-timer.py')
+guard_spec = importlib.util.spec_from_file_location('timer_guard', Path(__file__).resolve().parents[1] / 'scripts/check-rollback-timer.py')
 guard = importlib.util.module_from_spec(guard_spec)
 guard_spec.loader.exec_module(guard)
 

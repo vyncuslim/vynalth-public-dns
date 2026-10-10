@@ -5,7 +5,7 @@ exec 9>/var/lib/vynalth-dns/transaction.lock
 flock -x 9
 backup=/var/lib/vynalth-dns/rollback
 test -d "$backup" || exit 0
-if [[ -e $backup/service-only ]]; then
+if [[ ${1:-} == --service-only || -e $backup/service-only ]]; then
   cp -a "$backup/unbound.conf" /etc/unbound/unbound.conf
   if [[ -f $backup/unbound-private-limits.conf ]]; then
     cp -a "$backup/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf
@@ -14,7 +14,7 @@ if [[ -e $backup/service-only ]]; then
   fi
   systemctl daemon-reload
   timeout 40 systemctl restart unbound
-  mv "$backup" "/var/lib/vynalth-dns/rolled-back-$(date +%s)"
+  mv -T "$backup" "/var/lib/vynalth-dns/rolled-back-$(date +%s)-$$"
   exit 0
 fi
 batch=$(mktemp)

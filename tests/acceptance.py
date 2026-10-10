@@ -11,11 +11,12 @@ import dns.flags
 import dns.message
 import dns.query
 import dns.rcode
+import dns.rdatatype
 
 
 def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
                 expected='NOERROR', ad=False, cd=False, timeout,
-                latency_limit=None, scenario='standard', cache_evidence='unknown'):
+                latency_limit=None, scenario='standard', cache_evidence='unknown', expected_ptr=None):
     """Exactly one transmission; observation can outlast the acceptance threshold.
 
     A late correct response is still FAIL. No fallback, retry, cache flush or
@@ -46,6 +47,9 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
                            'AD': bool(reply.flags & dns.flags.AD),
                            'CD': bool(reply.flags & dns.flags.CD),
                            'TC': bool(reply.flags & dns.flags.TC),
+                           'answers': [rrset.to_text() for rrset in reply.answer],
+                           'ptr_targets': [item.target.to_text() for rrset in reply.answer
+                                           if rrset.rdtype == dns.rdatatype.PTR for item in rrset],
                            'EDE': [str(o) for o in reply.options if int(o.otype) == 15]}
         if elapsed > limit:
             outcome = 'latency_exceeded'
@@ -59,7 +63,10 @@ def check_query(server, name, kind='A', *, port=53, source=None, tcp=False,
             outcome = 'missing_CD'
         elif row['response']['TC']:
             outcome = 'truncated'
-        elif expected == 'NOERROR' and kind in ('A', 'AAAA') and not reply.answer:
+        elif expected_ptr is not None and [(rrset.name.to_text(), rrset.rdtype, item.target.to_text())
+                for rrset in reply.answer if rrset.rdtype == dns.rdatatype.PTR for item in rrset] != [(query.question[0].name.to_text(), dns.rdatatype.PTR, expected_ptr)]:
+            outcome = 'unexpected_PTR'
+        elif expected == 'NOERROR' and kind in ('A', 'AAAA', 'PTR') and not reply.answer:
             outcome = 'missing_answer'
         else:
             outcome = 'pass'

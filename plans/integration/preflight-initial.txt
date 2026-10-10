@@ -1,0 +1,3 @@
+Initial read-only gate output: Baseline drift, maintenance, pending reboot or clock failure
+No field receipt was captured; exact transient cause is unproven. No deployment followed.
+See fresh-baseline-check.json and subsequent direct gate result.

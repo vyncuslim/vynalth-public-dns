@@ -11,6 +11,22 @@ spec.loader.exec_module(runner)
 
 
 class PrivateAcceptanceTests(unittest.TestCase):
+    def test_missing_acl_records_never_produce_complete_pass(self):
+        states = [copy.deepcopy(self.state()) for _ in range(4)]
+        states[2]['stats']['total.num.cachehits'] = '4'
+        states[3]['local_refused'] = []
+        with patch('builtins.print'):
+            result = runner.accept(self.args(), Mock(side_effect=states), Mock(return_value={'pass': True}), lambda: 0)
+        self.assertFalse(result['pass'])
+
+    def test_cold_failure_after_ptr_never_runs_warm(self):
+        query = Mock(side_effect=[{'pass': True}, {'pass': True}, {'pass': False, 'outcome': 'timeout'}])
+        with patch('builtins.print'):
+            result = runner.accept(self.args(), Mock(return_value=self.state()), query, lambda: 0)
+        self.assertFalse(result['pass'])
+        self.assertEqual(query.call_count, 3)
+        self.assertEqual(query.call_args.kwargs['scenario'], 'dnssec-cold')
+
     def args(self, deadline=100):
         return SimpleNamespace(ssh_key='filename-only.key', config_sha256='a' * 64,
                                deadline_seconds=deadline)
@@ -50,7 +66,7 @@ class PrivateAcceptanceTests(unittest.TestCase):
         with patch('builtins.print'):
             result = runner.accept(self.args(), inspect, query, lambda: 0)
         self.assertFalse(result['pass'])
-        self.assertEqual(query.call_count, 6)
+        self.assertEqual(query.call_count, 8)
         self.assertEqual(result['warm_cache_hit_delta'], 0)
 
     def test_complete_receipt_needs_cache_and_acl_evidence(self):
@@ -62,7 +78,7 @@ class PrivateAcceptanceTests(unittest.TestCase):
         with patch('builtins.print'):
             result = runner.accept(self.args(), inspect, query, lambda: 0)
         self.assertTrue(result['pass'])
-        self.assertEqual(query.call_count, 15)
+        self.assertEqual(query.call_count, 17)
         self.assertEqual(result['warm_cache_hit_delta'], 4)
         inspect.assert_called_with('filename-only.key', True)
 

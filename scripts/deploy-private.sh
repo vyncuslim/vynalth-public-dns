@@ -2,7 +2,7 @@
 # Service-only deployment after explicit approval of the exact rendered hash.
 # Never updates packages, firewall rules, SSH, Tailscale, trust anchors or hints.
 set -euo pipefail
-[[ $EUID == 0 && $# == 2 ]] || { echo 'Usage: sudo bash scripts/deploy-private.sh RENDERED_DIR APPROVED_CONFIG_SHA256'; exit 1; }
+[[ $EUID == 0 && $# == 6 ]] || { echo 'Usage: sudo bash scripts/deploy-private.sh RENDERED_DIR APPROVED_CONFIG_SHA256 APPROVED_BASELINE_SHA256 SSH_CONNECTION SERVER_GLOBAL_DEADLINE_MONOTONIC CLOCK_PROBE_BOOT_ID'; exit 1; }
 root=$(cd "$(dirname "$0")/.." && pwd)
 rendered=$(realpath "$1")
 # Review commits include a checksum manifest for config, limits and transaction code.
@@ -13,6 +13,7 @@ sha256sum --check "$root/plans/phase-b-active.sha256"
 [[ $(sha256sum "$rendered/unbound.conf" | cut -d ' ' -f1) == "$2" ]] || { echo 'Approved hash mismatch'; exit 1; }
 cmp "$rendered/unbound.conf" "$root/plans/phase-b-unbound.conf"
 unbound-checkconf "$rendered/unbound.conf"
+"$root/.venv/bin/python" "$root/scripts/verify-post-boot.py" "$3" "$4"
 test -S /run/unbound.ctl
 systemctl is-active --quiet unbound
 systemctl is-active --quiet tailscaled
@@ -27,9 +28,11 @@ cp -a /etc/unbound/unbound.conf "$backup/unbound.conf"
 if [[ -f /etc/systemd/system/unbound.service.d/private.conf ]]; then
   cp -a /etc/systemd/system/unbound.service.d/private.conf "$backup/unbound-private-limits.conf"
 fi
-cp -a "$root/scripts/rollback.sh" /var/lib/vynalth-dns/rollback.sh
-systemd-run --unit=vynalth-rollback --on-active=180s --timer-property=AccuracySec=1s /bin/bash /var/lib/vynalth-dns/rollback.sh
-trap '/bin/bash /var/lib/vynalth-dns/rollback.sh' ERR
+install -o root -g root -m 0700 "$root/scripts/rollback.sh" /var/lib/vynalth-dns/rollback.sh
+"$root/.venv/bin/python" -c 'import json,time,sys; from pathlib import Path; now=time.monotonic(); boot=Path("/proc/sys/kernel/random/boot_id").read_text().strip(); deadline=float(sys.argv[3]); assert boot==sys.argv[4] and now < deadline < now+140; Path(sys.argv[1]).write_text(json.dumps({"started_monotonic":now,"global_deadline_monotonic":deadline,"boot_id":boot,"config_sha256":sys.argv[2]}))' "$backup/transaction.json" "$2" "$5" "$6"
+trap '/bin/bash /var/lib/vynalth-dns/rollback.sh --service-only' ERR
+systemd-run --unit=vynalth-rollback --on-active=180s --timer-property=AccuracySec=1s /bin/bash /var/lib/vynalth-dns/rollback.sh --service-only
+"$root/.venv/bin/python" "$root/scripts/check-rollback-timer.py"
 install -m 0644 "$rendered/unbound.conf" /etc/unbound/unbound.conf
 mkdir -p /etc/systemd/system/unbound.service.d
 install -m 0644 "$root/scripts/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf

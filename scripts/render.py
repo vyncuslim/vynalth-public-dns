@@ -56,6 +56,16 @@ def render(config):
         conf += '    interface: 127.0.0.1\n'
     conf += f'    do-ip6: {"yes" if ipv6 else "no"}\n    ip-ratelimit: {rate}\n'
     conf += ''.join(f'    access-control: {x} allow\n' for x in clients)
+    identity = config.get('dns_identity')
+    if identity is not None:
+        # Private identity is deliberately a single owner, never a broad reverse zone.
+        if not tailscale or identity != {'address': str(addr), 'hostname': 'dns.vynalthai.com.'}:
+            raise ValueError('DNS identity requires the matching private listener and reviewed hostname')
+        if str(addr) != '100.95.65.20':
+            raise ValueError('DNS identity is only approved for the Vynalth private server')
+        owner = addr.reverse_pointer + '.'
+        conf += f'    local-zone: "{owner}" static\n'
+        conf += f'    local-data: "{owner} 3600 IN PTR {identity["hostname"]}"\n'
     # Dedicated table; no flush ruleset, no modification to OCI/provider firewall.
     rules = ['table inet vynalth_dns {', ' chain input {',
              '  type filter hook input priority -10; policy drop;',
@@ -90,8 +100,8 @@ def main():
     args = parser.parse_args()
     conf, firewall = render(json.loads(args.config.read_text()))
     args.out.mkdir(parents=True, exist_ok=True)
-    (args.out / 'unbound.conf').write_text(conf)
-    (args.out / 'firewall.nft').write_text(firewall)
+    (args.out / 'unbound.conf').write_bytes(conf.encode('utf-8'))
+    (args.out / 'firewall.nft').write_bytes(firewall.encode('utf-8'))
 
 if __name__ == '__main__':
     main()

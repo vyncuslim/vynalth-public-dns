@@ -92,3 +92,18 @@ unchanged. Diagnostic observation is 20s, acceptance threshold 15s, warm 2s.
 The declared 5s comparison must FAIL late replies; no warm retry follows failure.
 Negative-control PASS means the expected missing reply was reproduced, not that
 DNS service passed. See [the private acceptance procedure](../PHASE_B.md).
+# Private identity candidate
+
+`test_identity.py` checks exact rendered bytes, narrow reverse owner, input
+rejection and missing/wrong PTR failure. `local_runtime.py` tests real UDP/TCP
+identity, unrelated reverse with/without the mapping, approved loopback and
+unauthorized A/PTR refusal under enforced AppArmor. Actual Windows/Tailscale
+identity/display remains NOT TESTED / PENDING LIVE ACCEPTANCE.
+
+`test_confirmation.py` rejects incomplete/failed/late receipts, wrong PTR,
+missing cache/ACL evidence and boot/config/process drift. The actual shell
+transaction is tested by `private_transaction_lab.py` using private mounts,
+strict OS/service shims and synthetic receipts; it never restarts production.
+`timer_guard_lab.py` tests harmless independent timer readiness; the existing
+`service_rollback_lab.sh` separately tests real180s file restoration.
+See [POST_BOOT_REVIEW.md](../POST_BOOT_REVIEW.md) for commands and limitations.
