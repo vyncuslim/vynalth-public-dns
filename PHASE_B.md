@@ -1,5 +1,14 @@
 # Existing Oracle VM: private service approval plan
 
+**Latest review: [POST_MAINTENANCE.md](POST_MAINTENANCE.md). No next deployment is
+authorized or ready.** The fresh PID34123 baseline is stable and exact, but a
+kernel reboot is pending and independent console recovery is unverified. Review
+the separate maintenance proposal first, then commit/review a new post-boot
+baseline and exact service authorization. The historical transaction commands
+below are gated references, not permission to execute. Read-only readiness and
+the additional timer-check patch are separately reviewable; the latter has not
+been applied to the service bundle.
+
 Status on 2026-10-10: the `036575d` attempt **failed and rolled back**; production
 remains localhost-only. The subsequent investigation reproduced reply expiry at
 the packaged 1900ms discard timeout and tested a finite 15000ms correction in

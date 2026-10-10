@@ -1,0 +1,10 @@
+--- a/scripts/deploy-private.sh
++++ b/scripts/deploy-private.sh
+@@ -36,6 +36,7 @@
+ cp -a "$root/scripts/rollback.sh" /var/lib/vynalth-dns/rollback.sh
+ systemd-run --unit=vynalth-rollback --on-active=180s --timer-property=AccuracySec=1s /bin/bash /var/lib/vynalth-dns/rollback.sh
+ trap '/bin/bash /var/lib/vynalth-dns/rollback.sh' ERR
++"$root/.venv/bin/python" "$root/proposals/check-rollback-timer.py"
+ install -m 0644 "$rendered/unbound.conf" /etc/unbound/unbound.conf
+ mkdir -p /etc/systemd/system/unbound.service.d
+ install -m 0644 "$root/scripts/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf

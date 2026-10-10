@@ -433,3 +433,66 @@ service/package baseline and pending-reboot disposition in a stable maintenance
 window, obtain fresh authorization, and reverify all existing gates. Do not
 automatically disable updates, reboot, retry, confirm or promote public service.
 No cloud resources were created; existing cost assumptions remain unverified.
+
+## 2026-10-10 post-maintenance review (no production change)
+
+Read-only inspection after unattended-upgrades/needrestart found production
+PID34123 active/enforcing, invocation2cad7a7d4117419398f15349dcf710f5, original
+127.0.0.1/[::1] UDP/TCP53 listeners, no private drop-in or forwarders. Main config,
+two includes, complete original service manifest and management fingerprints
+still match. The reviewed proposed config SHA256 remains
+`d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`.
+Fresh private SSH source100.85.132.14 ->100.95.65.20 and the retained session both
+worked. tailscaled/unbound enabled; ssh.socket enabled/active. No new independent
+OCI console or public SSH recovery verification is claimed.
+
+Two samples60s apart at07:17/07:18 UTC matched exact kernel/boot/service/binary/
+configuration/management fingerprints. apt services inactive/dead, no installer
+or needrestart processes, four package locks unoccupied. Existing waiting
+unattended-upgrade-shutdown helper was explicitly distinguished from installation.
+Schedules were >15min away at sampling, not a guarantee of future inactivity.
+Frozen review baseline and raw capture are committed under plans/. Its pinned
+comparison matched the exact fingerprint at both samples; its only failures
+were pending reboot (exit1, deployment_ready=false). Capture does not authorize
+deployment or auto-refresh.
+
+Pending reboot remains: running6.17.0-1020-oracle, installed7.0.0-1013-oracle and
+linux-base; new /boot links and old fallback image/initramfs verified. No scheduled
+shutdown was present. Separate console-backed maintenance approval is recommended
+before another DNS trial; the actual post-boot fingerprint requires new review.
+No reboot, policy change, upgrade or production restart occurred in this review.
+
+Historical timer journal proves missing-fragment warnings began after the timer
+was explicitly stopped05:49:15, before its deadline; current timer not-found and
+no pending snapshot. Transient GC/stale references are a plausible explanation,
+not a proven exact systemd bug. The same exact warning was not reproduced.
+Harmless isolated cancellation/same-name2s rearming succeeded independently.
+
+Existing180s isolated rollback lab passed: journal07:12:11 armed,07:15:11 fired;
+outer monotonic181.385918s, shell observation182s including polling/rounding.
+Config/prior settings restored byte-for-byte, unrelated drop-in retained and
+initially absent private.conf removed in a separate isolated case. Production
+PID/invocation/config/nft/sshd fingerprints unchanged. Production daemon-reload/
+restart calls were stubbed in disposable mounts; this is not a new live rollback
+or proof of future recovery. Lab transient units/temp data cleaned.
+
+Proposed read-only timer gate tested against real independent lab units:
+180s active/waiting PASS (179.928543s remaining);60s FAIL;stopped/missing FAIL.
+During lab development busctl scalar decoding and cancellation cleanup assumptions
+were corrected; only disposable lab units were involved. The production script
+remains unchanged and the patch is not applied. Adoption requires a separately
+reviewed updated script/bundle manifest/commit and fresh approval.
+
+30 unit tests passed on Windows Python3.12 and real Ubuntu ARM64 (original eight
+included); seven additional tests cover maintenance/process/lock/schedule gates
+and busctl property decoding. Python compilation, JSON and patch dry-run checks
+passed. No new live private DNS acceptance was run; previous DNSSEC/runtime
+evidence above remains historical. No fresh full DNS runtime or Shellcheck pass
+is claimed. GitHub Actions remain billing-blocked; local success is not CI success.
+
+See POST_MAINTENANCE.md for reproduction commands, exact proposed gates, separate
+maintenance/recovery plan and blocked future approval terms. Evidence collectors
+and receipts are in plans/post-maintenance/. No deploy-private/install/confirm/
+production rollback, firewall/SSH/Tailscale/OCI/Spectrum/public-DNS mutation,
+Terraform operation or paid-resource creation occurred. Further deployment is
+stopped awaiting fresh explicit authorization after prerequisites are satisfied.

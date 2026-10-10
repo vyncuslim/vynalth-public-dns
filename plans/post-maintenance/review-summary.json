@@ -1,0 +1,14 @@
+{
+  "retained_ssh_session_verified": true,
+  "source": "100.85.132.14",
+  "destination": "100.95.65.20",
+  "production_change_executed": false,
+  "pinned_baseline_match": true,
+  "deployment_ready": false,
+  "blockers": [
+    "Pending kernel reboot",
+    "Independent OCI console recovery unverified",
+    "Post-boot baseline and any adopted timer patch require a new review and authorization"
+  ],
+  "config_sha256": "d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7"
+}
