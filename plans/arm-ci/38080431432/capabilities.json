@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "failures": [],
+  "capabilities": {
+    "hostname": "runnervmy3dvn",
+    "architecture": "aarch64",
+    "ubuntu24": true,
+    "systemd": true,
+    "apparmor_enabled": true,
+    "unbound_available": true
+  },
+  "authorization": "Independent lab prerequisite only; never approves Oracle or deployment",
+  "unbound_version": "Version 1.19.2"
+}

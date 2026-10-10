@@ -18,7 +18,7 @@
   "latest_full_linux_arm_transaction": "NOT RETESTED after stop",
   "local_unbound_engine": "PASS: local WSL Unbound 1.19.2 network namespace; both exact synthetic source IPs; no live devices",
   "shellcheck": "PASS: private deploy/confirm/rollback and local rollback harness",
-  "github_ci": "Known account billing lock prevents job start; inspect new head checks; no settings/purchases",
+  "github_ci": "Scheduling resumed without billing change; native81c8cf8 PASS; x86 missing privsep dir fixed atf4a6f15, current runs pending",
   "approvals_required": [
     "Scoped read-only Oracle status/impact review",
     "Itemized cleanup after review",
@@ -42,9 +42,9 @@
   "external_authorities": "Time-bound LOCAL external comparisons: Cloudflare signed compact denial; NS1/AWS NODATA samples; not Oracle",
   "acceptance_fixes": "Built-in invalid AD assumption; CNAME-only positive false PASS; explicit negative diagnostics; confirmation rejects NODATA diagnostic mode",
   "gate_a": "Owner-provided evidence reconciled; timestamp/method/recovery/path limits retained",
-  "gate_c_arm": "NOT EXECUTED / PENDING: standard hosted job authorized, no physical ARM machine required",
+  "gate_c_arm": "PASS native hosted jobs at81c8cf8; receipts hashed; no production equivalence",
   "local_deploy_guards": "9 PASS actual shell/private mounts; OS/timer/DNS shims",
   "fresh_baseline": "PENDING separately approved capture; no Oracle execution",
-  "arm_hosted_job": "Prepared: public-only standard ubuntu-24.04-arm; runtime NOT EXECUTED/PENDING until started",
-  "arm_service_cgroup": "Implemented actual unique-service restore; NOT EXECUTED; production recovery PENDING"
+  "arm_hosted_job": "PASS push38080431432 and PR38080434109 at81c8cf8; later head evaluated separately",
+  "arm_service_cgroup": "PASS actual unique Unbound/profile/kernel limits and restore at81c8cf8; production recovery PENDING"
 }

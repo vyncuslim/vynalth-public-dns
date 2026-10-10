@@ -1,0 +1,47 @@
+{
+  "pass": true,
+  "scope": "independent local systemd timers; private files; service shims",
+  "architecture": "aarch64",
+  "cases": [
+    {
+      "mode": "controller-killed",
+      "started": 256.143185859,
+      "unit": "vynalth-local-gate-c-d98810bdb44340c2bf1281989bec375c",
+      "timer_readiness": {
+        "unit": "vynalth-local-gate-c-d98810bdb44340c2bf1281989bec375c.timer",
+        "pass": true,
+        "active": "active",
+        "substate": "waiting",
+        "fragment": "/run/systemd/transient/vynalth-local-gate-c-d98810bdb44340c2bf1281989bec375c.timer",
+        "entered_usec": 256149058,
+        "next_usec": 436148987,
+        "accuracy_usec": 1000000,
+        "configured_interval_usec": 179999929,
+        "remaining_seconds": 179.918657
+      },
+      "lab": "/tmp/vynalth-local-gate-c-zcyf1zqq",
+      "elapsed_seconds": 180.774371,
+      "pass": true
+    },
+    {
+      "mode": "confirmed-no-op",
+      "started": 256.239601263,
+      "unit": "vynalth-local-gate-c-7f513cc7fc814a54af885cad3777ab49",
+      "timer_readiness": {
+        "unit": "vynalth-local-gate-c-7f513cc7fc814a54af885cad3777ab49.timer",
+        "pass": true,
+        "active": "active",
+        "substate": "waiting",
+        "fragment": "/run/systemd/transient/vynalth-local-gate-c-7f513cc7fc814a54af885cad3777ab49.timer",
+        "entered_usec": 256244744,
+        "next_usec": 436244689,
+        "accuracy_usec": 1000000,
+        "configured_interval_usec": 179999945,
+        "remaining_seconds": 179.95126
+      },
+      "lab": "/tmp/vynalth-local-gate-c-b2hm_046",
+      "elapsed_seconds": 180.663318,
+      "pass": true
+    }
+  ]
+}

@@ -154,3 +154,16 @@ tests remain. Architecture/profile/service/cgroup/timer/Unbound results stay NOT
 EXECUTED/PENDING until actual runner evidence exists. CI billing lock is separate
 from code/runtime failures. No paid/OCI/self-hosted fallback or billing/VPN change.
 Production recovery and fresh baseline/Windows/Android approvals remain separate.
+
+## Actual hosted native ARM evidence supersedes preparation status
+
+See ARM_CI_RESULTS.md and plans/arm-ci/38080431432/ plus38080434109/. Both
+81c8cf8 native ARM jobs completed SUCCESS; downloaded evidence hashes verified.
+aarch64/Ubuntu24.04/Unbound1.19.2-1ubuntu3.10 and actual unbound(enforce),
+DNSSEC/dual ACL/PTR, actual isolated service/cgroup restoration and real180s
+unique timers are now PASS for that code/scope, not merely prepared or mocked.
+Production recovery/live devices remain PENDING. Earlier billing-block statements
+are historical: scheduling resumed without any Codex billing modification. The
+retained x86 job's missing /run/sshd runtime dependency is fixed in f4a6f15; its
+results are separate from native ARM success. Do not claim all CI or production
+readiness solely from these ARM receipts.

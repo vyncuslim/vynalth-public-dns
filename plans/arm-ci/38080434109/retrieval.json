@@ -1,0 +1,79 @@
+{
+  "run_id": 38080434109,
+  "tested_commit": "81c8cf8bc9ec42f7c730b7b3d53cf9bb5cbac4b3",
+  "url": "https://github.com/vyncuslim/vynalth-public-dns/actions/runs/38080434109",
+  "arm_job_conclusion": "success",
+  "archive_sha256": "d6cba6847150317a050ebe05fd39229d97a976fe8bfcfc4745894e8840553c32",
+  "evidence_hashes_verified": true,
+  "source_run": "pull_request",
+  "job_steps": [
+    [
+      "Set up job",
+      "success"
+    ],
+    [
+      "Run actions/checkout@v4",
+      "success"
+    ],
+    [
+      "Run actions/setup-python@v5",
+      "success"
+    ],
+    [
+      "Initialize evidence and immutable source hashes",
+      "success"
+    ],
+    [
+      "Install ephemeral runner test dependencies",
+      "success"
+    ],
+    [
+      "Fail-closed ARM and AppArmor prerequisites",
+      "success"
+    ],
+    [
+      "Unit and syntax checks",
+      "success"
+    ],
+    [
+      "Actual enforcing Unbound DNSSEC ACL PTR and negative response tests",
+      "success"
+    ],
+    [
+      "Actual unique service cgroup limits and isolated restore",
+      "success"
+    ],
+    [
+      "Shell guard and file recovery contracts (explicit service shims)",
+      "success"
+    ],
+    [
+      "Real independent 180-second disposable timers (service shims)",
+      "success"
+    ],
+    [
+      "Record completed lab scope",
+      "success"
+    ],
+    [
+      "Preserve logs and hashes even on failure",
+      "success"
+    ],
+    [
+      "Run actions/upload-artifact@v4",
+      "success"
+    ],
+    [
+      "Post Run actions/setup-python@v5",
+      "success"
+    ],
+    [
+      "Post Run actions/checkout@v4",
+      "success"
+    ],
+    [
+      "Complete job",
+      "success"
+    ]
+  ]
+}

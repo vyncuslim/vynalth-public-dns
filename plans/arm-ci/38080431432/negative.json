@@ -1,0 +1,1892 @@
+{
+  "pass": true,
+  "scope": "local/CI namespace without default route; never Oracle",
+  "unbound_version": "Version 1.19.2",
+  "baseline_main_bytes_verified": true,
+  "baseline_effective_runtime": "NOT RECONSTRUCTED: include files/package/live environment not identical",
+  "candidate_sha256": "d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634",
+  "negatives": {
+    "pass": true,
+    "queries": [
+      {
+        "name": "missing.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NXDOMAIN",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.062731,
+        "answer": [],
+        "authority": [
+          "signed-negative.test. 30 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ==",
+          "signed-negative.test. 60 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. U1eGLFjdCPv2I+CI7LG7ObVHOsO78hHH R59R18MO4HIwb5Gyd405ocoXdeyohGnO hswpuO07ZDNLZGQxgn+0Iw==",
+          "ns.signed-negative.test. 60 IN NSEC only-v6.signed-negative.test. A RRSIG NSEC",
+          "ns.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. KtvOVkZ2w25X9q1BaSlaP0GwMZ9DeVKs ALtW1mSqJwVwv0Lh16W6iCISccSlcF6K FnboEg2lXX6AfMQ4TjTySg==",
+          "only-v6.signed-negative.test. 60 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. DY3lAL+NbG9Rktjz440mXYLOKUK4BA1k ZtbM2zALQmg60PqNpiY26wei0sfSHlTv QcJlI7L58FkSbNPyxxw3mQ==",
+          "target.signed-negative.test. 60 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. /YlBvfAROdev2vKVU16JyOxNUqueHlWv 8CLXrvUQobofMFQFKMzaiJCskAj9uUwD 2gL4ohYavt2dbBzhi8Z3Yg==",
+          "child.ent.signed-negative.test. 60 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193642 20261010183642 9287 signed-negative.test. U6rPc3sx677Hgu2WFqIxJaYpxH1XIrbD WQ9/cnaJfttUMhtTpDBVC1Yak4xes+pX ghJln3RrDFjT0RMb3aXXbA=="
+        ]
+      },
+      {
+        "name": "only-v6.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001113,
+        "answer": [],
+        "authority": [
+          "only-v6.signed-negative.test. 60 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. DY3lAL+NbG9Rktjz440mXYLOKUK4BA1k ZtbM2zALQmg60PqNpiY26wei0sfSHlTv QcJlI7L58FkSbNPyxxw3mQ==",
+          "signed-negative.test. 30 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "target.signed-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000953,
+        "answer": [],
+        "authority": [
+          "target.signed-negative.test. 60 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. /YlBvfAROdev2vKVU16JyOxNUqueHlWv 8CLXrvUQobofMFQFKMzaiJCskAj9uUwD 2gL4ohYavt2dbBzhi8Z3Yg==",
+          "signed-negative.test. 30 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "ent.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001034,
+        "answer": [],
+        "authority": [
+          "ent.signed-negative.test. 60 IN NSEC child.ent.signed-negative.test. RRSIG NSEC",
+          "ent.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. jpxqnWsJ4wUDlAB2ys2F5Nkbz29easDv Aaz3FQx8/JdesDp7m3hge59T7CmaEgKm ZTn7DHVyxE3BbI6htVy1UQ==",
+          "signed-negative.test. 30 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "only-v6.signed-negative.test.",
+        "type": "TYPE65280",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001049,
+        "answer": [],
+        "authority": [
+          "only-v6.signed-negative.test. 59 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193642 20261010183642 9287 signed-negative.test. DY3lAL+NbG9Rktjz440mXYLOKUK4BA1k ZtbM2zALQmg60PqNpiY26wei0sfSHlTv QcJlI7L58FkSbNPyxxw3mQ==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "x.wild.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.067432,
+        "answer": [
+          "x.wild.signed-negative.test. 60 IN A 203.0.113.11",
+          "x.wild.signed-negative.test. 60 IN RRSIG A 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. pZXjE+i1dWPYbPGaPMa7S1qBegK7JYDP PpPICmYcnvrNnUmTqX+OqK+g6AeyMmym dpHlFj/9Sz8Cade5hiJ1zA=="
+        ],
+        "authority": [
+          "signed-negative.test. 60 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "ns.signed-negative.test. 60 IN NSEC only-v6.signed-negative.test. A RRSIG NSEC",
+          "ns.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. aHxhiAwSECdNd5WteaJkt03+DSXFxT89 heoZIBuS7H95k66NjVChLJTMAYIXFIHm uzS5Oaww1M06Ee9CLuufIw==",
+          "only-v6.signed-negative.test. 60 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "target.signed-negative.test. 60 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. c3kuvDbhJyU07XA3CebS68OddDTVnxtg g3lo6QSr6wGuKh1ADAbBHaqzdxKV+JCF Z9kAXzeudI/Lwlui3TArlA==",
+          "child.ent.signed-negative.test. 60 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "*.wild.signed-negative.test. 60 IN NSEC signed-negative.test. A RRSIG NSEC",
+          "*.wild.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. jF3n007Cc4RsRgOfjq18cKQM1PaMX0rM qO5f+rvt69h50pS5DXo4JxWpNmSN/GCC aZI1z+qy0gyQrBVR4LryNQ=="
+        ]
+      },
+      {
+        "name": "x.wild.signed-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000984,
+        "answer": [],
+        "authority": [
+          "*.wild.signed-negative.test. 60 IN NSEC signed-negative.test. A RRSIG NSEC",
+          "*.wild.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. jF3n007Cc4RsRgOfjq18cKQM1PaMX0rM qO5f+rvt69h50pS5DXo4JxWpNmSN/GCC aZI1z+qy0gyQrBVR4LryNQ==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "x.alias.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.018392,
+        "answer": [
+          "x.alias.signed-negative.test. 60 IN CNAME target.signed-negative.test.",
+          "x.alias.signed-negative.test. 60 IN RRSIG CNAME 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. E4SWsLZGL6QytkW9I5+RSpioUWIC10m+ n7RPBXyQ02ZHsK25TOQoGVE8S6y6Zw9c FQOeOzcLA0Enma/UcMtTFg==",
+          "target.signed-negative.test. 60 IN A 203.0.113.9",
+          "target.signed-negative.test. 60 IN RRSIG A 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. 5DV9mgegPLyP+q0Gl1J6/tcoEvXPjaa5 rk620Iy/5rjbKxfT809lGtWtu/6CdZ4K Y4ZOE2/P9mOOhUYa9bjr1w=="
+        ],
+        "authority": [
+          "signed-negative.test. 60 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "ns.signed-negative.test. 60 IN NSEC only-v6.signed-negative.test. A RRSIG NSEC",
+          "ns.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. aHxhiAwSECdNd5WteaJkt03+DSXFxT89 heoZIBuS7H95k66NjVChLJTMAYIXFIHm uzS5Oaww1M06Ee9CLuufIw==",
+          "only-v6.signed-negative.test. 60 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "target.signed-negative.test. 60 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. c3kuvDbhJyU07XA3CebS68OddDTVnxtg g3lo6QSr6wGuKh1ADAbBHaqzdxKV+JCF Z9kAXzeudI/Lwlui3TArlA==",
+          "child.ent.signed-negative.test. 60 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg=="
+        ]
+      },
+      {
+        "name": "to-missing.signed-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NXDOMAIN",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002526,
+        "answer": [
+          "to-missing.signed-negative.test. 60 IN CNAME missing.signed-negative.test.",
+          "to-missing.signed-negative.test. 60 IN RRSIG CNAME 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. dTdhzELPAGfs4eH7pnrozBGMplcRBaHe uZTpqWkCBvOuNXQcZJ4IUfXVasK5zkH7 ZJLGHo1TRnlrp0oWP8r8vA=="
+        ],
+        "authority": [
+          "signed-negative.test. 60 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "child.ent.signed-negative.test. 60 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "missing.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NXDOMAIN",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001345,
+        "answer": [],
+        "authority": [
+          "signed-negative.test. 60 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "child.ent.signed-negative.test. 60 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "only-v6.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00114,
+        "answer": [],
+        "authority": [
+          "only-v6.signed-negative.test. 60 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "target.signed-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001032,
+        "answer": [],
+        "authority": [
+          "target.signed-negative.test. 60 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. c3kuvDbhJyU07XA3CebS68OddDTVnxtg g3lo6QSr6wGuKh1ADAbBHaqzdxKV+JCF Z9kAXzeudI/Lwlui3TArlA==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "ent.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001136,
+        "answer": [],
+        "authority": [
+          "ent.signed-negative.test. 60 IN NSEC child.ent.signed-negative.test. RRSIG NSEC",
+          "ent.signed-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. ksKMDPCXTxdZjjRqlPDXAu0flGsJVguk vh8t2Lb9vfpRF5TAZr5NHyhOD0NPy8L0 A19B9SPTfZCYQ17GYN5QEQ==",
+          "signed-negative.test. 29 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "only-v6.signed-negative.test.",
+        "type": "TYPE65280",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00114,
+        "answer": [],
+        "authority": [
+          "only-v6.signed-negative.test. 59 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "signed-negative.test. 28 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "x.wild.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002154,
+        "answer": [
+          "x.wild.signed-negative.test. 59 IN A 203.0.113.11",
+          "x.wild.signed-negative.test. 59 IN RRSIG A 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. pZXjE+i1dWPYbPGaPMa7S1qBegK7JYDP PpPICmYcnvrNnUmTqX+OqK+g6AeyMmym dpHlFj/9Sz8Cade5hiJ1zA=="
+        ],
+        "authority": [
+          "signed-negative.test. 59 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 59 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "ns.signed-negative.test. 59 IN NSEC only-v6.signed-negative.test. A RRSIG NSEC",
+          "ns.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. aHxhiAwSECdNd5WteaJkt03+DSXFxT89 heoZIBuS7H95k66NjVChLJTMAYIXFIHm uzS5Oaww1M06Ee9CLuufIw==",
+          "only-v6.signed-negative.test. 59 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "target.signed-negative.test. 59 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. c3kuvDbhJyU07XA3CebS68OddDTVnxtg g3lo6QSr6wGuKh1ADAbBHaqzdxKV+JCF Z9kAXzeudI/Lwlui3TArlA==",
+          "child.ent.signed-negative.test. 59 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 59 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "*.wild.signed-negative.test. 59 IN NSEC signed-negative.test. A RRSIG NSEC",
+          "*.wild.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. jF3n007Cc4RsRgOfjq18cKQM1PaMX0rM qO5f+rvt69h50pS5DXo4JxWpNmSN/GCC aZI1z+qy0gyQrBVR4LryNQ==",
+          "*.alias.signed-negative.test. 59 IN NSEC ent.signed-negative.test. CNAME RRSIG NSEC",
+          "*.alias.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. uoT+rEWehoJPAQYqm34T3qvWqQsGx/yi Un/65agDPbf1rWALnWbvtS33SW5IwRzu 64QVH/AvqqrWDB9zspCTkQ==",
+          "to-missing.signed-negative.test. 59 IN NSEC wild.signed-negative.test. CNAME RRSIG NSEC",
+          "to-missing.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. x3ts12u4fzdIRi312Kf3FMZfMK5/CQVO Ae+i1wrTqlFHZIGG6RIozOx/5vh5tIC5 XF+MXvgyav9jnVqys8Covw==",
+          "ent.signed-negative.test. 59 IN NSEC child.ent.signed-negative.test. RRSIG NSEC",
+          "ent.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. ksKMDPCXTxdZjjRqlPDXAu0flGsJVguk vh8t2Lb9vfpRF5TAZr5NHyhOD0NPy8L0 A19B9SPTfZCYQ17GYN5QEQ==",
+          "wild.signed-negative.test. 59 IN NSEC *.wild.signed-negative.test. RRSIG NSEC",
+          "wild.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. d7iu5MR223HW86s6OYzl032w/tG8Rvxv tgnNHb7ByAS/pKcTxOpKfJ3l4xatCFgH MWsl5yLEaITUJVW4rSuJKQ==",
+          "alias.signed-negative.test. 59 IN NSEC *.alias.signed-negative.test. RRSIG NSEC",
+          "alias.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. ikP5DEJnLzx0LFBoINdCrYIUYkFLJMrl eoU5/lMq3BVAI2WtSCe13sFltX0zyot9 nCphShVJBIr/lmI8/3JdDQ=="
+        ]
+      },
+      {
+        "name": "x.wild.signed-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001199,
+        "answer": [],
+        "authority": [
+          "*.wild.signed-negative.test. 59 IN NSEC signed-negative.test. A RRSIG NSEC",
+          "*.wild.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. jF3n007Cc4RsRgOfjq18cKQM1PaMX0rM qO5f+rvt69h50pS5DXo4JxWpNmSN/GCC aZI1z+qy0gyQrBVR4LryNQ==",
+          "signed-negative.test. 28 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "x.alias.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002243,
+        "answer": [
+          "x.alias.signed-negative.test. 59 IN CNAME target.signed-negative.test.",
+          "x.alias.signed-negative.test. 59 IN RRSIG CNAME 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. E4SWsLZGL6QytkW9I5+RSpioUWIC10m+ n7RPBXyQ02ZHsK25TOQoGVE8S6y6Zw9c FQOeOzcLA0Enma/UcMtTFg==",
+          "target.signed-negative.test. 59 IN A 203.0.113.9",
+          "target.signed-negative.test. 59 IN RRSIG A 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. 5DV9mgegPLyP+q0Gl1J6/tcoEvXPjaa5 rk620Iy/5rjbKxfT809lGtWtu/6CdZ4K Y4ZOE2/P9mOOhUYa9bjr1w=="
+        ],
+        "authority": [
+          "signed-negative.test. 59 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 59 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "ns.signed-negative.test. 59 IN NSEC only-v6.signed-negative.test. A RRSIG NSEC",
+          "ns.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. aHxhiAwSECdNd5WteaJkt03+DSXFxT89 heoZIBuS7H95k66NjVChLJTMAYIXFIHm uzS5Oaww1M06Ee9CLuufIw==",
+          "only-v6.signed-negative.test. 59 IN NSEC target.signed-negative.test. AAAA RRSIG NSEC",
+          "only-v6.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. AFJ+3QrnGCF+xtqQKQG5H7IZ2FuNETMn MdkdvzDJeyUntontDzEAuuWzV0BurNRM JQgXwYvxKyOu0BAZ1IBNdQ==",
+          "target.signed-negative.test. 59 IN NSEC to-missing.signed-negative.test. A RRSIG NSEC",
+          "target.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. c3kuvDbhJyU07XA3CebS68OddDTVnxtg g3lo6QSr6wGuKh1ADAbBHaqzdxKV+JCF Z9kAXzeudI/Lwlui3TArlA==",
+          "child.ent.signed-negative.test. 59 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 59 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "*.wild.signed-negative.test. 59 IN NSEC signed-negative.test. A RRSIG NSEC",
+          "*.wild.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. jF3n007Cc4RsRgOfjq18cKQM1PaMX0rM qO5f+rvt69h50pS5DXo4JxWpNmSN/GCC aZI1z+qy0gyQrBVR4LryNQ==",
+          "*.alias.signed-negative.test. 59 IN NSEC ent.signed-negative.test. CNAME RRSIG NSEC",
+          "*.alias.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. uoT+rEWehoJPAQYqm34T3qvWqQsGx/yi Un/65agDPbf1rWALnWbvtS33SW5IwRzu 64QVH/AvqqrWDB9zspCTkQ==",
+          "to-missing.signed-negative.test. 59 IN NSEC wild.signed-negative.test. CNAME RRSIG NSEC",
+          "to-missing.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. x3ts12u4fzdIRi312Kf3FMZfMK5/CQVO Ae+i1wrTqlFHZIGG6RIozOx/5vh5tIC5 XF+MXvgyav9jnVqys8Covw==",
+          "ent.signed-negative.test. 59 IN NSEC child.ent.signed-negative.test. RRSIG NSEC",
+          "ent.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. ksKMDPCXTxdZjjRqlPDXAu0flGsJVguk vh8t2Lb9vfpRF5TAZr5NHyhOD0NPy8L0 A19B9SPTfZCYQ17GYN5QEQ==",
+          "wild.signed-negative.test. 59 IN NSEC *.wild.signed-negative.test. RRSIG NSEC",
+          "wild.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. d7iu5MR223HW86s6OYzl032w/tG8Rvxv tgnNHb7ByAS/pKcTxOpKfJ3l4xatCFgH MWsl5yLEaITUJVW4rSuJKQ==",
+          "alias.signed-negative.test. 59 IN NSEC *.alias.signed-negative.test. RRSIG NSEC",
+          "alias.signed-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. ikP5DEJnLzx0LFBoINdCrYIUYkFLJMrl eoU5/lMq3BVAI2WtSCe13sFltX0zyot9 nCphShVJBIr/lmI8/3JdDQ=="
+        ]
+      },
+      {
+        "name": "to-missing.signed-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NXDOMAIN",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00126,
+        "answer": [
+          "to-missing.signed-negative.test. 59 IN CNAME missing.signed-negative.test.",
+          "to-missing.signed-negative.test. 59 IN RRSIG CNAME 13 3 60 20261011193643 20261010183643 9287 signed-negative.test. dTdhzELPAGfs4eH7pnrozBGMplcRBaHe uZTpqWkCBvOuNXQcZJ4IUfXVasK5zkH7 ZJLGHo1TRnlrp0oWP8r8vA=="
+        ],
+        "authority": [
+          "signed-negative.test. 59 IN NSEC alias.signed-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "signed-negative.test. 59 IN RRSIG NSEC 13 2 60 20261011193643 20261010183643 9287 signed-negative.test. xhINs+SEFxz0uGBCaBrb22gm+qrL97Is AJ4TOiR5Kwu7VIXKyZ/0e46YWnef8Qoa jXr0WM0LZfIeh5+4AKVieQ==",
+          "child.ent.signed-negative.test. 59 IN NSEC ns.signed-negative.test. A RRSIG NSEC",
+          "child.ent.signed-negative.test. 59 IN RRSIG NSEC 13 4 60 20261011193643 20261010183643 9287 signed-negative.test. UlEzLv3EJOGAaIZcS7VwxHUcO2p1N3dT UgNwmbVsvZIGS50xlLV5hLi1LEERvbhH xaFDQzfTmDQ4V8MKOK1+mg==",
+          "signed-negative.test. 28 IN SOA ns.signed-negative.test. hostmaster.signed-negative.test. 1 60 60 600 30",
+          "signed-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193642 20261010183642 9287 signed-negative.test. wskwCxZbcLY84RYybgEviscs5oi7spxu QMf9WAPdNf40Dq4ZnWY6QTyN6IDWBQ6b Zmu3+bkm5iey72OemxvtQQ=="
+        ]
+      },
+      {
+        "name": "missing.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NXDOMAIN",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001252,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 30 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "only-v6.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001467,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 30 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "target.unsigned-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001792,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "ent.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001497,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "only-v6.unsigned-negative.test.",
+        "type": "TYPE65280",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001459,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "x.wild.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001838,
+        "answer": [
+          "x.wild.unsigned-negative.test. 60 IN A 203.0.113.11"
+        ],
+        "authority": []
+      },
+      {
+        "name": "x.wild.unsigned-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001485,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "x.alias.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002448,
+        "answer": [
+          "x.alias.unsigned-negative.test. 60 IN CNAME target.unsigned-negative.test.",
+          "target.unsigned-negative.test. 60 IN A 203.0.113.9"
+        ],
+        "authority": []
+      },
+      {
+        "name": "to-missing.unsigned-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NXDOMAIN",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001637,
+        "answer": [
+          "to-missing.unsigned-negative.test. 60 IN CNAME missing.unsigned-negative.test."
+        ],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "missing.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NXDOMAIN",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000912,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "only-v6.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000884,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "target.unsigned-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000878,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 29 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "ent.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000677,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 28 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "only-v6.unsigned-negative.test.",
+        "type": "TYPE65280",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000842,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 28 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "x.wild.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000728,
+        "answer": [
+          "x.wild.unsigned-negative.test. 59 IN A 203.0.113.11"
+        ],
+        "authority": []
+      },
+      {
+        "name": "x.wild.unsigned-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000859,
+        "answer": [],
+        "authority": [
+          "unsigned-negative.test. 28 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "x.alias.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00093,
+        "answer": [
+          "x.alias.unsigned-negative.test. 59 IN CNAME target.unsigned-negative.test.",
+          "target.unsigned-negative.test. 59 IN A 203.0.113.9"
+        ],
+        "authority": []
+      },
+      {
+        "name": "to-missing.unsigned-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NXDOMAIN",
+        "AD": false,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000848,
+        "answer": [
+          "to-missing.unsigned-negative.test. 59 IN CNAME missing.unsigned-negative.test."
+        ],
+        "authority": [
+          "unsigned-negative.test. 28 IN SOA ns.unsigned-negative.test. hostmaster.unsigned-negative.test. 1 60 60 600 30"
+        ]
+      },
+      {
+        "name": "missing.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.004159,
+        "answer": [],
+        "authority": [
+          "compact-negative.test. 30 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g==",
+          "missing.compact-negative.test. 30 IN NSEC \\000.missing.compact-negative.test. RRSIG NSEC NXNAME",
+          "missing.compact-negative.test. 30 IN RRSIG NSEC 13 3 30 20261011193646 20261010183646 9287 compact-negative.test. qcYiXkiJvZyGfNIZCWZeC6vOcAqgqCQ1 UtzMZmSYoxcKfoFmHvUl3wYzPynoaf6x ERNigmAghw9Fys0uEqNQBA=="
+        ]
+      },
+      {
+        "name": "only-v6.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.059971,
+        "answer": [],
+        "authority": [
+          "compact-negative.test. 30 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 60 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g==",
+          "compact-negative.test. 60 IN NSEC alias.compact-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "compact-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. npYJyB49svbmdanqwnMmliAE4ferZ/8d /6HuwzTOQjNnaRpxgUTfL1BN9k1E9ALL Y7RwNs3ccOD7yOw8lmqYNw==",
+          "ns.compact-negative.test. 60 IN NSEC only-v6.compact-negative.test. A RRSIG NSEC",
+          "ns.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. SCS7tI+yAUt3P4zfPy4vHjiI164IAYXH Duld34xenOZmgYU2BhZBLJfogV17D0Lo dLcRQCIxPV/s6MMdKChA5g==",
+          "only-v6.compact-negative.test. 60 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. aCDLCsel5bU7jkZidE5phZwLsB8394E7 Ex5Z6u6JbXY9IqZAYmBtjP9Ncu6T1RV6 LaQYVAfelxRR3Td+sdJ9DQ==",
+          "target.compact-negative.test. 60 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. XmTJ5Fl0tTItb/w3hPAXlUFb5DP737ot Uw0LpP886kxIlS3Hfv7KUTgzQhKRRokk qAAc+7MzOfnyUY0/ANMeWQ==",
+          "child.ent.compact-negative.test. 60 IN NSEC ns.compact-negative.test. A RRSIG NSEC",
+          "child.ent.compact-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193646 20261010183646 9287 compact-negative.test. rgLzRz9hRiHaxQ43fOQqtc+co7yuCmLu 8NUwmLyLX+lxjelxINgQKPl0EdrHshqJ BPQp1trOrYvxbW3mwePwyQ=="
+        ]
+      },
+      {
+        "name": "target.compact-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000885,
+        "answer": [],
+        "authority": [
+          "target.compact-negative.test. 59 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. XmTJ5Fl0tTItb/w3hPAXlUFb5DP737ot Uw0LpP886kxIlS3Hfv7KUTgzQhKRRokk qAAc+7MzOfnyUY0/ANMeWQ==",
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "ent.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000838,
+        "answer": [],
+        "authority": [
+          "ent.compact-negative.test. 59 IN NSEC child.ent.compact-negative.test. RRSIG NSEC",
+          "ent.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. LzD9PRD/JkZEILwEz+a1+181P8VE2Bxg lgtI1K8wk32CUkx7S536pxBFKX6Cf5Mg 3HFVVuCd10pIAZ5BnKaELA==",
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "only-v6.compact-negative.test.",
+        "type": "TYPE65280",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000888,
+        "answer": [],
+        "authority": [
+          "only-v6.compact-negative.test. 59 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193646 20261010183646 9287 compact-negative.test. aCDLCsel5bU7jkZidE5phZwLsB8394E7 Ex5Z6u6JbXY9IqZAYmBtjP9Ncu6T1RV6 LaQYVAfelxRR3Td+sdJ9DQ==",
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "x.wild.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.065458,
+        "answer": [
+          "x.wild.compact-negative.test. 60 IN A 203.0.113.11",
+          "x.wild.compact-negative.test. 60 IN RRSIG A 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. d42sp5hBqf/YR+BkHjf2DYvL8RRPJ6KB 6l7Gk4DfE5tq5QoYzdLiPdZvD+o0/vvI PQj7ZgRPUZ/ZecCRmtskHA=="
+        ],
+        "authority": [
+          "compact-negative.test. 60 IN NSEC alias.compact-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "compact-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193647 20261010183647 9287 compact-negative.test. i7cYrwY1v1R8QFMuFl84oHhv1mlkJv7q Qen3StnzcMXD8EYi5PW3siF4nEebB5wC l5J3FQlHna21hP4l/K8TCw==",
+          "ns.compact-negative.test. 60 IN NSEC only-v6.compact-negative.test. A RRSIG NSEC",
+          "ns.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. VUgpoXYo8nqtbHMlauvDr91TXUCWLw7f 3tQghC5gqSnJ9Lplj/El42CHYaqK0FDO 9RcKBARbNAZLcK6xdjLdoA==",
+          "only-v6.compact-negative.test. 60 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "target.compact-negative.test. 60 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Vw8mXJ2VXpAyhaiNv2xwIQxBN/2lXw1t fzuvUL/lwS4IRxmedy5xOzkp5vNtOwuB SmifIBn5eVjY4GZN2wq2yQ==",
+          "child.ent.compact-negative.test. 60 IN NSEC ns.compact-negative.test. A RRSIG NSEC",
+          "child.ent.compact-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193647 20261010183647 9287 compact-negative.test. QBxaF5PBAE8N1pexc6AvWiCL3rPwg/RT lO+J43XkJXTVlMVws5QLJx7/X5kNAzEa d/GIHn7sMA1729W3Ny2euw==",
+          "*.wild.compact-negative.test. 60 IN NSEC compact-negative.test. A RRSIG NSEC",
+          "*.wild.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. o+i1QJ1vFtdz7txKexjBagNXa4oI/ug/ qFzZfi3Gvv6WrdBkbbsmZr3ACaCR9d0F VoMQLaq3nrcTLBSwav1cqw=="
+        ]
+      },
+      {
+        "name": "x.wild.compact-negative.test.",
+        "type": "AAAA",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00108,
+        "answer": [],
+        "authority": [
+          "*.wild.compact-negative.test. 60 IN NSEC compact-negative.test. A RRSIG NSEC",
+          "*.wild.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. o+i1QJ1vFtdz7txKexjBagNXa4oI/ug/ qFzZfi3Gvv6WrdBkbbsmZr3ACaCR9d0F VoMQLaq3nrcTLBSwav1cqw==",
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "x.alias.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.017699,
+        "answer": [
+          "x.alias.compact-negative.test. 60 IN CNAME target.compact-negative.test.",
+          "x.alias.compact-negative.test. 60 IN RRSIG CNAME 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. ApFSVp0J4/bn5mYPYpLdF8BC4SElQtKO qgxYnn5NURKN4IwrBzDxcaYvjuVrSpq6 CQ2UGlkrpiDO0Q7Wy+kG0w==",
+          "target.compact-negative.test. 60 IN A 203.0.113.9",
+          "target.compact-negative.test. 60 IN RRSIG A 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 92+bjakO7HeDtDHWeK/Kd+lEmiW+Hj+9 KViLht2RES6Mll6c5zrdu2Ep5ptOUks8 O5yWUaroNVgV3xpoPzq78A=="
+        ],
+        "authority": [
+          "compact-negative.test. 60 IN NSEC alias.compact-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "compact-negative.test. 60 IN RRSIG NSEC 13 2 60 20261011193647 20261010183647 9287 compact-negative.test. i7cYrwY1v1R8QFMuFl84oHhv1mlkJv7q Qen3StnzcMXD8EYi5PW3siF4nEebB5wC l5J3FQlHna21hP4l/K8TCw==",
+          "ns.compact-negative.test. 60 IN NSEC only-v6.compact-negative.test. A RRSIG NSEC",
+          "ns.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. VUgpoXYo8nqtbHMlauvDr91TXUCWLw7f 3tQghC5gqSnJ9Lplj/El42CHYaqK0FDO 9RcKBARbNAZLcK6xdjLdoA==",
+          "only-v6.compact-negative.test. 60 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "target.compact-negative.test. 60 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 60 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Vw8mXJ2VXpAyhaiNv2xwIQxBN/2lXw1t fzuvUL/lwS4IRxmedy5xOzkp5vNtOwuB SmifIBn5eVjY4GZN2wq2yQ==",
+          "child.ent.compact-negative.test. 60 IN NSEC ns.compact-negative.test. A RRSIG NSEC",
+          "child.ent.compact-negative.test. 60 IN RRSIG NSEC 13 4 60 20261011193647 20261010183647 9287 compact-negative.test. QBxaF5PBAE8N1pexc6AvWiCL3rPwg/RT lO+J43XkJXTVlMVws5QLJx7/X5kNAzEa d/GIHn7sMA1729W3Ny2euw=="
+        ]
+      },
+      {
+        "name": "to-missing.compact-negative.test.",
+        "type": "A",
+        "transport": "UDP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002496,
+        "answer": [
+          "to-missing.compact-negative.test. 60 IN CNAME missing.compact-negative.test.",
+          "to-missing.compact-negative.test. 60 IN RRSIG CNAME 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 7VjI5xh5yZsgrCj9P948Ol8v0hN+/p1z DobM6nqqaklVoZ9Im1oBOveHYKMxUNkn pEKNlITxBtRlt+goQPqwug=="
+        ],
+        "authority": [
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g==",
+          "missing.compact-negative.test. 29 IN NSEC \\000.missing.compact-negative.test. RRSIG NSEC NXNAME",
+          "missing.compact-negative.test. 29 IN RRSIG NSEC 13 3 30 20261011193646 20261010183646 9287 compact-negative.test. qcYiXkiJvZyGfNIZCWZeC6vOcAqgqCQ1 UtzMZmSYoxcKfoFmHvUl3wYzPynoaf6x ERNigmAghw9Fys0uEqNQBA=="
+        ]
+      },
+      {
+        "name": "missing.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.000961,
+        "answer": [],
+        "authority": [
+          "compact-negative.test. 29 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 59 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g==",
+          "missing.compact-negative.test. 29 IN NSEC \\000.missing.compact-negative.test. RRSIG NSEC NXNAME",
+          "missing.compact-negative.test. 29 IN RRSIG NSEC 13 3 30 20261011193646 20261010183646 9287 compact-negative.test. qcYiXkiJvZyGfNIZCWZeC6vOcAqgqCQ1 UtzMZmSYoxcKfoFmHvUl3wYzPynoaf6x ERNigmAghw9Fys0uEqNQBA=="
+        ]
+      },
+      {
+        "name": "only-v6.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001125,
+        "answer": [],
+        "authority": [
+          "only-v6.compact-negative.test. 59 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "target.compact-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001162,
+        "answer": [],
+        "authority": [
+          "target.compact-negative.test. 59 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Vw8mXJ2VXpAyhaiNv2xwIQxBN/2lXw1t fzuvUL/lwS4IRxmedy5xOzkp5vNtOwuB SmifIBn5eVjY4GZN2wq2yQ==",
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "ent.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001119,
+        "answer": [],
+        "authority": [
+          "ent.compact-negative.test. 59 IN NSEC child.ent.compact-negative.test. RRSIG NSEC",
+          "ent.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. RN4/dOXY5QvkvNmyf3xZjP97z1FcmkHC xgOk7U2rn/YpN50FchmLzQXTUG4GFBHu Oxi1AZzV0EwdaICVkVSE9g==",
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "only-v6.compact-negative.test.",
+        "type": "TYPE65280",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.00101,
+        "answer": [],
+        "authority": [
+          "only-v6.compact-negative.test. 59 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "x.wild.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002134,
+        "answer": [
+          "x.wild.compact-negative.test. 59 IN A 203.0.113.11",
+          "x.wild.compact-negative.test. 59 IN RRSIG A 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. d42sp5hBqf/YR+BkHjf2DYvL8RRPJ6KB 6l7Gk4DfE5tq5QoYzdLiPdZvD+o0/vvI PQj7ZgRPUZ/ZecCRmtskHA=="
+        ],
+        "authority": [
+          "compact-negative.test. 59 IN NSEC alias.compact-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "compact-negative.test. 59 IN RRSIG NSEC 13 2 60 20261011193647 20261010183647 9287 compact-negative.test. i7cYrwY1v1R8QFMuFl84oHhv1mlkJv7q Qen3StnzcMXD8EYi5PW3siF4nEebB5wC l5J3FQlHna21hP4l/K8TCw==",
+          "ns.compact-negative.test. 59 IN NSEC only-v6.compact-negative.test. A RRSIG NSEC",
+          "ns.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. VUgpoXYo8nqtbHMlauvDr91TXUCWLw7f 3tQghC5gqSnJ9Lplj/El42CHYaqK0FDO 9RcKBARbNAZLcK6xdjLdoA==",
+          "only-v6.compact-negative.test. 59 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "target.compact-negative.test. 59 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Vw8mXJ2VXpAyhaiNv2xwIQxBN/2lXw1t fzuvUL/lwS4IRxmedy5xOzkp5vNtOwuB SmifIBn5eVjY4GZN2wq2yQ==",
+          "child.ent.compact-negative.test. 59 IN NSEC ns.compact-negative.test. A RRSIG NSEC",
+          "child.ent.compact-negative.test. 59 IN RRSIG NSEC 13 4 60 20261011193647 20261010183647 9287 compact-negative.test. QBxaF5PBAE8N1pexc6AvWiCL3rPwg/RT lO+J43XkJXTVlMVws5QLJx7/X5kNAzEa d/GIHn7sMA1729W3Ny2euw==",
+          "*.wild.compact-negative.test. 59 IN NSEC compact-negative.test. A RRSIG NSEC",
+          "*.wild.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. o+i1QJ1vFtdz7txKexjBagNXa4oI/ug/ qFzZfi3Gvv6WrdBkbbsmZr3ACaCR9d0F VoMQLaq3nrcTLBSwav1cqw==",
+          "*.alias.compact-negative.test. 59 IN NSEC ent.compact-negative.test. CNAME RRSIG NSEC",
+          "*.alias.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Bf7KnSxhxo0KzFAZ/qOwa2lD3dfdQHJY FCsxasQujX51Ay/OsTIwTbZ5Ani5vvgo 20rYIv1XZ5eLFWcPkLZrFQ==",
+          "to-missing.compact-negative.test. 59 IN NSEC wild.compact-negative.test. CNAME RRSIG NSEC",
+          "to-missing.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Ml4i76ui1M3WQHq9weialorqT1dfnSDl CdFwBVW+scYX6zmQeNVmhUqWH9p+6on7 CsipTdnVqZ6iofR/EbuhVQ==",
+          "ent.compact-negative.test. 59 IN NSEC child.ent.compact-negative.test. RRSIG NSEC",
+          "ent.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. RN4/dOXY5QvkvNmyf3xZjP97z1FcmkHC xgOk7U2rn/YpN50FchmLzQXTUG4GFBHu Oxi1AZzV0EwdaICVkVSE9g==",
+          "wild.compact-negative.test. 59 IN NSEC *.wild.compact-negative.test. RRSIG NSEC",
+          "wild.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Nta5/aAAJxDGnercYWiz0YZgLlOnMx52 jMmgjS2gTDtAHIWOMLzXCFtweYMPPKUb 9sgTFTJEslKs5edNjzVFCg==",
+          "alias.compact-negative.test. 59 IN NSEC *.alias.compact-negative.test. RRSIG NSEC",
+          "alias.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 87bddd43+N67Ss+xP82o8m3xHRojcVNh N+cFbT51xZOjYPaJtd11h/L8i38sMVx0 h3FMDk/A9BFQA8C+t7PemQ=="
+        ]
+      },
+      {
+        "name": "x.wild.compact-negative.test.",
+        "type": "AAAA",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001204,
+        "answer": [],
+        "authority": [
+          "*.wild.compact-negative.test. 59 IN NSEC compact-negative.test. A RRSIG NSEC",
+          "*.wild.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. o+i1QJ1vFtdz7txKexjBagNXa4oI/ug/ qFzZfi3Gvv6WrdBkbbsmZr3ACaCR9d0F VoMQLaq3nrcTLBSwav1cqw==",
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g=="
+        ]
+      },
+      {
+        "name": "x.alias.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.002309,
+        "answer": [
+          "x.alias.compact-negative.test. 59 IN CNAME target.compact-negative.test.",
+          "x.alias.compact-negative.test. 59 IN RRSIG CNAME 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. ApFSVp0J4/bn5mYPYpLdF8BC4SElQtKO qgxYnn5NURKN4IwrBzDxcaYvjuVrSpq6 CQ2UGlkrpiDO0Q7Wy+kG0w==",
+          "target.compact-negative.test. 59 IN A 203.0.113.9",
+          "target.compact-negative.test. 59 IN RRSIG A 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 92+bjakO7HeDtDHWeK/Kd+lEmiW+Hj+9 KViLht2RES6Mll6c5zrdu2Ep5ptOUks8 O5yWUaroNVgV3xpoPzq78A=="
+        ],
+        "authority": [
+          "compact-negative.test. 59 IN NSEC alias.compact-negative.test. NS SOA RRSIG NSEC DNSKEY",
+          "compact-negative.test. 59 IN RRSIG NSEC 13 2 60 20261011193647 20261010183647 9287 compact-negative.test. i7cYrwY1v1R8QFMuFl84oHhv1mlkJv7q Qen3StnzcMXD8EYi5PW3siF4nEebB5wC l5J3FQlHna21hP4l/K8TCw==",
+          "ns.compact-negative.test. 59 IN NSEC only-v6.compact-negative.test. A RRSIG NSEC",
+          "ns.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. VUgpoXYo8nqtbHMlauvDr91TXUCWLw7f 3tQghC5gqSnJ9Lplj/El42CHYaqK0FDO 9RcKBARbNAZLcK6xdjLdoA==",
+          "only-v6.compact-negative.test. 59 IN NSEC target.compact-negative.test. AAAA RRSIG NSEC",
+          "only-v6.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. GxZW7orzyaXVGtCFj8VoDnv9C3dyGi2S WPmuhVc9Fb2E7MF8H+BFzUR7XKYOHXGD Do+AD6LrsFWuFccCET/9XA==",
+          "target.compact-negative.test. 59 IN NSEC to-missing.compact-negative.test. A RRSIG NSEC",
+          "target.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Vw8mXJ2VXpAyhaiNv2xwIQxBN/2lXw1t fzuvUL/lwS4IRxmedy5xOzkp5vNtOwuB SmifIBn5eVjY4GZN2wq2yQ==",
+          "child.ent.compact-negative.test. 59 IN NSEC ns.compact-negative.test. A RRSIG NSEC",
+          "child.ent.compact-negative.test. 59 IN RRSIG NSEC 13 4 60 20261011193647 20261010183647 9287 compact-negative.test. QBxaF5PBAE8N1pexc6AvWiCL3rPwg/RT lO+J43XkJXTVlMVws5QLJx7/X5kNAzEa d/GIHn7sMA1729W3Ny2euw==",
+          "*.wild.compact-negative.test. 59 IN NSEC compact-negative.test. A RRSIG NSEC",
+          "*.wild.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. o+i1QJ1vFtdz7txKexjBagNXa4oI/ug/ qFzZfi3Gvv6WrdBkbbsmZr3ACaCR9d0F VoMQLaq3nrcTLBSwav1cqw==",
+          "*.alias.compact-negative.test. 59 IN NSEC ent.compact-negative.test. CNAME RRSIG NSEC",
+          "*.alias.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Bf7KnSxhxo0KzFAZ/qOwa2lD3dfdQHJY FCsxasQujX51Ay/OsTIwTbZ5Ani5vvgo 20rYIv1XZ5eLFWcPkLZrFQ==",
+          "to-missing.compact-negative.test. 59 IN NSEC wild.compact-negative.test. CNAME RRSIG NSEC",
+          "to-missing.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Ml4i76ui1M3WQHq9weialorqT1dfnSDl CdFwBVW+scYX6zmQeNVmhUqWH9p+6on7 CsipTdnVqZ6iofR/EbuhVQ==",
+          "ent.compact-negative.test. 59 IN NSEC child.ent.compact-negative.test. RRSIG NSEC",
+          "ent.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. RN4/dOXY5QvkvNmyf3xZjP97z1FcmkHC xgOk7U2rn/YpN50FchmLzQXTUG4GFBHu Oxi1AZzV0EwdaICVkVSE9g==",
+          "wild.compact-negative.test. 59 IN NSEC *.wild.compact-negative.test. RRSIG NSEC",
+          "wild.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. Nta5/aAAJxDGnercYWiz0YZgLlOnMx52 jMmgjS2gTDtAHIWOMLzXCFtweYMPPKUb 9sgTFTJEslKs5edNjzVFCg==",
+          "alias.compact-negative.test. 59 IN NSEC *.alias.compact-negative.test. RRSIG NSEC",
+          "alias.compact-negative.test. 59 IN RRSIG NSEC 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 87bddd43+N67Ss+xP82o8m3xHRojcVNh N+cFbT51xZOjYPaJtd11h/L8i38sMVx0 h3FMDk/A9BFQA8C+t7PemQ=="
+        ]
+      },
+      {
+        "name": "to-missing.compact-negative.test.",
+        "type": "A",
+        "transport": "TCP",
+        "rcode": "NOERROR",
+        "AD": true,
+        "CD": false,
+        "AA": false,
+        "elapsed_seconds": 0.001205,
+        "answer": [
+          "to-missing.compact-negative.test. 59 IN CNAME missing.compact-negative.test.",
+          "to-missing.compact-negative.test. 59 IN RRSIG CNAME 13 3 60 20261011193647 20261010183647 9287 compact-negative.test. 7VjI5xh5yZsgrCj9P948Ol8v0hN+/p1z DobM6nqqaklVoZ9Im1oBOveHYKMxUNkn pEKNlITxBtRlt+goQPqwug=="
+        ],
+        "authority": [
+          "compact-negative.test. 28 IN SOA ns.compact-negative.test. hostmaster.compact-negative.test. 1 60 60 600 30",
+          "compact-negative.test. 58 IN RRSIG SOA 13 2 60 20261011193646 20261010183646 9287 compact-negative.test. xu5LETqE2eqeFLCOOInBwkFzmNB3RS3V Iyx6L+I7YBhMFX6CKJ8edVAjU7AaBV/6 CEYkPjiFuH4QGfssNy4N9g==",
+          "missing.compact-negative.test. 28 IN NSEC \\000.missing.compact-negative.test. RRSIG NSEC NXNAME",
+          "missing.compact-negative.test. 28 IN RRSIG NSEC 13 3 30 20261011193646 20261010183646 9287 compact-negative.test. qcYiXkiJvZyGfNIZCWZeC6vOcAqgqCQ1 UtzMZmSYoxcKfoFmHvUl3wYzPynoaf6x ERNigmAghw9Fys0uEqNQBA=="
+        ]
+      }
+    ],
+    "negative_cache": [
+      {
+        "name": "missing.signed-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 0.0,
+          "num.query.aggressive.NOERROR": 0.0,
+          "num.query.aggressive.NXDOMAIN": 1.0
+        },
+        "no_new_authority_query": true
+      },
+      {
+        "name": "only-v6.signed-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 0.0,
+          "num.query.aggressive.NOERROR": 1.0,
+          "num.query.aggressive.NXDOMAIN": 0.0
+        },
+        "no_new_authority_query": true
+      },
+      {
+        "name": "missing.unsigned-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 1.0,
+          "num.query.aggressive.NOERROR": 0.0,
+          "num.query.aggressive.NXDOMAIN": 0.0
+        },
+        "no_new_authority_query": true
+      },
+      {
+        "name": "only-v6.unsigned-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 1.0,
+          "num.query.aggressive.NOERROR": 0.0,
+          "num.query.aggressive.NXDOMAIN": 0.0
+        },
+        "no_new_authority_query": true
+      },
+      {
+        "name": "missing.compact-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 1.0,
+          "num.query.aggressive.NOERROR": 0.0,
+          "num.query.aggressive.NXDOMAIN": 0.0
+        },
+        "no_new_authority_query": true
+      },
+      {
+        "name": "only-v6.compact-negative.test.",
+        "cache_counter_deltas": {
+          "total.num.cachehits": 0.0,
+          "num.query.aggressive.NOERROR": 1.0,
+          "num.query.aggressive.NXDOMAIN": 0.0
+        },
+        "no_new_authority_query": true
+      }
+    ],
+    "apparmor": "unbound (enforce)",
+    "bogus_negative_proof": [
+      {
+        "query": {
+          "name": "bad-proof.bad-negative.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 20093,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "tampered-signed-negative-SOA",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 3,
+        "expected_nodata": false,
+        "latency_limit_seconds": 3,
+        "started_utc": "2026-10-10T19:36:49.079851+00:00",
+        "elapsed_seconds": 0.061118,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      {
+        "query": {
+          "name": "bad-proof.bad-negative.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 12886,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "tampered-signed-negative-SOA",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 3,
+        "expected_nodata": false,
+        "latency_limit_seconds": 3,
+        "started_utc": "2026-10-10T19:36:49.241492+00:00",
+        "elapsed_seconds": 0.000737,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      }
+    ],
+    "local_invalid": {
+      "rcode": "NXDOMAIN",
+      "AD": false,
+      "AA": true,
+      "authority": [
+        "invalid. 10800 IN SOA localhost. nobody.invalid. 1 3600 1200 604800 10800"
+      ]
+    },
+    "authority_transport_counts": {
+      "UDP": 42,
+      "TCP": 18
+    }
+  },
+  "delayed": [
+    {
+      "discard_timeout_ms": 1900,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 411,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:36:49.396553+00:00",
+        "elapsed_seconds": 8.00607,
+        "response": null,
+        "error": {
+          "type": "dns.exception.Timeout",
+          "message": "The DNS operation timed out."
+        },
+        "pass": false,
+        "outcome": "timeout",
+        "attempts": 1
+      },
+      "warm": null,
+      "CD": null,
+      "authority_request_count": 12
+    },
+    {
+      "discard_timeout_ms": 1900,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 49882,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:36:57.468635+00:00",
+        "elapsed_seconds": 8.007215,
+        "response": null,
+        "error": {
+          "type": "dns.exception.Timeout",
+          "message": "The DNS operation timed out."
+        },
+        "pass": false,
+        "outcome": "timeout",
+        "attempts": 1
+      },
+      "warm": null,
+      "CD": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 34173,
+          "DO": true,
+          "CD": true
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "post-failure-CD-diagnostic",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:05.476116+00:00",
+        "elapsed_seconds": 0.000731,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": false,
+          "CD": true,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "bogus.signed-fixture.test. 58 IN A 203.0.113.10",
+            "bogus.signed-fixture.test. 58 IN RRSIG A 13 3 300 20261011193703 20261010183703 61284 signed-fixture.test. UBfsdNlO9qmA8JCcRl1r6FJTrpGo7euE 5v6RVaifzrZes448pAY2Fq+MbdAxBZ6u LP9ML8XAEtnTgyHcZn2Ubw=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "authority_request_count": 17
+    },
+    {
+      "discard_timeout_ms": 1900,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 25306,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:05.539629+00:00",
+        "elapsed_seconds": 6.005846,
+        "response": null,
+        "error": {
+          "type": "builtins.EOFError",
+          "message": "EOF"
+        },
+        "pass": false,
+        "outcome": "transport_error",
+        "attempts": 1
+      },
+      "warm": null,
+      "CD": null,
+      "authority_request_count": 9
+    },
+    {
+      "discard_timeout_ms": 1900,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 57719,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:11.702467+00:00",
+        "elapsed_seconds": 6.009687,
+        "response": null,
+        "error": {
+          "type": "builtins.EOFError",
+          "message": "EOF"
+        },
+        "pass": false,
+        "outcome": "transport_error",
+        "attempts": 1
+      },
+      "warm": null,
+      "CD": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 32311,
+          "DO": true,
+          "CD": true
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "post-failure-CD-diagnostic",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:17.712283+00:00",
+        "elapsed_seconds": 0.00051,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": false,
+          "CD": true,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "bogus.signed-fixture.test. 60 IN A 203.0.113.10",
+            "bogus.signed-fixture.test. 60 IN RRSIG A 13 3 300 20261011193717 20261010183717 4380 signed-fixture.test. xLNk/nJDACvAptEtQJWWMkBra9JObsaJ DExQ4gZtFszeiMGPzFK8soSzHuUrceLO NFxwdLFKpZsLF3hMcH2fnA=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "authority_request_count": 17
+    },
+    {
+      "discard_timeout_ms": 15000,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 59200,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:17.867685+00:00",
+        "elapsed_seconds": 6.006084,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": true,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "valid.signed-fixture.test. 300 IN A 203.0.113.9",
+            "valid.signed-fixture.test. 300 IN RRSIG A 13 3 300 20261011193723 20261010183723 57585 signed-fixture.test. BaAAsSxHLxMjwv8wkfiggpaM1t14GuRg eavuzn74e3EcCho2s7cfVrKwgpS4QeT7 R8tTcEYFi12Ziam22/g1Bw=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "warm": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 57232,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "warm-after-cold-pass",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:23.874010+00:00",
+        "elapsed_seconds": 0.000606,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": true,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "valid.signed-fixture.test. 300 IN A 203.0.113.9",
+            "valid.signed-fixture.test. 300 IN RRSIG A 13 3 300 20261011193723 20261010183723 57585 signed-fixture.test. BaAAsSxHLxMjwv8wkfiggpaM1t14GuRg eavuzn74e3EcCho2s7cfVrKwgpS4QeT7 R8tTcEYFi12Ziam22/g1Bw=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "CD": null,
+      "authority_request_count": 9
+    },
+    {
+      "discard_timeout_ms": 15000,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 42965,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:24.030867+00:00",
+        "elapsed_seconds": 6.01007,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "warm": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 60786,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "warm-after-cold-pass",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:30.041071+00:00",
+        "elapsed_seconds": 0.000287,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "CD": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 16557,
+          "DO": true,
+          "CD": true
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "UDP",
+        "scenario": "checking-disabled-diagnostic",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:30.041463+00:00",
+        "elapsed_seconds": 0.000371,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": false,
+          "CD": true,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "bogus.signed-fixture.test. 60 IN A 203.0.113.10",
+            "bogus.signed-fixture.test. 60 IN RRSIG A 13 3 300 20261011193730 20261010183730 42765 signed-fixture.test. ZV+hcW3LF+I+CKjjage1wXK+2EBZ7vgj 8VVdNkNXtszVUebkCJAsbSKPObUAPVQW 1pni2DuSzotqZhsYyJNYbg=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "authority_request_count": 17
+    },
+    {
+      "discard_timeout_ms": 15000,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 25617,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:30.196372+00:00",
+        "elapsed_seconds": 6.006533,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": true,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "valid.signed-fixture.test. 300 IN A 203.0.113.9",
+            "valid.signed-fixture.test. 300 IN RRSIG A 13 3 300 20261011193736 20261010183736 29515 signed-fixture.test. E7cp+sv+ibPLz63ADTFxK66ysp9vpHSS Yn8HkjZm9I4SKRDwZbtW00u/L5ZWkm89 vcmGp7LC96N8smr6YPKEJA=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "warm": {
+        "query": {
+          "name": "valid.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 18676,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "warm-after-cold-pass",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": true,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:36.203161+00:00",
+        "elapsed_seconds": 0.000831,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": true,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "valid.signed-fixture.test. 300 IN A 203.0.113.9",
+            "valid.signed-fixture.test. 300 IN RRSIG A 13 3 300 20261011193736 20261010183736 29515 signed-fixture.test. E7cp+sv+ibPLz63ADTFxK66ysp9vpHSS Yn8HkjZm9I4SKRDwZbtW00u/L5ZWkm89 vcmGp7LC96N8smr6YPKEJA=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "CD": null,
+      "authority_request_count": 10
+    },
+    {
+      "discard_timeout_ms": 15000,
+      "apparmor": "unbound (enforce)",
+      "cold": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 21367,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "fresh-process-six-second-authority-delay",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 8,
+        "expected_nodata": false,
+        "latency_limit_seconds": 8,
+        "started_utc": "2026-10-10T19:37:36.359466+00:00",
+        "elapsed_seconds": 6.009905,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "warm": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 7877,
+          "DO": true,
+          "CD": false
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "warm-after-cold-pass",
+        "cache_evidence": "unknown",
+        "expected_rcode": "SERVFAIL",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:42.369519+00:00",
+        "elapsed_seconds": 0.000377,
+        "response": {
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "CD": false,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "SERVFAIL",
+          "answers": [],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "CD": {
+        "query": {
+          "name": "bogus.signed-fixture.test.",
+          "type": "A",
+          "class": "IN",
+          "id": 40033,
+          "DO": true,
+          "CD": true
+        },
+        "server": "127.0.0.1",
+        "port": 15359,
+        "source": null,
+        "transport": "TCP",
+        "scenario": "checking-disabled-diagnostic",
+        "cache_evidence": "unknown",
+        "expected_rcode": "NOERROR",
+        "require_AD": false,
+        "observation_timeout_seconds": 2,
+        "expected_nodata": false,
+        "latency_limit_seconds": 2,
+        "started_utc": "2026-10-10T19:37:42.370007+00:00",
+        "elapsed_seconds": 0.000402,
+        "response": {
+          "rcode": "NOERROR",
+          "AD": false,
+          "CD": true,
+          "TC": false,
+          "AA": false,
+          "RA": true,
+          "shape": "ANSWER",
+          "answers": [
+            "bogus.signed-fixture.test. 60 IN A 203.0.113.10",
+            "bogus.signed-fixture.test. 60 IN RRSIG A 13 3 300 20261011193742 20261010183742 56710 signed-fixture.test. DGU6mp2KZUkr7s2a8vqdkqGPhTGzyIUl zNWhU0YUxzSojdEahZjGzVQ58o+xaBvn eiVowCK+SbG/DRJm/jiWaQ=="
+          ],
+          "authority": [],
+          "SOA_negative_ttls": [],
+          "ptr_targets": [],
+          "EDE": []
+        },
+        "error": null,
+        "pass": true,
+        "outcome": "pass",
+        "attempts": 1
+      },
+      "authority_request_count": 17
+    }
+  ]
+}
