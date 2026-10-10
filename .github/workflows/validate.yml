@@ -11,6 +11,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: sudo apt-get update && sudo apt-get install -y unbound dns-root-data nftables shellcheck
+      - name: Prepare disposable runner SSH syntax-check directory (no service/policy change)
+        run: sudo install -d -o root -g root -m 0755 /run/sshd
       - run: pip install -r requirements-test.txt -r requirements-discovery.txt
       - run: python -m unittest discover -s tests -p 'test_*.py' -v
       - run: python scripts/render.py config.example.json
