@@ -1,5 +1,7 @@
 # Existing Oracle VM: private service approval plan
 
+> **DNS display-name proposal (not applied):** [Phase B private PTR identity review](proposals/PHASE_B_DNS_IDENTITY.md) and [candidate Unbound fragment](proposals/phase-b-dns-identity.conf) propose the Windows `Server: dns.vynalthai.com` label for `100.95.65.20` only. These review files are **not** included in the existing pinned config/bundle hashes or production deployment. Integrate, recalculate hashes, test, review a new post-boot baseline, and request new exact authorization before deploying. No Oracle setting or public DNS is changed by this proposal.
+
 **Latest review: [POST_MAINTENANCE.md](POST_MAINTENANCE.md). No next deployment is
 authorized or ready.** The fresh PID34123 baseline is stable and exact, but a
 kernel reboot is pending and independent console recovery is unverified. Review
