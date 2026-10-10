@@ -1,0 +1,44 @@
+{
+  "approved_commit": "61a9ad8c342717d10974b6de1e274a0e180d09e6",
+  "approved_config_sha256": "d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7",
+  "started_utc": "2026-10-10T06:55:12.110212+00:00",
+  "attempts": 0,
+  "confirmed": false,
+  "acceptance_pass": false,
+  "rollback_invoked": false,
+  "records": [
+    {
+      "check": "github_windows_reviewed_commit",
+      "value": "61a9ad8c342717d10974b6de1e274a0e180d09e6",
+      "recorded_utc": "2026-10-10T06:55:20.833013+00:00"
+    },
+    {
+      "check": "windows_bundle_hashes",
+      "value": "13/13 pass",
+      "recorded_utc": "2026-10-10T06:55:20.865752+00:00"
+    },
+    {
+      "check": "vm_bundle_baseline_preflight",
+      "value": "plans/phase-b-unbound.conf: OK\nplans/phase-b-active.sha256: OK\nscripts/unbound-private-limits.conf: OK\nscripts/deploy-private.sh: OK\nscripts/rollback.sh: OK\nscripts/confirm.sh: OK\nunbound/base.conf: OK\nconfig.private.example.json: OK\nscripts/render.py: OK\nscripts/prepare-private.py: OK\ntests/acceptance.py: OK\nscripts/private-acceptance.py: OK\nscripts/private-service-inspect.py: OK\n/etc/unbound/unbound.conf: OK\n/etc/unbound/unbound.conf.d/remote-control.conf: OK\n/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf: OK\nunbound-checkconf: no errors in artifacts/private/unbound.conf",
+      "recorded_utc": "2026-10-10T06:55:21.810772+00:00"
+    },
+    {
+      "check": "failure",
+      "value": {
+        "type": "builtins.AssertionError",
+        "message": ""
+      },
+      "recorded_utc": "2026-10-10T06:55:23.040817+00:00"
+    }
+  ],
+  "error": {
+    "type": "builtins.AssertionError",
+    "message": ""
+  },
+  "status": "ABORTED_BEFORE_DEPLOYMENT",
+  "confirmed_failure": "MainPID no longer matches initial 13423; journal shows intermediate 24650 and subsequent read-only inspection observes 34123. Configuration and management hashes unchanged.",
+  "deployment_restart_count_by_agent": 0,
+  "acceptance_executed": false,
+  "rollback_required": false,
+  "rollback_reason": "No deployment started, no active files changed and no pending transaction snapshot"
+}

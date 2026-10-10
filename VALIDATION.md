@@ -359,3 +359,77 @@ blocked. The longer finite reply window needs a separate abuse/capacity review
 before broader exposure. RM0 remains a target, existing billing unverified;
 no resources or paid services were created. GitHub Actions remain subject to
 the account billing lock; no CI execution success is claimed.
+
+## Second approved private trial — ABORTED BEFORE DEPLOYMENT, 2026-10-10
+
+The user approved only `61a9ad8c342717d10974b6de1e274a0e180d09e6` and config
+SHA256 `d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`.
+No approved service file or executable was changed by this reporting commit.
+The orchestration aborted during preflight; **deployment attempts = 0** for
+this authorization. No `deploy-private.sh`, Unbound restart, rollback timer,
+acceptance controller or `confirm.sh` execution by the agent. No automatic retry.
+
+| Preflight / acceptance item | Actual result |
+|---|---|
+| GitHub Draft PR head, remote branch, Windows and VM HEAD | exact approved commit, clean worktrees |
+| Windows / VM 13-file service manifest | all hashes passed |
+| Active main config / both include hashes, rendered byte equality, syntax | passed |
+| Existing systemd drop-ins and include set | no drop-ins, original two include files |
+| Private SSH / Tailscale | real source 100.85.132.14 -> 100.95.65.20, both online; retained session still open |
+| AppArmor | unbound (enforce) before and after abort |
+| Recovery | old real rollback snapshot retained; no pending snapshot or active timer |
+| Stable service baseline | **FAIL: initial MainPID13423 no longer matched; journal shows 24650, subsequent inspection 34123** |
+| Cold / warm DNSSEC UDP/TCP, A/AAAA, NXDOMAIN, CD, cache and ACL | **NOT RUN**; no live latency or PASS receipt |
+| 180s transaction and <140s confirmation gate | NOT STARTED; no confirmation |
+
+The raw orchestration log retains its assertion failure and attempt count zero.
+Subsequent diagnostics identify the differing field as MainPID; the exact failed
+inspection's JSON was not saved by the wrapper, so its intermediate PID is
+correlated from the service journal rather than claimed as a captured receipt.
+No threshold or
+baseline was relaxed to continue. The failure was not a DNSSEC timeout. Original
+active config, effective systemd limits and management hashes still matched.
+
+Service journal timeline (UTC; MYT = UTC+8):
+
+- 06:52:21: existing `apt-daily-upgrade.service` / unattended-upgrade started.
+- 06:52:47: initial inspection still observed PID13423 and original baseline.
+- 06:53:53: Unbound stopped/started with PID24650.
+- 06:55:20: final transaction preflight bundle/config checks passed; the following
+  active-service equality check failed before the transaction timer was started.
+- 06:56:04: Unbound stopped/started again with PID34123.
+- 06:56:18: unattended-upgrades log reports all upgrades installed.
+- 06:57 onward: read-only verification found PID34123 active, NRestarts0.
+
+The automatic-maintenance dpkg log explicitly contains a `needrestart` command
+restarting `unbound.service`, `ssh.service`, `systemd-networkd.service`,
+`systemd-resolved.service` and other services after package updates. This links
+the observed baseline drift to concurrent host maintenance, independently of the
+agent's zero-attempt transaction. The agent neither started those upgrades nor
+changed/restarted those services, and did not disable the maintenance mechanism.
+Unbound package remains 1.19.2-1ubuntu3.10; library/kernel packages changed under
+existing automatic maintenance. `reboot-required` lists the new Oracle kernel
+and linux-base. **No reboot was performed.** NRestarts0 does not mean no restarts:
+explicit service starts are visible in the journal and may reset that counter.
+
+Final inspected state: Unbound active PID34123, enforcing; listeners only
+127.0.0.1/[::1] UDP/TCP53, no Tailscale/public Unbound DNS listener. Effective
+MemoryMax=infinity, TasksMax=6964, LimitNOFILE=524288; DropInPaths empty. Default
+discard timeout remains 1900ms. The final receipt reports zero client queries,
+zero cache hits/misses/recursive replies; these are counters after the external
+restart, not a successful cache/DNSSEC test. SSH and tailscaled active, retained
+private SSH session usable. Stateless nftables and effective sshd hashes match
+the initial preflight. The agent made no management-network/cloud/DNS changes.
+
+`vynalth-rollback.timer`: LoadState=not-found, inactive/dead; no new snapshot.
+No rollback command was needed because the deployment never started and active
+files were not written. Previous recovery snapshot remains retained. Do not run
+a recovery operation that would undo unrelated maintenance changes.
+
+Sanitized initial/final service receipts, the abort log, PID diagnosis, Tailscale
+preflight and host-maintenance logs are committed in `plans/second-attempt/`.
+Stop further deployments as instructed. Before any fresh trial, review the new
+service/package baseline and pending-reboot disposition in a stable maintenance
+window, obtain fresh authorization, and reverify all existing gates. Do not
+automatically disable updates, reboot, retry, confirm or promote public service.
+No cloud resources were created; existing cost assumptions remain unverified.

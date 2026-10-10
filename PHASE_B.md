@@ -3,9 +3,14 @@
 Status on 2026-10-10: the `036575d` attempt **failed and rolled back**; production
 remains localhost-only. The subsequent investigation reproduced reply expiry at
 the packaged 1900ms discard timeout and tested a finite 15000ms correction in
-isolated enforcing processes. This revised bundle is **awaiting fresh approval**.
-The previous authorization/hash does not cover it. See VALIDATION.md and the
-committed `plans/investigation/` receipts. No redeployment or restart occurred.
+isolated enforcing processes. The user approved exact `61a9ad8`/the revised hash,
+but the second trial was **aborted during preflight before deployment** because
+automatic package maintenance restarted Unbound and changed its PID baseline.
+No reviewed deployment, agent service restart, timer start or confirmation ran.
+Further deployment is stopped; do not automatically retry under that approval.
+See VALIDATION.md, `plans/second-attempt/` and the investigation receipts. A new
+trial needs a stable maintenance window, refreshed baseline review and fresh
+human authorization. The service bundle/config hash below remain unchanged.
 No firewall, SSH, Tailscale, OCI, DNS record or package changes are authorized by
 this plan. Public recursive service remains blocked.
 
@@ -73,7 +78,7 @@ without reloading/restarting the production service. A later authorized service
 attempt restored the real production config/drop-in state after test failure;
 successful private-service acceptance remains incomplete. See VALIDATION.md.
 
-## Revised acceptance and rollback gates (not authorized to execute yet)
+## Revised acceptance and rollback gates (further execution stopped)
 
 Keep the existing SSH session open. Before any future deployment, require clean
 Windows/VM worktrees at the exact newly reviewed full commit, bundle SHA256
