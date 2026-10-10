@@ -750,3 +750,23 @@ deadline relaxation, timer early cancellation or automatic confirmation retry.
 
 Config unchanged SHA256: `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 Updated21-file service manifest SHA256: `435883ec91e3d4784991015352b75fba1dcbb147a2faa04a4df89f474702e254`.
+
+## Standard hosted ARM job preparation (2026-10-11)
+
+Starting verified HEAD bcd873cb842f58e3272cec990ff02814b5bc1e3c. Added separate
+public-only ubuntu-24.04-arm job, read-only permission,20min cap, Bash pipefail,
+mandatory aarch64/Ubuntu/systemd/Unbound/profile checks and always-on artifacts.
+No original test removed. Actual unique service/cgroup/restore test is implemented
+with strict ARM/GitHub/AppArmor guard; it is NOT EXECUTED locally. No Oracle/VPN,
+billing settings, purchases or infrastructure operations.
+
+- LOCAL DEVELOPMENT PASS68 unit tests, Python compilation and Git whitespace.
+  New tests cover public standard-runner policy, retained old checks, enforcement/
+  timer/evidence requirements and private fixture invariants. Not ARM results.
+- ARM CI runtime ALL NOT EXECUTED / PENDING until job actually starts: no claimed
+  ARM/AppArmor/real service/cgroup/timer/DNSSEC/ACL/PTR PASS based on preparation.
+- Repo API confirms PUBLIC and Actions enabled. Prior current checks explicitly
+  never started because account locked due to billing issue. No executed job log
+  or deeper billing cause available; no automatic retry or settings change.
+- Config and21-file service hashes unchanged; Gate C/review manifests updated
+  for new workflow/source/docs/development evidence.

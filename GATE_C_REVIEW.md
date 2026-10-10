@@ -99,3 +99,12 @@ network/verification/confirmation operation. No retries on ambiguous confirmatio
 Android DNS-only gate remains separately approved, after Windows confirmation,
 strictly<45s. Both /32 ACLs/private listeners/PTR/DNSSEC/default refuse remain.
 No system-wide override, public listener or paid infrastructure is authorized.
+
+## Authorized standard public ARM hosted CI
+
+See ARM_HOSTED_CI.md. Owner now authorizes the independent ubuntu-24.04-arm
+standard public-repository job; no separate physical machine is required. Existing
+tests remain. Architecture/profile/service/cgroup/timer/Unbound results stay NOT
+EXECUTED/PENDING until actual runner evidence exists. CI billing lock is separate
+from code/runtime failures. No paid/OCI/self-hosted fallback or billing/VPN change.
+Production recovery and fresh baseline/Windows/Android approvals remain separate.
