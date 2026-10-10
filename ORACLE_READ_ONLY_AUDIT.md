@@ -125,7 +125,7 @@ impact. Assess CPU/RAM/disk and active dependencies before any cleanup proposal.
 Return UTC sample time/boot ID, each result including failures, actual listener
 owners, enforcing label, file/policy hashes, maintenance/reboot/clock state,
 retained artifact/unit/process inventory and separately verified recovery path.
-Current status is **NOT AUDITED**. No fresh baseline is approved by these commands.
+Owner Gate A evidence is now reconciled in GATE_A_RECONCILIATION.md; Codex has not executed an audit. No fresh baseline is approved by these commands.
 Reboot required, maintenance activity/schedule uncertainty, drift, public binding,
 unknown residue impact, failed recovery or pending protection blocks deployment.
 Do not disable upgrades, relax checks, cancel timers or automatically retry.
@@ -143,3 +143,14 @@ UNKNOWN; do not enable it or log browsing histories. No cache flush/restart or
 extra DNS probe is implicit. Cold-cache queries need an explicitly scoped fresh
 isolated environment. Review exact query counts/transports/CD/deadlines before
 any later live comparison. Old15s timeout is not a validation PASS.
+
+## Superseding owner Gate A evidence
+
+See GATE_A_RECONCILIATION.md. Owner reports no matching loaded units/active timers,
+pending recovery absent, retained PMaPSc directory~976KB and three retained /tmp
+files; backup rolled-back-1791611257 must be preserved. Owner also reports PID984,
+enforcing profile, localhost-only DNS, working Windows authenticated SSH and
+inactive maintenance services at observation time. These update the historical
+inventory but do not prove all dependencies resolved or future recovery guaranteed.
+Firewall589768... used an unspecified pipeline; compare methods before declaring
+drift or incident. No cleanup or new Oracle access occurred during this work.

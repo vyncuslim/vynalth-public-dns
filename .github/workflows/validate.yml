@@ -26,6 +26,7 @@ jobs:
       - run: sudo $(which python) tests/timer_guard_lab.py
       - run: sudo $(which python) tests/private_transaction_lab.py
       - run: sudo bash tests/local_rollback_files.sh
+      - run: sudo $(which python) tests/gate_c_deploy_lab.py --authorized-independent-lab
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: '1.9.8'

@@ -10,7 +10,7 @@ not enabled or change Android Private DNS/blanket tailnet DNS Override.
 
 | Gate | Reviewable scope / exit evidence | Current state |
 |---|---|---|
-| A | Approve existing serial-console read-only impact/status audit; optionally extended baseline and Windows read-only recovery scope in ORACLE_READ_ONLY_AUDIT.md | PENDING approval; not executed |
+| A | Approve existing serial-console read-only impact/status audit; optionally extended baseline and Windows read-only recovery scope in ORACLE_READ_ONLY_AUDIT.md | Owner Gate A reconciled; fresh readiness/impact limits remain |
 | B | Review exact retained paths/units/dependencies and recovery exclusions; authorize itemized cleanup only if needed | UNKNOWN need; no cleanup approved |
 | C | Approve exact environment and effects of current ARM/AppArmor/real180s timer readiness validation, preferring a separate lab; live host test files/scopes/transfers require explicit scope | NOT TESTED on current ARM; local evidence is insufficient |
 | D | Review final full commit, config, complete bundle, exact diff, fresh pinned baseline and procedure; separately authorize staging and one-shot service-only Windows transaction | BLOCKED; no fresh baseline or deployment approval |
@@ -35,7 +35,7 @@ branch HEAD and review that full SHA before approval. No old approval carries ov
 Unchanged Unbound configuration SHA256:
 `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 Current21-file service manifest SHA256:
-`39d1d897e63bb87ff52195ce07ef77c219dff2def100e44249ae72071182ffc2`.
+`435883ec91e3d4784991015352b75fba1dcbb147a2faa04a4df89f474702e254`.
 
 The existing baseline SHA256
 `cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b`
@@ -132,3 +132,16 @@ Windows/Android success is claimed. Current ARM/AppArmor/real timer/baseline,
 residue impact/recovery/private packet path and CI limitations remain blockers.
 No extra queries or time are added to the <140s protected transaction; independent
 180s rollback and separately approved post-confirmation Android<45s remain.
+
+## Gate A reconciliation / Gate C engineering
+
+Owner-completed Gate A observations are reconciled in GATE_A_RECONCILIATION.md
+with attribution, time limits and method-unknown firewall fingerprint. This does
+not authorize new Oracle access, cleanup or deployment. Retained976KB lab and
+historical recovery backup remain preserved. See GATE_C_REVIEW.md and
+FRESH_BASELINE_APPROVAL.md for exact independent lab and future capture scopes.
+Current local65-unit suite,9 actual shell guard scenarios,4 restore plus4 failure
+cases and real180s independent timers PASS in their stated x86/shim scope. Actual
+ARM/AppArmor/systemd-Unbound resource/recovery path remain NOT TESTED. No production
+timeout resolution or device live success is claimed. New lock/snapshot/deadline/
+capture safeguards change the service bundle; older approvals do not carry over.

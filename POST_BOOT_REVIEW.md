@@ -4,7 +4,7 @@
 The earlier isolation ran on the live VM and violated the development boundary.
 See [LIVE_VM_IMPACT.md](LIVE_VM_IMPACT.md) for the explicit deviation, prior
 cleanup, retained paths/processes/units and uncertain current status. No new
-Oracle command was issued after the stop; only existing SSH output was read.
+Oracle command was issued by Codex after the stop; only existing SSH output was read.
 Further audit/cleanup/testing/deployment requires separate human approval.
 
 Product **Vynalth AI DNS â€” Vynalth AI Secure Recursive DNS Resolver**.
@@ -184,3 +184,16 @@ Windows/Android success is claimed. Current ARM/AppArmor/real timer/baseline,
 residue impact/recovery/private packet path and CI limitations remain blockers.
 No extra queries or time are added to the <140s protected transaction; independent
 180s rollback and separately approved post-confirmation Android<45s remain.
+
+## Gate A reconciliation / Gate C engineering
+
+Owner-completed Gate A observations are reconciled in GATE_A_RECONCILIATION.md
+with attribution, time limits and method-unknown firewall fingerprint. This does
+not authorize new Oracle access, cleanup or deployment. Retained976KB lab and
+historical recovery backup remain preserved. See GATE_C_REVIEW.md and
+FRESH_BASELINE_APPROVAL.md for exact independent lab and future capture scopes.
+Current local65-unit suite,9 actual shell guard scenarios,4 restore plus4 failure
+cases and real180s independent timers PASS in their stated x86/shim scope. Actual
+ARM/AppArmor/systemd-Unbound resource/recovery path remain NOT TESTED. No production
+timeout resolution or device live success is claimed. New lock/snapshot/deadline/
+capture safeguards change the service bundle; older approvals do not carry over.

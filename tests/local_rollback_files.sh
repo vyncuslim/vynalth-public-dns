@@ -21,7 +21,8 @@ mount --bind "$lab/varlib" /var/lib
 cat > "$lab/bin/systemctl" <<'SHIM'
 #!/bin/bash
 case "$*" in
- 'daemon-reload'|'restart unbound') printf '%s\n' "$*" >> /var/lib/calls ;;
+ 'daemon-reload'|'restart unbound') printf '%s\n' "$*" >> /var/lib/calls
+   [[ "$*" != 'restart unbound' || ${VYNALTH_LAB_FAIL_RESTART:-0} != 1 ]] ;;
  *) exit 90 ;;
 esac
 SHIM
@@ -38,6 +39,7 @@ for previous in present absent; do
   printf 'unrelated setting\n' > /etc/systemd/system/unbound.service.d/unrelated.conf
   [[ $marker != present ]] || touch "$backup/service-only"
   [[ $previous != present ]] || printf 'original limits\n' > "$backup/unbound-private-limits.conf"
+  (cd "$backup" && sha256sum unbound.conf > snapshot.sha256; if [[ -f unbound-private-limits.conf ]]; then sha256sum unbound-private-limits.conf >> snapshot.sha256; fi)
   bash "$lab/rollback.sh" --service-only
   grep -qx 'original configuration' /etc/unbound/unbound.conf
   grep -qx 'unrelated setting' /etc/systemd/system/unbound.service.d/unrelated.conf
@@ -54,3 +56,29 @@ before=$(wc -l < /var/lib/calls)
 bash "$lab/rollback.sh" --service-only
 [[ $(wc -l < /var/lib/calls) == "$before" ]]
 echo 'PASS no pending snapshot: timer callback does not touch service'
+for fault in missing-manifest corrupt-config extra-limits restart-failed; do
+ backup=/var/lib/vynalth-dns/rollback
+ mkdir -p "$backup"
+ printf 'original configuration\n' > "$backup/unbound.conf"
+ (cd "$backup" && sha256sum unbound.conf > snapshot.sha256)
+ printf 'candidate configuration\n' > /etc/unbound/unbound.conf
+ case $fault in
+  missing-manifest) rm "$backup/snapshot.sha256" ;;
+  corrupt-config) printf 'corrupt\n' > "$backup/unbound.conf" ;;
+  extra-limits) printf 'unrecorded\n' > "$backup/unbound-private-limits.conf" ;;
+  restart-failed) export VYNALTH_LAB_FAIL_RESTART=1 ;;
+ esac
+ if bash "$lab/rollback.sh" --service-only > /dev/null 2>&1; then
+  echo "FAIL $fault accepted"; exit 1
+ fi
+ test -d "$backup"
+ if [[ $fault == restart-failed ]]; then
+  grep -qx 'original configuration' /etc/unbound/unbound.conf
+ else
+  grep -qx 'candidate configuration' /etc/unbound/unbound.conf
+ fi
+ unset VYNALTH_LAB_FAIL_RESTART
+ # Disposable local fixture only; preserve the host and real historical backup.
+ rm -r "$backup"
+ echo "PASS recovery failure retained pending evidence: $fault"
+done

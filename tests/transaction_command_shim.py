@@ -20,6 +20,8 @@ elif command == 'systemctl':
     elif args == ['show', 'unbound', '-p', 'MemoryMax', '-p', 'TasksMax', '-p', 'LimitNOFILE', '-p', 'ActiveState']:
         print('MemoryMax=402653184\nTasksMax=64\nLimitNOFILE=1024\nActiveState=active')
     elif args[:2] == ['is-active', '--quiet']:
+        if args[-1] == 'vynalth-rollback.service':
+            raise SystemExit(1)
         if args[-1] == 'vynalth-rollback.timer' and not timer.exists():
             raise SystemExit(1)
         assert args[-1] in ('unbound', 'tailscaled', 'vynalth-rollback.timer')

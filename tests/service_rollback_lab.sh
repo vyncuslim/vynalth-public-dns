@@ -52,6 +52,7 @@ touch "$backup/service-only"
 cp -a "$lab/original.conf" "$backup/unbound.conf"
 printf '[Service]\nMemoryMax=256M\nTasksMax=32\n' > "$lab/original-private.conf"
 cp -a "$lab/original-private.conf" "$backup/unbound-private-limits.conf"
+(cd "$backup" && sha256sum unbound.conf unbound-private-limits.conf > snapshot.sha256)
 printf 'unrelated unit setting\n' > "$lab/system-units/unbound.service.d/unrelated.conf"
 cp -a "$repo/plans/phase-b-unbound.conf" "$lab/etc-unbound/unbound.conf"
 cp -a "$repo/scripts/unbound-private-limits.conf" "$lab/system-units/unbound.service.d/private.conf"
@@ -76,6 +77,7 @@ grep -qx 'unrelated unit setting' "$lab/system-units/unbound.service.d/unrelated
 mkdir -m 0700 "$backup"
 touch "$backup/service-only"
 cp -a "$lab/original.conf" "$backup/unbound.conf"
+(cd "$backup" && sha256sum unbound.conf > snapshot.sha256)
 cp -a "$repo/plans/phase-b-unbound.conf" "$lab/etc-unbound/unbound.conf"
 unshare --mount bash "$repo/tests/service_rollback_lab.sh" --inside "$lab"
 cmp "$lab/original.conf" "$lab/etc-unbound/unbound.conf"

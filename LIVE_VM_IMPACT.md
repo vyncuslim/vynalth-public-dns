@@ -82,3 +82,14 @@ and PHASE_B_APPROVAL_CHECKLIST.md for separate approvals. No Oracle access or
 cleanup occurred in this documentation follow-up. Old PID984 and old fingerprints
 remain historical, not current confirmation. The owner's phone failure/control
 observations are recorded in ANDROID_DNS.md; they do not clear residual impact.
+
+## Superseding owner Gate A evidence
+
+See GATE_A_RECONCILIATION.md. Owner reports no matching loaded units/active timers,
+pending recovery absent, retained PMaPSc directory~976KB and three retained /tmp
+files; backup rolled-back-1791611257 must be preserved. Owner also reports PID984,
+enforcing profile, localhost-only DNS, working Windows authenticated SSH and
+inactive maintenance services at observation time. These update the historical
+inventory but do not prove all dependencies resolved or future recovery guaranteed.
+Firewall589768... used an unspecified pipeline; compare methods before declaring
+drift or incident. No cleanup or new Oracle access occurred during this work.

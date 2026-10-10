@@ -6,6 +6,9 @@ flock -x 9
 backup=/var/lib/vynalth-dns/rollback
 test -d "$backup" || exit 0
 if [[ ${1:-} == --service-only || -e $backup/service-only ]]; then
+  # Detect snapshot corruption before replacing any active service files.
+  (cd "$backup" && sha256sum --check snapshot.sha256)
+  (cd "$backup" && cmp snapshot.sha256 <(sha256sum unbound.conf; if [[ -f unbound-private-limits.conf ]]; then sha256sum unbound-private-limits.conf; fi))
   cp -a "$backup/unbound.conf" /etc/unbound/unbound.conf
   if [[ -f $backup/unbound-private-limits.conf ]]; then
     cp -a "$backup/unbound-private-limits.conf" /etc/systemd/system/unbound.service.d/private.conf

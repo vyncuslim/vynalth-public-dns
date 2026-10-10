@@ -164,7 +164,7 @@ def main():
     args = parser.parse_args()
     if not 60 <= args.interval <= 300:
         parser.error('At least 60 seconds of stability is required')
-    result = {'capture_only': args.capture, 'deployment_ready': False, 'samples': [], 'failures': []}
+    result = {'capture_only': args.capture, 'capture_complete': False, 'deployment_ready': False, 'samples': [], 'failures': []}
     expected = json.loads(args.baseline.read_text())['fingerprint'] if args.baseline else None
     args.out.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -185,13 +185,14 @@ def main():
                 time.sleep(args.interval)
         if result['samples'][0]['fingerprint'] != result['samples'][1]['fingerprint']:
             result['failures'].append('Service/host fingerprint changed during stability interval')
+        result['capture_complete'] = not result['failures']
         result['deployment_ready'] = not result['failures'] and not args.capture
     except Exception as exc:
         result['failures'].append(type(exc).__name__ + ': ' + str(exc))
     finally:
         args.out.write_text(json.dumps(result, indent=2), encoding='utf-8')
-    print(json.dumps({'deployment_ready': result['deployment_ready'], 'failures': result['failures']}), flush=True)
-    raise SystemExit(0 if result['deployment_ready'] else 1)
+    print(json.dumps({'capture_complete': result['capture_complete'], 'deployment_ready': result['deployment_ready'], 'failures': result['failures']}), flush=True)
+    raise SystemExit(0 if (result['capture_complete'] if args.capture else result['deployment_ready']) else 1)
 
 
 if __name__ == '__main__':
