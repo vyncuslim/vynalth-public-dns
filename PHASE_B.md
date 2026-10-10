@@ -79,6 +79,19 @@ strict<140s; rollback180s. First-use count must be one readiness query. Extra
 nslookup/manual tests belong AFTER protected acceptance/confirmation. Real second
 unapproved tailnet client, Windows display and private live DNS remain PENDING.
 
+## Latest review handoff: status audit first
+
+See [Oracle read-only audit](ORACLE_READ_ONLY_AUDIT.md) and
+[next approval checklist](PHASE_B_APPROVAL_CHECKLIST.md). The owner reports
+OPPO transport refusal/5s timeouts while a same-phone Cloudflare control works.
+These are not DNS REFUSED responses, precise root-cause evidence, or live success.
+No new Oracle access occurred. Stop repetitive private probes until the listener
+is enabled under a separate approval. Gates: read-only audit; itemized cleanup
+if needed; scoped ARM/AppArmor/timer readiness; fresh commit/hash/bundle/baseline
+service-only Windows trial; separately approved Android gate; only then DNS
+settings review. Existing config/service hashes are unchanged by this docs update.
+The historical baseline below is a reference, never a current approval token.
+
 ## Future execution reference: NOT authorized, DO NOT RUN now
 
 First obtain explicit approval for actual full commit, new config hash, approved
@@ -97,7 +110,7 @@ documented coordinator (the old unbounded PowerShell sequence is superseded):
 python scripts/private-transaction.py --execute-authorized-private-trial `
   --commit '<ACTUAL_REVIEWED_FULL_COMMIT>' `
   --config-sha256 d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634 `
-  --baseline-sha256 cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b `
+  --baseline-sha256 '<FRESH_HUMAN_APPROVED_BASELINE_SHA256>' `
   --ssh-key 'C:\Users\lynne\Downloads\ssh-key-2026-10-09 (1).key' `
   --out artifacts/private-transaction.json
 ```
@@ -110,9 +123,11 @@ snapshot state must be inspected before claiming rollback or deployment success.
 
 ## Separate firewall proposal: not approved for application
 
-[The proposed dedicated table](plans/phase-b-firewall.nft) passed VM `nft --check`.
-There is currently no `vynalth_dns` table, so the exact proposed change is adding
-this entire table; existing Oracle and Tailscale tables would be retained.
+The earlier version of [the proposed table](plans/phase-b-firewall.nft) passed
+historical VM `nft --check`; the Android revision has not been checked on Oracle.
+Earlier evidence showed no `vynalth_dns` table. Current table presence/policy is
+UNKNOWN pending approved read-only audit. The proposal adds this dedicated table
+while retaining existing Oracle/Tailscale tables; it is not applied or approved.
 
 Its input hook runs at priority -10 before the existing iptables-nft filter hook.
 Accept in one base chain does not override a later chain's rejection; a drop in

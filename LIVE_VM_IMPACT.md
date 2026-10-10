@@ -74,3 +74,11 @@ All later source changes/tests were local Windows/WSL only. Latest global-deadli
 root-owned rollback installation and archive-collision fix have NOT been retested
 on Oracle. Windows live acceptance is NOT TESTED. CI is billing-blocked. Do not
 deploy or claim the current Oracle service has this candidate installed.
+
+## Prepared review handoff (not executed)
+
+See ORACLE_READ_ONLY_AUDIT.md for the exact proposed status/inventory commands
+and PHASE_B_APPROVAL_CHECKLIST.md for separate approvals. No Oracle access or
+cleanup occurred in this documentation follow-up. Old PID984 and old fingerprints
+remain historical, not current confirmation. The owner's phone failure/control
+observations are recorded in ANDROID_DNS.md; they do not clear residual impact.

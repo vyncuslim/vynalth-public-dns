@@ -7,10 +7,40 @@ Windows100.85.132.14/32 and OPPO100.75.232.110/32 are the only external recursiv
 clients in this candidate. Android receives DNS access, not SSH authorization.
 Localhost/default-refuse/IPv4-only private listeners and DNSSEC remain intact.
 
+## User-reported OPPO observations (review comment6098859695)
+
+Source: [owner review,2026-10-10](https://github.com/vyncuslim/vynalth-public-dns/pull/1#issuecomment-6098859695).
+These are **user-reported**, not independently rerun by Codex. OPPO source
+100.75.232.110, Termux BIND dig9.20.24, explicit queries only; default DNS was
+not changed:
+
+```text
+dig @100.95.65.20 vyncuslim.com A +time=5 +tries=1
+connection refused; no servers could be reached
+Other attempts: timed out (5s)
+
+dig @1.1.1.1 vyncuslim.com A +time=5 +tries=1
+NOERROR; ANSWER:2; Query time:76ms
+104.18.17.55 / 104.18.16.55 (observed, not test constants)
+```
+
+Vynalth Android DNS is **UNAVAILABLE in the reported probes**. The successful
+same-phone control proves direct DNS can work, not a working Tailscale UDP/TCP53
+path. Earlier overlay ping and localhost-only listener evidence are historical.
+Refusal/timeout alone cannot identify current listener/firewall/packet-path cause.
+`~ $` prompt and `;;` output pasted into Bash produce unrelated shell errors.
+Local simulation PASS remains valid for its isolated scope; real acceptance is
+**PENDING LIVE ACCEPTANCE**, not PASS. Do not repeat private probes before the
+service is enabled, change Private DNS DoT hostname or blanket DNS Override.
+
+Next: separately authorized [read-only audit](ORACLE_READ_ONLY_AUDIT.md), then
+the sequential [approval gates](PHASE_B_APPROVAL_CHECKLIST.md). No live host
+access or action was performed for this follow-up.
+
 ## Failure diagnosis / implementation
 
 User reports Tailscale connectivity works but dig gets connection refused. The
-reported production service still listens on localhost and private deployment
+historical production service evidence showed localhost-only listeners; private deployment
 has not occurred. Adding an ACL in Git does not open the existing listener.
 Transport refusal is not DNS RCODE REFUSED or a successful DNSSEC rejection.
 We did not access Oracle to reconfirm its current state; retained laboratory/

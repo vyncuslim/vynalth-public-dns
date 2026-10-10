@@ -647,3 +647,21 @@ No deployment or Tailscale DNS Override is authorized by these results.
   to remove the proc attribute NUL terminator; original remains local.
 - NOT TESTED: Tailscale firewall simulation this update; local nft/iptables
   binaries are absent. CI retains the expanded two-client simulation.
+
+## Review6098859695: phone failure evidence and audit preparation
+
+Owner-reported2026-10-10 OPPO/Termux dig9.20.24 explicit Vynalth A queries got
+connection refused or5s timeouts. Same-phone1.1.1.1 control returned NOERROR,
+two dynamic A answers and76ms. Default DNS was unchanged. Evidence source is
+the linked owner review in ANDROID_DNS.md, not a new Codex live measurement.
+Transport failure is not REFUSED RCODE; no exact current root cause is confirmed.
+Earlier localhost-only listeners and overlay ping are historical. No repeated
+phone probes, Oracle SSH/SCP/commands, cleanup, service/timer or DNS changes
+were made. No new runtime PASS or baseline approval is claimed.
+
+Prepared ORACLE_READ_ONLY_AUDIT.md for separately authorized, existing mobile
+serial-console use, with minimal service/listener/syntax/localhost query and
+focused retained lab inventory. PHASE_B_APPROVAL_CHECKLIST.md separates audit,
+cleanup, readiness validation, exact approved service trial, mobile gate and
+settings gates. Config/21-file service manifest bytes remain unchanged; review
+checksums cover this documentation update. Live acceptance stays PENDING.

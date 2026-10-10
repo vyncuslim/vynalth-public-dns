@@ -8,7 +8,7 @@ Oracle command was issued after the stop; only existing SSH output was read.
 Further audit/cleanup/testing/deployment requires separate human approval.
 
 Product **Vynalth AI DNS â€” Vynalth AI Secure Recursive DNS Resolver**.
-Private server100.95.65.20; approved Windows clients100.85.132.14/32 and100.75.232.110/32;
+Private server100.95.65.20; Windows100.85.132.14/32 and OPPO Android100.75.232.110/32;
 informational hostname dns.vynalthai.com. Starting actual GitHub HEAD was
 9bc27af72a1a2229d440f025caf2aefa777a784e; it was safely fast-forwarded, not overwritten.
 
@@ -86,13 +86,21 @@ second collision. No stop/cancel/force/automatic retry is permitted.
 
 ## Actual testing and its limits
 
-Latest local Windows suite: **48 unit tests PASS**. Local WSL private-mount actual
+The earlier local Windows suite below had48 PASS. The current two-client
+candidate has **53 Windows and53 local WSL unit tests PASS**, plus actual local
+Unbound1.19.2 two-client and full runtime PASS. AppArmor enforcing is unavailable
+locally; current ARM/real timer remains NOT TESTED. See VALIDATION.md and
+[sequential audit/approval gates](PHASE_B_APPROVAL_CHECKLIST.md).
+
+Historical development record: local WSL private-mount actual
 rollback file tests: **4 cases PASS** (prior limits present/absent, marker present/
 absent), plus no-pending-snapshot callback PASS; service calls stubbed, nft
 prohibited. A same-second archive collision first failed and was fixed/tested.
 Python compilation, Bash syntax, YAML, rendered equality and21-file hashes PASS.
-Local WSL has no Unbound; latest full service/clock protocol is NOT runtime-tested
-there. CI account is billing-blocked, not PASS. Shellcheck absent/NOT TESTED.
+At that earlier point local WSL had no Unbound and Shellcheck was unavailable.
+Later local cached Unbound and Shellcheck tests passed as recorded in VALIDATION.md;
+this does not certify a full live ARM service/clock transaction. CI is billing-blocked.
+
 No Oracle rerun of post-stop changes. Root-owned installation/global deadline/
 archive fix therefore have local/contract evidence, not final live ARM acceptance.
 
