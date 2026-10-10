@@ -7,18 +7,18 @@ cleanup, retained paths/processes/units and uncertain current status. No new
 Oracle command was issued after the stop; only existing SSH output was read.
 Further audit/cleanup/testing/deployment requires separate human approval.
 
-Product **Vynalth AI DNS — Vynalth AI Secure Recursive DNS Resolver**.
-Private server100.95.65.20; approved Windows client100.85.132.14/32;
+Product **Vynalth AI DNS â€” Vynalth AI Secure Recursive DNS Resolver**.
+Private server100.95.65.20; approved Windows clients100.85.132.14/32 and100.75.232.110/32;
 informational hostname dns.vynalthai.com. Starting actual GitHub HEAD was
 9bc27af72a1a2229d440f025caf2aefa777a784e; it was safely fast-forwarded, not overwritten.
 
 ## Immutable identities
 
 Configuration SHA256:
-`e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b`.
+`d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 Candidate post-boot baseline SHA256:
 `cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b`.
-Current20-file [service manifest](plans/phase-b-service.sha256) and
+Current21-file [service manifest](plans/phase-b-service.sha256) and
 [review evidence manifest](plans/identity-review.sha256) use actual bytes.
 Old d2e4c258 config and pre-reboot baseline are historical, not authorization.
 See [full config](plans/phase-b-unbound.conf), [diff](plans/phase-b-unbound.diff),
@@ -90,7 +90,7 @@ Latest local Windows suite: **48 unit tests PASS**. Local WSL private-mount actu
 rollback file tests: **4 cases PASS** (prior limits present/absent, marker present/
 absent), plus no-pending-snapshot callback PASS; service calls stubbed, nft
 prohibited. A same-second archive collision first failed and was fixed/tested.
-Python compilation, Bash syntax, YAML, rendered equality and20-file hashes PASS.
+Python compilation, Bash syntax, YAML, rendered equality and21-file hashes PASS.
 Local WSL has no Unbound; latest full service/clock protocol is NOT runtime-tested
 there. CI account is billing-blocked, not PASS. Shellcheck absent/NOT TESTED.
 No Oracle rerun of post-stop changes. Root-owned installation/global deadline/
@@ -104,7 +104,7 @@ fallback, bounded local outage/recovery/restart/rate test. The platform choice
 was a deviation, even though functional results were recorded.
 
 Historical384MiB/64-task/1024FD enforcing/no-forwarder fixture cold cases returned
-valid/bogus results at6.008725–6.016141s, distinct warm hits measured. Independent
+valid/bogus results at6.008725â€“6.016141s, distinct warm hits measured. Independent
 recursion valid cloudflare.com UDP/TCP NOERROR+AD1.111152/0.521043s; bogus
 dnssec-failed.org SERVFAIL without AD2.468710/2.941162s. Timeout never counts as
 rejection success. Original live timeout exact cause remains uncertain;1900ms
@@ -138,7 +138,7 @@ queries. Windows live display/Tailscale DNS/second unapproved tailnet client:
 
 ## Blockers / approvals
 
-Human review of exact full commit/config/baseline/20-file bundle/procedure;
+Human review of exact full commit/config/baseline/21-file bundle/procedure;
 separate read-only impact audit, then itemized cleanup approval if wanted; new
 approved source staging and private trial only after that review. No old approval
 covers current code. Oracle repository was24aa2d0 when last checked, not staged.
@@ -146,3 +146,11 @@ No reboot, SSH/firewall/Tailscale/OCI/Spectrum/public DNS/OS-policy/paid resourc
 install.sh or Terraform authorization. Independent console/current recovery,
 latest live state/clock behavior and complete Windows acceptance remain unknown.
 RM0 is an unverified budget target. Keep PR Draft, stop at review, never merge.
+
+## Two-device development update
+
+The current candidate authorizes Windows 100.85.132.14/32 and OPPO Android
+100.75.232.110/32 for DNS only. Windows remains the sole SSH administrator.
+See ANDROID_DNS.md and the latest VALIDATION.md section. Previous live receipts
+are historical; they do not validate this modified configuration or approve
+the post-boot baseline. No Oracle access occurred during this update.

@@ -4,18 +4,18 @@
 changes are authorized.** See [impact/deviation inventory](LIVE_VM_IMPACT.md).
 All subsequent work is local/CI. Keep Draft PR1; never merge/deploy automatically.
 
-Vynalth AI DNS — Vynalth AI Secure Recursive DNS Resolver.
-Hostname dns.vynalthai.com, private server100.95.65.20, approved Windows
-client100.85.132.14/32. PTR20.65.95.100.in-addr.arpa. returns dns.vynalthai.com.
+Vynalth AI DNS â€” Vynalth AI Secure Recursive DNS Resolver.
+Hostname dns.vynalthai.com, private server100.95.65.20, approved Windows client100.85.132.14/32
+and OPPO A5 Pro Android client100.75.232.110/32. PTR20.65.95.100.in-addr.arpa. returns dns.vynalthai.com.
 Only this full owner is overridden, with no public DNS or broad reverse change.
 The label is informational, not authenticated server identity.
 
 ## Immutable candidate identities
 
-Config SHA256: `e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b`.
+Config SHA256: `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 Candidate post-boot baseline SHA256:
 `cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b`.
-The new20-file [manifest](plans/phase-b-service.sha256) pins config, baseline,
+The new21-file [manifest](plans/phase-b-service.sha256) pins config, baseline,
 source generator, deployment/rollback/confirmation, client controller and probe.
 Old d2e4c258 configuration and pre-reboot baseline are not current authorization.
 Original post-boot evidence bytes were verified against5e1b7207...bc4b3; baseline
@@ -82,7 +82,7 @@ unapproved tailnet client, Windows display and private live DNS remain PENDING.
 ## Future execution reference: NOT authorized, DO NOT RUN now
 
 First obtain explicit approval for actual full commit, new config hash, approved
-post-boot baseline,20-file bundle, protected procedure and source staging. Oracle
+post-boot baseline,21-file bundle, protected procedure and source staging. Oracle
 working HEAD was24aa2d0 at last check and was not staged to this candidate.
 Require clean matching GitHub/Windows/VM commits, all hashes, exact fresh60s
 two-sample baseline, idle maintenance/locks and >15min known schedule, NTP,
@@ -96,7 +96,7 @@ documented coordinator (the old unbounded PowerShell sequence is superseded):
 ```powershell
 python scripts/private-transaction.py --execute-authorized-private-trial `
   --commit '<ACTUAL_REVIEWED_FULL_COMMIT>' `
-  --config-sha256 e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b `
+  --config-sha256 d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634 `
   --baseline-sha256 cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b `
   --ssh-key 'C:\Users\lynne\Downloads\ssh-key-2026-10-09 (1).key' `
   --out artifacts/private-transaction.json
@@ -147,3 +147,26 @@ inventory; tenancy-wide free allocation, boot storage, public IP pricing,
 egress and current invoice have not been verified. This is not a RM0 guarantee.
 All additional paid resources and Spectrum functionality require pricing and
 explicit approval. No Terraform apply/destroy is part of this plan.
+
+## Android candidate integration (development only)
+
+Both reviewed hosts receive DNS access; Android receives no SSH authorization.
+The firewall file is a regenerated proposal only, never applied. Production
+connection refusal is consistent with the reported localhost-only listener;
+adding an ACL does not deploy that listener.
+
+The Windows protected transaction keeps its complete existing acceptance suite,
+independent 180-second timer and strictly less than 140-second global deadline,
+including command, transfer, network, verification and confirmation time.
+Android must remain idle during that first-use acceptance. After successful
+Windows confirmation, a separately authorized, DNS-only Android release gate
+uses ten one-shot queries, 32 seconds summed query caps and a 45-second total
+cap. It never confirms, stops a timer, retries or changes services. It cannot
+replace Windows acceptance. A failed mobile gate blocks release and system-wide
+DNS activation; any remedial production change requires separate authorization.
+See [Android instructions and recovery](ANDROID_DNS.md).
+
+The two-client private proposal may admit twice the aggregate per-client query
+budget. Existing queue, process and timeout bounds remain intact; 15000ms is
+not approved for public service. Fresh commit/config/bundle/baseline approval
+is mandatory. Earlier evidence for e20308ba describes the old configuration.

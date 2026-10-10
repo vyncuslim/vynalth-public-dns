@@ -14,7 +14,7 @@ import subprocess
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = 'e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b'
+CONFIG = 'd6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634'
 LOCKS = ['/var/lib/dpkg/lock', '/var/lib/dpkg/lock-frontend', '/var/lib/apt/lists/lock', '/var/cache/apt/archives/lock']
 
 

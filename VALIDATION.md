@@ -1,4 +1,4 @@
-# Validation evidence — 2026-10-10
+# Validation evidence â€” 2026-10-10
 
 Local verification completed on Windows Python 3.12 and WSL Ubuntu 24.04.4:
 
@@ -152,7 +152,7 @@ Existing A1 1 OCPU / 6 GiB shape and public IP are user-supplied inventory;
 no new resources/charges were incurred by these actions, but the existing bill
 and Always Free eligibility remain unverified. Monthly target is RM0.
 
-## Authorized service attempt: FAILED, rolled back — 2026-10-10 13:47 MYT
+## Authorized service attempt: FAILED, rolled back â€” 2026-10-10 13:47 MYT
 
 The user explicitly approved only commit
 `036575dfcf7ee1c9e5f0a15d8b7a4ab061b4ca97` and config SHA256
@@ -218,7 +218,7 @@ Structured sanitized transaction evidence is retained in
 GitHub runner billing lock are unchanged. A new attempt requires root-cause
 investigation, a complete acceptance plan and renewed human authorization.
 
-## DNSSEC timeout investigation — 2026-10-10, no production redeployment
+## DNSSEC timeout investigation â€” 2026-10-10, no production redeployment
 
 Starting HEAD was `ba6d457`. All work used the existing Windows OpenSSH client
 with strict host-key checking and the key filename only. Fresh SSH again proved
@@ -271,7 +271,7 @@ never needs Internet DNS. Each cold failure suppresses its warm case.
 | Real recursion, finite 15000ms, bogus UDP/TCP | SERVFAIL without AD at 6.070s / 2.584s | <1ms, hit increment 1 each |
 | Final rendered config, no experimental override, valid UDP/TCP | NOERROR + AD at 0.484s / 0.690s | <1ms, hit increment 1 each |
 | Final rendered config, no override, bogus UDP/TCP | SERVFAIL without AD at 2.664s / 2.404s | <1ms, hit increment 1 each |
-| Final rendered config, local delayed fixture UDP/TCP | valid and bogus expected replies at 6.009–6.016s | <1ms, hit increment 1 each |
+| Final rendered config, local delayed fixture UDP/TCP | valid and bogus expected replies at 6.009â€“6.016s | <1ms, hit increment 1 each |
 
 The controlled A/B changed the finite discard window with the same authority
 delay and validation setup. Extending client observation alone did not fix the
@@ -287,7 +287,7 @@ confirmed reproducible defect and a high-confidence explanation of the original
 failure. Original PID 13235 had verbosity zero and no packet capture, so the
 exact historical packet path/delay cannot be proved retrospectively. Upstream
 delay variance, packet loss and Tailscale-path latency in that one event remain
-possible contributors. The observed 2.4–6.1s bogus validation variability is not
+possible contributors. The observed 2.4â€“6.1s bogus validation variability is not
 a service latency guarantee. Warm success does not erase a cold failure.
 
 ### Read-only production and resource evidence
@@ -360,7 +360,7 @@ before broader exposure. RM0 remains a target, existing billing unverified;
 no resources or paid services were created. GitHub Actions remain subject to
 the account billing lock; no CI execution success is claimed.
 
-## Second approved private trial — ABORTED BEFORE DEPLOYMENT, 2026-10-10
+## Second approved private trial â€” ABORTED BEFORE DEPLOYMENT, 2026-10-10
 
 The user approved only `61a9ad8c342717d10974b6de1e274a0e180d09e6` and config
 SHA256 `d2e4c258f750db0e3b42a32b12bc690ecf43743500d90e099ee2628a022c57c7`.
@@ -530,7 +530,7 @@ Real enforcing runtime passed exact PTR UDP/TCP, unrelated reverse with/without
 identity, A/AAAA, valid/bogus/CD DNSSEC, NXDOMAIN, approved-loopback/unapproved
 A+PTR REFUSED, cache, rebinding, truncation/TCP fallback, local outage/recovery,
 child restart and bounded40-packet loopback rate limiting. Local6s signed/bogus
-UDP/TCP cold cases passed at6.008725–6.016141s with finite15000ms; distinct warm
+UDP/TCP cold cases passed at6.008725â€“6.016141s with finite15000ms; distinct warm
 cases passed with one measured hit each. Fixture and low-volume recursive
 children used384MiB/64-task scopes,1024 descriptors, enforcing profiles and no
 forwarders. Valid cloudflare.com NOERROR+AD UDP/TCP1.111152/0.521043s; bogus
@@ -611,3 +611,39 @@ validation. Original configuration content/hash e20308ba...d6c5b1b is unchanged.
 Local WSL has no Unbound; latest full timing/service ARM runtime is NOT TESTED.
 Windows live acceptance and second tailnet client remain PENDING. CI billing
 lock and absent Shellcheck are NOT PASS. No new live status/recovery guarantee.
+
+## Android integration: local-only validation
+
+Starting branch HEAD df070d3466c64c7dde68f69304532dfffd1ba51f was verified
+against origin before editing. No Oracle connection or experiment was made.
+The earlier live laboratory boundary deviation remains documented in
+LIVE_VM_IMPACT.md; current residues and production impact remain unknown.
+
+- PASS: 53 unit tests on Windows and 53 on local WSL Linux.
+- PASS: actual local Unbound 1.19.2, namespace without a default route, exact
+  synthetic Windows and Android source IPs: UDP/TCP A/AAAA, exact PTR, unrelated
+  reverse NXDOMAIN, valid DNSSEC NOERROR+AD, bogus SERVFAIL, CD diagnostic.
+  Timeout is never counted as rejection. Both sources measured two warm cache
+  hits. Eight unknown-tailnet/public-source probes returned REFUSED.
+- PASS: actual rollback file restoration in four prior-file/marker variants
+  plus no-snapshot no-op, using strict service shims and no firewall calls.
+- PASS: Shellcheck of deploy/confirm/rollback and local rollback harness.
+- NOT TESTED: enforcing AppArmor locally (kernel unavailable), new ARM runtime,
+  fresh real 180-second timer, real Tailscale path and system-wide phone DNS.
+  Historical live tests do not validate this new candidate.
+- PENDING LIVE ACCEPTANCE: Windows and OPPO hardware, production private
+  listeners, fresh baseline/recovery/firewall review. CI requires AppArmor;
+  local success does not imply CI passed.
+
+Raw current evidence: plans/integration/android-local-runtime.json,
+android-linux-unit.txt, android-rollback.txt and android-shellcheck.txt.
+The Windows transaction is unchanged at strictly <140s total and 180s rollback.
+The ten-query mobile release gate is separate, <=45s, fail-fast and DNS-only.
+No deployment or Tailscale DNS Override is authorized by these results.
+
+- PASS: full local_runtime.py in a local network namespace, including large
+  answer truncation/TCP fallback, rebinding, authority outage/recovery, isolated
+  restart and bounded rate limits. Raw android-full-runtime.txt is normalized
+  to remove the proc attribute NUL terminator; original remains local.
+- NOT TESTED: Tailscale firewall simulation this update; local nft/iptables
+  binaries are absent. CI retains the expanded two-client simulation.

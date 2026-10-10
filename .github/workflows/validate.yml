@@ -17,6 +17,7 @@ jobs:
       - run: sudo install -o unbound -g unbound /usr/share/dns/root.key /var/lib/unbound/root.key && unbound-checkconf artifacts/rendered/unbound.conf
       - run: shellcheck scripts/*.sh tests/*.sh
       - run: sudo $(which python) tests/local_runtime.py --require-apparmor
+      - run: sudo $(which python) tests/two_client_runtime.py --require-apparmor --out artifacts/two-client-runtime.json
       - run: sudo $(which python) tests/isolated_dnssec.py --mode fixture --discard-timeout 15000 --legacy-comparison --require-apparmor --out artifacts/dnssec-fixture.json
       - run: sudo bash tests/firewall_lab.sh
       - run: sudo bash tests/tailscale_firewall_lab.sh

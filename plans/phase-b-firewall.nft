@@ -12,5 +12,7 @@ table inet vynalth_dns {
   iifname "tailscale0" ip saddr 100.85.132.14/32 tcp dport 22 ct state new accept
   iifname "tailscale0" ip saddr 100.85.132.14/32 ip daddr 100.95.65.20 udp dport 53 limit rate 20/second burst 40 packets accept
   iifname "tailscale0" ip saddr 100.85.132.14/32 ip daddr 100.95.65.20 tcp dport 53 limit rate 20/second burst 40 packets accept
+  iifname "tailscale0" ip saddr 100.75.232.110/32 ip daddr 100.95.65.20 udp dport 53 limit rate 20/second burst 40 packets accept
+  iifname "tailscale0" ip saddr 100.75.232.110/32 ip daddr 100.95.65.20 tcp dport 53 limit rate 20/second burst 40 packets accept
  }
 }

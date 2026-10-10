@@ -26,6 +26,7 @@ ip link set tail0 netns tail
 ip addr add 100.95.65.20/10 dev tailscale0
 ip link set tailscale0 up
 ip netns exec tail ip addr add 100.85.132.14/10 dev tail0
+ip netns exec tail ip addr add 100.75.232.110/32 dev tail0
 ip netns exec tail ip link set tail0 up
 ip netns exec tail ip link set lo up
 ip link add enp0s6 type veth peer name physical0
@@ -54,25 +55,35 @@ python3 -m http.server 22 --bind 100.95.65.20 > /dev/null 2>&1 &
 ssh_pid=$!
 sleep 1
 for transport in +notcp +tcp; do
-  [[ $(ip netns exec tail dig @100.95.65.20 a.fixture.test A "$transport" +short +time=1 +tries=1) == 203.0.113.7 ]]
+  for source in 100.85.132.14 100.75.232.110; do
+    [[ $(ip netns exec tail dig -b "$source" @100.95.65.20 a.fixture.test A "$transport" +short +time=1 +tries=1) == 203.0.113.7 ]]
+  done
   # Correct IP on a physical interface must not impersonate the tailnet client.
   if ip netns exec physical dig -b 100.85.132.14 @100.95.65.20 a.fixture.test A "$transport" +time=1 +tries=1 >/dev/null 2>&1; then
     echo 'FAIL physical source spoof accepted'; exit 1
   fi
 done
 ip netns exec tail python3 -c "import socket; socket.create_connection(('100.95.65.20',22),timeout=1).close()"
+ip netns exec tail python3 -c "import socket
+s=socket.socket(); s.settimeout(1); s.bind(('100.75.232.110',0))
+try:
+    s.connect(('100.95.65.20',22))
+except (TimeoutError,OSError):
+    pass
+else:
+    raise SystemExit('FAIL Android DNS ACL granted SSH')"
 ip netns exec tail ip addr del 100.85.132.14/10 dev tail0
 ip netns exec tail ip addr add 100.85.132.15/10 dev tail0
 for transport in +notcp +tcp; do
-  if ip netns exec tail dig @100.95.65.20 a.fixture.test A "$transport" +time=1 +tries=1 >/dev/null 2>&1; then
+  if ip netns exec tail dig -b 100.85.132.15 @100.95.65.20 a.fixture.test A "$transport" +time=1 +tries=1 >/dev/null 2>&1; then
     echo 'FAIL unapproved tailnet DNS accepted'; exit 1
   fi
 done
 ip netns exec tail python3 -c "import socket
 try:
-    socket.create_connection(('100.95.65.20',22),timeout=1)
+    socket.create_connection(('100.95.65.20',22),timeout=1,source_address=('100.85.132.15',0))
 except (TimeoutError, OSError):
     pass
 else:
     raise SystemExit('FAIL unapproved tailnet SSH accepted')"
-echo 'PASS simulated Tailscale chain ordering: approved DNS/SSH, physical spoof and unapproved tailnet denied'
+echo 'PASS simulated Tailscale ordering: Windows+Android DNS, Windows-only SSH, physical spoof and unknown tailnet denied'

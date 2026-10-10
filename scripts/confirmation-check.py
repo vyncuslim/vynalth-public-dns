@@ -13,6 +13,7 @@ from acceptance import case_plan
 
 def validate(receipt, transaction, now, boot_id, config_hash, pid):
     if (receipt.get('pass') is not True or receipt.get('error') is not None
+            or receipt.get('scope') != 'windows-protected-transaction'
             or receipt.get('expected_config_sha256') != transaction['config_sha256']
             or config_hash != transaction['config_sha256'] or boot_id != transaction['boot_id']
             or not 0 <= now - transaction['started_monotonic'] < 140
@@ -20,6 +21,8 @@ def validate(receipt, transaction, now, boot_id, config_hash, pid):
             or not 0 <= receipt['elapsed_seconds'] <= 100
             or not receipt.get('warm_cache_hit_delta', 0) >= 4):
         raise ValueError('Receipt, config, boot or transaction deadline invalid')
+    # Confirmation attests the existing bounded Windows transaction only.
+    # It cannot certify Android or authorize system-wide/tailnet DNS activation.
     expected = [('20.65.95.100.in-addr.arpa.', 'PTR', tcp, 'NOERROR', False, False,
                  'private-server-identity', 2) for tcp in (False, True)]
     for scenario, limit in [('dnssec-cold', 15), ('dnssec-warm', 2), ('standard', 5), ('diagnostic-cd', 5)]:

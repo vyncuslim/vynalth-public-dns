@@ -1,6 +1,6 @@
---- /etc/unbound/unbound.conf (active)
-+++ plans/phase-b-unbound.conf (candidate)
-@@ -1,10 +1,66 @@
+--- /etc/unbound/unbound.conf (previously captured baseline; not re-read)
++++ plans/phase-b-unbound.conf (two-client candidate)
+@@ -1,10 +1,67 @@
 -# Unbound configuration file for Debian.
 -#
 -# See the unbound.conf(5) man page.
@@ -75,5 +75,6 @@
 +    do-ip6: no
 +    ip-ratelimit: 20
 +    access-control: 100.85.132.14/32 allow
++    access-control: 100.75.232.110/32 allow
 +    local-zone: "20.65.95.100.in-addr.arpa." static
 +    local-data: "20.65.95.100.in-addr.arpa. 3600 IN PTR dns.vynalthai.com."

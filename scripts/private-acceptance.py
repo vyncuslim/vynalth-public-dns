@@ -1,4 +1,4 @@
-"""Windows one-shot private acceptance. Does not deploy, confirm or roll back.
+"""Windows protected-transaction acceptance; Android release gate is separate.
 
 SSH key is passed only as a filename to OpenSSH; this program never reads it.
 The operator must immediately roll back on a nonzero result or missing receipt.
@@ -54,7 +54,9 @@ def validate_state(state, expected_hash):
 
 def accept(args, inspect=inspect_remote, query=check_query, clock=time.monotonic):
     receipt = {'pass': False, 'expected_config_sha256': args.config_sha256,
-               'before': None, 'after': None, 'queries': [], 'error': None}
+               'before': None, 'after': None, 'queries': [], 'error': None,
+               'scope': 'windows-protected-transaction',
+               'android_live_acceptance': 'PENDING LIVE ACCEPTANCE; separate bounded release gate'}
     started = clock()
 
     def budget(seconds):

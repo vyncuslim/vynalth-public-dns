@@ -1,6 +1,6 @@
 # Vynalth AI DNS
 
-**Vynalth AI Secure Recursive DNS Resolver** — `dns.vynalthai.com`.
+**Vynalth AI Secure Recursive DNS Resolver** â€” `dns.vynalthai.com`.
 The private candidate includes single-owner PTR identity, DNSSEC and checked
 rollback/confirmation gates. See [post-boot candidate review](POST_BOOT_REVIEW.md).
 It has not been deployed; every live trial requires separate exact authorization.
@@ -39,3 +39,11 @@ service-only procedure rather than the full installer on this Tailscale-managed 
 This is not yet a replacement for 1.1.1.1: no verified static edge IP entitlement,
 SLA, failover, DDoS guarantee or production acceptance. Conventional OS DNS clients
 need stable IP addresses; `dns.vynalthai.com` alone is insufficient.
+
+## Android private candidate
+
+See [Android setup and recovery](ANDROID_DNS.md). Both client ACLs are
+covered by `tests/two_client_runtime.py` in a local network namespace using
+synthetic exact source addresses and a signed local authority. Run as root
+on an isolated Linux test host; CI requires `--require-apparmor`. No live
+phone, Tailscale tunnel or public recursion is certified by this test.

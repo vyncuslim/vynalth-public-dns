@@ -1,0 +1,5 @@
+PASS actual file restore: prior=present marker=present; service calls stubbed; nft prohibited
+PASS actual file restore: prior=present marker=absent; service calls stubbed; nft prohibited
+PASS actual file restore: prior=absent marker=present; service calls stubbed; nft prohibited
+PASS actual file restore: prior=absent marker=absent; service calls stubbed; nft prohibited
+PASS no pending snapshot: timer callback does not touch service

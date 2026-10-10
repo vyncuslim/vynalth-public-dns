@@ -107,3 +107,11 @@ strict OS/service shims and synthetic receipts; it never restarts production.
 `timer_guard_lab.py` tests harmless independent timer readiness; the existing
 `service_rollback_lab.sh` separately tests real180s file restoration.
 See [POST_BOOT_REVIEW.md](../POST_BOOT_REVIEW.md) for commands and limitations.
+
+## Android private candidate
+
+See [Android setup and recovery](../ANDROID_DNS.md). Both client ACLs are
+covered by `tests/two_client_runtime.py` in a local network namespace using
+synthetic exact source addresses and a signed local authority. Run as root
+on an isolated Linux test host; CI requires `--require-apparmor`. No live
+phone, Tailscale tunnel or public recursion is certified by this test.

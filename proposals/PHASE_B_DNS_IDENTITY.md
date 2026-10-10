@@ -1,6 +1,6 @@
 # Phase B private DNS identity: implemented candidate, not deployed
 
-Product: **Vynalth AI DNS — Vynalth AI Secure Recursive DNS Resolver**.
+Product: **Vynalth AI DNS â€” Vynalth AI Secure Recursive DNS Resolver**.
 Hostname **dns.vynalthai.com**, private server100.95.65.20 and approved Windows
 client100.85.132.14/32 remain unchanged. See [current candidate review](../POST_BOOT_REVIEW.md).
 
@@ -12,7 +12,7 @@ The nslookup Server label is informational and client-dependent, not authenticat
 identity. Keep hide-identity/hide-version; do not expose CHAOS identity/version.
 
 New config SHA256:
-`e20308ba789cd7aebeb0a4e009c5df120a0523ebf9a8891176a8b67ddd6c5b1b`.
+`d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 The old d2e4c258 hash did not cover PTR and is historical. The updated18-file
 manifest covers the full config and integrated timer/confirmation/baseline guards.
 Default-refuse ACLs, private listeners, DNSSEC/iterator/root hints, AppArmor,
@@ -42,3 +42,11 @@ acceptance and explicit changed timer/confirmation design. Independent180s
 rollback before writes,100s acceptance, full PASS and strict<140s confirmation
 remain mandatory. No deployment, merge, reload, restart, reboot, paid resource
 or public DNS action is authorized by this document.
+
+## Two-device development update
+
+The current candidate authorizes Windows 100.85.132.14/32 and OPPO Android
+100.75.232.110/32 for DNS only. Windows remains the sole SSH administrator.
+See ANDROID_DNS.md and the latest VALIDATION.md section. Previous live receipts
+are historical; they do not validate this modified configuration or approve
+the post-boot baseline. No Oracle access occurred during this update.

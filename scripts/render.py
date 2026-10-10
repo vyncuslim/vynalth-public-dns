@@ -23,6 +23,8 @@ def render(config):
     if addr.version == 6 and not ipv6:
         raise ValueError("IPv6 listener requires ipv6=true")
     clients = [host_network(x) for x in config.get("clients", [])]
+    if len(clients) != len(set(clients)):
+        raise ValueError('Duplicate DNS client ACL')
     ssh = [host_network(x) for x in config.get("ssh_clients", [])]
     if any(x.version == 6 for x in clients + ssh) and not ipv6:
         raise ValueError("IPv6 clients require ipv6=true")
@@ -63,6 +65,8 @@ def render(config):
             raise ValueError('DNS identity requires the matching private listener and reviewed hostname')
         if str(addr) != '100.95.65.20':
             raise ValueError('DNS identity is only approved for the Vynalth private server')
+        if {str(client) for client in clients} != {'100.85.132.14/32', '100.75.232.110/32'}:
+            raise ValueError('Private identity candidate must retain exactly the reviewed Windows/Android DNS clients')
         owner = addr.reverse_pointer + '.'
         conf += f'    local-zone: "{owner}" static\n'
         conf += f'    local-data: "{owner} 3600 IN PTR {identity["hostname"]}"\n'

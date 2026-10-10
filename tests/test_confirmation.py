@@ -25,7 +25,7 @@ def receipt_fixture():
     after = copy.deepcopy(state)
     after['local_refused'] = [{'pass': True, 'response': {'rcode': 'REFUSED'}, 'attempts': 1,
                               'transport': transport} for transport in ('UDP', 'TCP')]
-    return {'pass': True, 'error': None, 'expected_config_sha256': 'a'*64,
+    return {'pass': True, 'error': None, 'scope': 'windows-protected-transaction', 'expected_config_sha256': 'a'*64,
             'elapsed_seconds': 30, 'warm_cache_hit_delta': 4, 'queries': rows,
             'before': state, 'after': after}
 
