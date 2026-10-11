@@ -32,3 +32,22 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(code,1)
         self.assertFalse(result['capture_complete'])
         self.assertFalse(result['deployment_ready'])
+
+    def test_existing_capture_is_preserved_before_any_host_read(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out=Path(directory)/'capture.json'; out.write_bytes(b'original evidence\n')
+            argv=['readiness','--capture','--interval','60','--ssh-connection','test','--out',str(out)]
+            with patch('sys.argv',argv),patch.object(capture,'sample') as sample:
+                with self.assertRaises(SystemExit) as status: capture.main()
+                self.assertEqual(status.exception.code,2)
+                sample.assert_not_called()
+            self.assertEqual(out.read_bytes(),b'original evidence\n')
+
+    def test_capture_does_not_create_unapproved_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            parent=Path(directory)/'not-approved'; out=parent/'capture.json'
+            argv=['readiness','--capture','--ssh-connection','test','--out',str(out)]
+            with patch('sys.argv',argv),patch.object(capture,'sample') as sample:
+                with self.assertRaises(SystemExit) as status: capture.main()
+                self.assertEqual(status.exception.code,2); sample.assert_not_called()
+            self.assertFalse(parent.exists())

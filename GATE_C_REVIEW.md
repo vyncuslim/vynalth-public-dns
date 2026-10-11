@@ -1,10 +1,12 @@
 # Gate C independent validation package — no Oracle execution
 
-Use an existing, separately authorized **independent Ubuntu24.04 aarch64 lab**.
+Completed on the authorized standard **ubuntu-24.04-arm hosted runner**.
+No additional physical ARM lab is requested; commands below are reproduction references.
 No OCI provisioning, cloud charges, package/OS updates or production access are
-performed by this package. Current available test host is local WSL x86_64 with
-systemd and cached Unbound1.19.2, but no enforcing AppArmor. Actual ARM/AppArmor
-candidate validation is **NOT TESTED**. Emulation/x86 success is not a substitute.
+performed by this package. Native ubuntu-24.04-arm hosted CI is now verified PASS for aarch64/Ubuntu24.04,
+Unbound1.19.2-1ubuntu3.10, actual unbound(enforce), isolated cgroup/service
+restoration and real180s timers. See ARM_CI_RESULTS.md. Earlier WSL results were
+x86-only and are retained as history, not substituted for these native receipts.
 
 ## Reproducible ARM/enforcement gate
 
@@ -38,10 +40,10 @@ active protection or recovery data. New files stay in lab temp directories and
 its artifacts; real timer units have unique vynalth-local-gate-c names. Scoped
 cleanup covers only those created lab units/files, not Oracle residue/backups.
 
-Systemd MemoryMax384M/TasksMax64/LimitNOFILE1024 must additionally be exercised
-with an actual isolated Unbound service/cgroup on that ARM host, reading the
-unit/cgroup/proc limits and enforcing label. Existing DNS fixture rlimit evidence
-and shell shims are not a full systemd-resource recovery proof. Tailscale SSH
+Systemd MemoryMax384M/TasksMax64/LimitNOFILE1024 has been verified with the actual
+isolated Unbound service/cgroup, reading unit/cgroup/proc limits and enforcing
+label; actual original limits were restored. See ARM_CI_RESULTS.md. Earlier
+rlimit/shim-only evidence was insufficient on its own. Tailscale SSH
 recovery/continuity and complete networking remain separate live/private gates.
 No actual Tailscale administration or Android DNS settings are part of this lab.
 
@@ -104,9 +106,9 @@ No system-wide override, public listener or paid infrastructure is authorized.
 
 See ARM_HOSTED_CI.md. Owner now authorizes the independent ubuntu-24.04-arm
 standard public-repository job; no separate physical machine is required. Existing
-tests remain. Architecture/profile/service/cgroup/timer/Unbound results stay NOT
-EXECUTED/PENDING until actual runner evidence exists. CI billing lock is separate
-from code/runtime failures. No paid/OCI/self-hosted fallback or billing/VPN change.
+tests remain. Architecture/profile/isolated service/cgroup/timer/Unbound results are now PASS
+with native hosted receipts. Earlier billing-lock observations were historical,
+not code/runtime failures; why scheduling resumed remains unknown. No paid/OCI/self-hosted fallback or billing/VPN change.
 Production recovery and fresh baseline/Windows/Android approvals remain separate.
 
 ## Actual hosted native ARM evidence supersedes preparation status
@@ -121,3 +123,13 @@ are historical: scheduling resumed without any Codex billing modification. The
 retained x86 job's missing /run/sshd runtime dependency is fixed in f4a6f15; its
 results are separate from native ARM success. Do not claim all CI or production
 readiness solely from these ARM receipts.
+
+## Current Gate D review
+
+See GATE_D_REVIEW.md and the superseding FRESH_BASELINE_APPROVAL.md for explicit
+R read-only inspection, S staging, C one-file two-sample capture and D deployment
+permissions. Native Gate C evidence is complete in its CI scope; no separate
+physical ARM lab is requested. Production recovery/UID/paths, residual dependencies,
+same-method policies/OCI/private path, anchor health, original DNSSEC timeout and
+fresh approved baseline/real Windows/Android acceptance remain blockers. No Oracle
+access occurred; next requested permission is R only, not staging or capture.

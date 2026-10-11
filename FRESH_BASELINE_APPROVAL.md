@@ -1,64 +1,123 @@
-# Fresh two-sample baseline: future separately approved collection only
+# Fresh Oracle baseline: separate permissions, no execution yet
 
-Owner Gate A findings are reconciled in GATE_A_RECONCILIATION.md. Existing pinned
-baseline is historical/review-only; no PID/hash substitution or automatic approval.
-No command here has been executed on Oracle by Codex. Gate C and unresolved
-production DNSSEC timeout are not cleared by collecting a baseline.
+Native ARM64/AppArmor/cgroup/180s CI passed; no new physical ARM lab is needed.
+See GATE_D_REVIEW.md. This is preparation only: Oracle was not accessed. The old
+cbb29c44 baseline is historical/review-only, never silently reused or refreshed.
 
-## Exact proposed authorization scope
+| Permission | Precisely allowed effects | Not included |
+|---|---|---|
+| R inspection | Existing pinned Windows private SSH and listed remote reads; stdout/local recording | Remote writes, staging, collector, probes/tests or deployment |
+| S source staging | Exact reviewed commit in existing /home/ubuntu/vynalth-public-dns after clean-state review and explicit git-operation approval | Active service/config, packages/venv, collector, cleanup |
+| C evidence capture | Reviewed code, two samples60s apart, exactly one new file in an existing approved artifacts directory, one local retrieval/hash check | Baseline approval/overwrite, DNS probes/cache/anchor changes, restart/timers/network |
+| D private trial | Future exact commit/config/service/fresh baseline protected Windows transaction | Granted by none of R/S/C; Android and DNS settings separate |
 
-Approve a Windows authenticated read-only SSH collection using its existing key
-and strict host pin, retaining the existing session and console recovery. First
-review/stage the exact full commit and complete source/config/manifest bundle to
-`/home/ubuntu/vynalth-public-dns` under **separate staging approval**. Staging and
-new evidence-file writes/transfers are writes and must be explicitly authorized;
-this request is not implicit permission for them. Never run install/deploy/confirm,
-start timers/tests, change active services, delete residue or modify networking.
+## Next request: approve R only
 
-After those prerequisites are approved and available, the capture-only command
-reads host state twice60s apart and writes one **new unique evidence file only**:
+One retained Windows OpenSSH session to ubuntu@100.95.65.20 using the existing
+local key filename and strict existing host-key pin. No key/password/token
+contents requested. Precisely these stdout-only commands, once, no script upload:
+
+```sh
+date -u
+hostname
+id -un
+uname -m
+uname -r
+printf '%s\n' "$SSH_CONNECTION"
+cat /proc/sys/kernel/random/boot_id
+GIT_OPTIONAL_LOCKS=0 git -C /home/ubuntu/vynalth-public-dns rev-parse HEAD
+GIT_OPTIONAL_LOCKS=0 git -C /home/ubuntu/vynalth-public-dns status --porcelain
+readlink -f /home/ubuntu/vynalth-public-dns/artifacts
+stat -c '%F %U:%G %a %n' /home/ubuntu/vynalth-public-dns/artifacts
+test -d /home/ubuntu/vynalth-public-dns/artifacts; printf 'artifacts-directory-exists=%s\n' "$?"
+/usr/bin/python3 --version
+systemctl show unbound -p MainPID -p InvocationID -p ExecMainStartTimestampMonotonic -p ActiveState -p SubState -p NRestarts -p DropInPaths
+sudo -n ss -lntup '( sport = :53 )'
+sudo -n sha256sum /etc/unbound/unbound.conf
+sudo -n find /etc/unbound/unbound.conf.d -maxdepth 1 -name '*.conf' -type f -exec sha256sum {} \;
+tailscale ip -4
+systemctl is-active ssh tailscaled
+systemctl show vynalth-rollback.timer vynalth-rollback.service -p LoadState -p ActiveState -p SubState
+sudo -n test ! -e /var/lib/vynalth-dns/rollback; printf 'pending-snapshot-absent=%s\n' "$?"
+```
+
+Test exit0 means condition true; errors/inaccessible fields are not PASS. Verify
+source100.85.132.14, destination100.95.65.20 and expected host/user. Wrong host,
+dirty checkout, unexpected listeners or active protection: STOP before writes.
+GIT_OPTIONAL_LOCKS=0 avoids optional index refresh writes. Routine SSH/sudo audit
+records may occur; read-only is not zero incidental logging. Retain existing
+session/console recovery; no new console connection or management test disruption.
+
+R approval text: "Approve only scope R of FRESH_BASELINE_APPROVAL.md at the full
+reviewed PR commit: one existing Windows private SSH session and listed stdout
+reads/local recording; no remote files, staging, collector, DNS probe/test, timer,
+cleanup, restart, network change or deployment."
+
+## S: separately approve staging after actual R results
+
+Review actual VM HEAD/clean state and permissions. Approve exact fetch/checkout
+operations to a named path/commit; do not reset, clean, overwrite dirty work or
+assume a branch. Verify resulting HEAD and21-file service/review/Gate C checksums.
+Do not run an old checkout's collector. Collector uses Python stdlib and existing
+OS commands; no package/OS/venv setup is required for C. Missing prerequisites
+require a new itemized scope, not automatic bootstrap. S is not C or D.
+
+## C: exact minimal two-sample capture after S review
+
+Approve the literal proposed filename below (or a newly reviewed unique name) and one local
+retrieval. Parent directory must already exist, resolve within the approved checkout, and have reviewed ownership/mode; unexpected symlinks STOP. Exclusive creation rejects an
+existing file/symlink or absent parent before any sample, with no automatic retry.
+One new evidence file is updated through this run; failures retain partial data.
+No other remote files/directories are created.60s plus bounded command time is
+preparation, outside the future<140s trial, never resetting its T0.
 
 ```sh
 cd /home/ubuntu/vynalth-public-dns
-git rev-parse HEAD
-git status --porcelain
+test "$(GIT_OPTIONAL_LOCKS=0 git rev-parse HEAD)" = '<APPROVED_FULL_COMMIT>'
+test -z "$(GIT_OPTIONAL_LOCKS=0 git status --porcelain)"
 sha256sum --check plans/phase-b-service.sha256
-sudo -n .venv/bin/python scripts/post-maintenance-readiness.py --capture --interval 60 --ssh-connection "$SSH_CONNECTION" --out artifacts/fresh-baseline-<APPROVED_UNIQUE_ID>.json
-sha256sum artifacts/fresh-baseline-<APPROVED_UNIQUE_ID>.json
+sha256sum --check plans/identity-review.sha256
+sha256sum --check plans/gate-c-review.sha256
+systemctl show vynalth-rollback.timer vynalth-rollback.service -p LoadState -p ActiveState -p SubState
+sudo -n /usr/bin/python3 scripts/post-maintenance-readiness.py --capture --interval 60 --ssh-connection "$SSH_CONNECTION" --out artifacts/fresh-baseline-gate-d-20261011-01.json
+systemctl show vynalth-rollback.timer vynalth-rollback.service -p LoadState -p ActiveState -p SubState
+sudo -n sha256sum artifacts/fresh-baseline-gate-d-20261011-01.json
 ```
 
-Approve the exact output path, staged commit, key filename-only use, read commands
-and one local retrieval/hash verification. No private key contents are requested.
-Do not overwrite the original capture or baseline. Capture success has
-`capture_complete=true` and **deployment_ready=false**; it is never authorization.
-All read failures are retained; no automatic repeat or silent baseline refresh.
+Execute each once and STOP on a nonzero result, not an unconditional command
+chain. Verify source/commit/hashes again immediately before C. Capture success
+means capture_complete=true and deployment_ready=false, never human approval.
+Do not overwrite original baseline/capture or retry a partial failed capture.
 
-## Human review and pinning, on the local review checkout
+## Evidence PASS / mandatory STOP
 
-Check both UTC timestamps and actual separation>=60s, equality of fingerprints,
-boot/kernel/PID/invocation/start time, configs/includes/drop-ins/package versions,
-AppArmor enforcing label, root hints and captured root-anchor SHA/status metadata,
-effective SSH/firewall normalization, Tailscale address and source connection.
-Compare full root-anchor/status records manually: mutable anchor metadata is not
-part of the static fingerprint, so equal fingerprints alone do not prove anchor
-health. Verify trusted keys/status and reject uncertain root validation.
+PASS means two complete samples>=60s apart with equal static fingerprints and no
+operational failure: boot/kernel/unit PID/invocation/start, includes/drop-ins,
+packages, enforcing profile, original loopback listeners, hints, anchor/status,
+same-method policies, Tailscale/source, no maintenance/locks/active protection,
+known schedule>15min, NTP=yes, reboot=no and reviewed RAM/disk/recovery evidence.
 
-Review maintenance services/processes/package locks, known timer schedule>15min,
-NTP, reboot flag, disk/RAM, SSH/Tailscale boot activation, pending snapshot and
-active rollback unit/service. Keep owner firewall589768... labeled method-unknown;
-do not treat it as interchangeable with the script's normalized digest. OCI
-ingress/private53 reachability and worst-case management recovery are separate.
+Anchor metadata is mutable and outside the static fingerprint: compare trusted
+keys/VALID status/refresh manually. Hash/equal samples alone do not prove DNSSEC
+health. Owner firewall589768... pipeline remains unknown; do not compare unlike
+digests as incidents. Full host/OCI/private policy/path still needs separate
+review. Collector does not resolve the original production bogus15s timeout.
 
-STOP for missing samples/fields, mismatched source/hash, new PID/boot/file/policy
-drift, non-enforcing profile, invalid anchor, clock/reboot/maintenance/schedule
-uncertainty, unknown active residue/transaction or failed recovery. Do not disable
-updates, clear cache, rewrite the sample, broaden ACLs or substitute old values.
+STOP for missing fields, inaccessible commands, source/hash/drift, unexpected
+boot/PID/config/policy needing review, invalid/uncertain anchor, non-enforcing
+profile, clock/reboot/maintenance/schedule, pending rollback or unresolved active
+residue/recovery. Never substitute PID/hash, waive checks, disable updates,
+flush caches, rewrite evidence or broaden permission to obtain PASS.
 
-Only after explicit review approval, create a **new local review-only baseline**
-from the accepted first fingerprint, with source capture SHA256, UTC time and
-`review_only=true`, `human_approval_required=true`. Preserve the full raw capture.
-Recalculate the baseline, service and review manifests; commit/push for another
-exact review. No baseline material is written back to Oracle until separately
-approved staging. Changed bundles invalidate older approvals. Final trial needs
-a fresh exact commit/config/bundle/baseline authorization and unchanged preflight;
-the collector never starts or confirms the trial.
+Only after explicit human review, make a new LOCAL review-only baseline from
+the first accepted fingerprint, raw capture SHA/UTC and review_only=true plus
+human_approval_required=true. Preserve both full samples. Recompute service/
+baseline/review hashes and commit for another exact approval. New baseline/source
+goes back to Oracle only with another S approval. D still requires exact then-
+current commit/config/bundle/fresh baseline, unchanged preflight,180s protection
+and strictly<140s complete Windows acceptance/confirmation. No D approval here.
+
+The separate pre/post service-property reads in C are recorded on local stdout;
+both timer and recovery service must be inactive (or not-found/inactive). Active,
+activating, failed or unknown states STOP. Collector JSON alone does not capture
+the recovery service state, so do not infer this PASS from its timer field alone.

@@ -797,3 +797,20 @@ generated with LF, while original runner payload bytes are preserved using
 The isolated service fixture uses a root test identity with enforcing Unbound
 profile; exact production unbound-user permissions/paths and management continuity
 remain separate acceptance gates. No production recovery or Oracle/VPN action.
+
+## Gate D review preparation — no Oracle execution
+
+Starting local/origin6f7a15a; four native/x86 push/PR checks SUCCESS independently
+re-read via GitHub API. Hardware/enforcing/cgroup/real180s findings are reconciled
+as completed isolated CI evidence; exact production recovery is still pending.
+No obsolete physical ARM lab request.
+
+Confirmed safety fix: capture previously overwrote existing --out evidence and
+created missing parents. Capture now uses exclusive creation, requires an existing
+parent, keeps one open descriptor and rejects existing file/symlink before any
+host sample. Tests preserve sentinel bytes and show no sample/directory creation.
+70 local unit tests PASS; compilation/static/integrity verified separately.
+R/S/C/D scopes and exact one-file60s procedure/STOP rules are in the rewritten
+FRESH_BASELINE_APPROVAL.md; staging is not read-only, evidence writes are not
+deployment, and capture_complete is never deployment_ready/approval.
+No Oracle access, cleanup, service/network, resource or merge operation occurred.

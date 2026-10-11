@@ -89,7 +89,7 @@ second collision. No stop/cancel/force/automatic retry is permitted.
 The earlier local Windows suite below had48 PASS. The current two-client
 candidate has **61 Windows and61 local WSL unit tests PASS**, plus actual local
 Unbound1.19.2 two-client and full runtime PASS. AppArmor enforcing is unavailable
-locally; current ARM/real timer remains NOT TESTED. See VALIDATION.md and
+locally at that historical point; subsequent native ARM/real timer PASS is in ARM_CI_RESULTS.md. See VALIDATION.md and
 [sequential audit/approval gates](PHASE_B_APPROVAL_CHECKLIST.md).
 
 Historical development record: local WSL private-mount actual
@@ -99,7 +99,7 @@ prohibited. A same-second archive collision first failed and was fixed/tested.
 Python compilation, Bash syntax, YAML, rendered equality and21-file hashes PASS.
 At that earlier point local WSL had no Unbound and Shellcheck was unavailable.
 Later local cached Unbound and Shellcheck tests passed as recorded in VALIDATION.md;
-this does not certify a full live ARM service/clock transaction. CI is billing-blocked.
+this does not certify a full live ARM service/clock transaction. CI was billing-blocked historically; later native/x86 success is verified in ARM_CI_RESULTS.md.
 
 No Oracle rerun of post-stop changes. Root-owned installation/global deadline/
 archive fix therefore have local/contract evidence, not final live ARM acceptance.
@@ -194,6 +194,16 @@ historical recovery backup remain preserved. See GATE_C_REVIEW.md and
 FRESH_BASELINE_APPROVAL.md for exact independent lab and future capture scopes.
 Current local65-unit suite,9 actual shell guard scenarios,4 restore plus4 failure
 cases and real180s independent timers PASS in their stated x86/shim scope. Actual
-ARM/AppArmor/systemd-Unbound resource/recovery path remain NOT TESTED. No production
+Hosted ARM/AppArmor/isolated systemd-Unbound recovery PASS; production recovery remains PENDING. No production
 timeout resolution or device live success is claimed. New lock/snapshot/deadline/
 capture safeguards change the service bundle; older approvals do not carry over.
+
+## Current Gate D review
+
+See GATE_D_REVIEW.md and the superseding FRESH_BASELINE_APPROVAL.md for explicit
+R read-only inspection, S staging, C one-file two-sample capture and D deployment
+permissions. Native Gate C evidence is complete in its CI scope; no separate
+physical ARM lab is requested. Production recovery/UID/paths, residual dependencies,
+same-method policies/OCI/private path, anchor health, original DNSSEC timeout and
+fresh approved baseline/real Windows/Android acceptance remain blockers. No Oracle
+access occurred; next requested permission is R only, not staging or capture.

@@ -166,7 +166,19 @@ def main():
         parser.error('At least 60 seconds of stability is required')
     result = {'capture_only': args.capture, 'capture_complete': False, 'deployment_ready': False, 'samples': [], 'failures': []}
     expected = json.loads(args.baseline.read_text())['fingerprint'] if args.baseline else None
-    args.out.parent.mkdir(parents=True, exist_ok=True)
+    if args.capture and not args.out.parent.is_dir():
+        parser.error('Capture requires an already approved existing output directory')
+    if not args.capture:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        output = args.out.open('x' if args.capture else 'w', encoding='utf-8')
+    except FileExistsError:
+        parser.error('Capture output already exists; never overwrite or retry automatically')
+    def save():
+        output.seek(0)
+        json.dump(result, output, indent=2)
+        output.truncate()
+        output.flush()
     try:
         for index in range(2):
             row = sample(args.ssh_connection)
@@ -178,7 +190,7 @@ def main():
                 result['failures'].append('Pending reboot: maintenance approval required')
             if expected is not None and row['fingerprint'] != expected:
                 result['failures'].append('Pinned baseline drift: new review required, never auto-refresh')
-            args.out.write_text(json.dumps(result, indent=2), encoding='utf-8')
+            save()
             print(json.dumps({'sample': index + 1, 'pid': row['fingerprint']['unit']['MainPID'],
                              'operational_failures': row['operational_failures'], 'reboot_required': row['reboot_required']}), flush=True)
             if index == 0:
@@ -190,7 +202,8 @@ def main():
     except Exception as exc:
         result['failures'].append(type(exc).__name__ + ': ' + str(exc))
     finally:
-        args.out.write_text(json.dumps(result, indent=2), encoding='utf-8')
+        save()
+        output.close()
     print(json.dumps({'capture_complete': result['capture_complete'], 'deployment_ready': result['deployment_ready'], 'failures': result['failures']}), flush=True)
     raise SystemExit(0 if (result['capture_complete'] if args.capture else result['deployment_ready']) else 1)
 

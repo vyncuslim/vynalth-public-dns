@@ -63,9 +63,9 @@ cause is available. No settings were changed or purchases made. The account owne
 can request GitHub clarification of the lock and public-runner eligibility;
 there is no automatic retry, billing workaround or paid runner substitution.
 
-Current ARM architecture/runtime/profile/actual service/cgroup/timer/ACL/PTR/
-DNSSEC tests are **NOT EXECUTED / PENDING** until actual receipts exist. See the
-PR's latest checks for scheduling status. Local development unit/static checks
+Native ARM architecture/runtime/profile/isolated service/cgroup/timer/ACL/PTR/
+DNSSEC tests are now **PASS**, with exact receipts in ARM_CI_RESULTS.md. See the
+PR's latest checks for later commits. Earlier local development unit/static checks
 are recorded separately in VALIDATION.md and are not ARM Gate C evidence.
 No physical ARM machine is required if the standard job starts and proves these
 properties. If profile or real recovery cannot be proven, their gates stay PENDING.

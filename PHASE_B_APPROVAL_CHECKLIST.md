@@ -12,7 +12,7 @@ not enabled or change Android Private DNS/blanket tailnet DNS Override.
 |---|---|---|
 | A | Approve existing serial-console read-only impact/status audit; optionally extended baseline and Windows read-only recovery scope in ORACLE_READ_ONLY_AUDIT.md | Owner Gate A reconciled; fresh readiness/impact limits remain |
 | B | Review exact retained paths/units/dependencies and recovery exclusions; authorize itemized cleanup only if needed | UNKNOWN need; no cleanup approved |
-| C | Approve exact environment and effects of current ARM/AppArmor/real180s timer readiness validation, preferring a separate lab; live host test files/scopes/transfers require explicit scope | NOT TESTED on current ARM; local evidence is insufficient |
+| C | Native hosted ARM/AppArmor/actual cgroup service restore and independent180s timer evidence reviewed in ARM_CI_RESULTS.md | PASS isolated CI scope; production UID/paths/management recovery separate |
 | D | Review final full commit, config, complete bundle, exact diff, fresh pinned baseline and procedure; separately authorize staging and one-shot service-only Windows transaction | BLOCKED; no fresh baseline or deployment approval |
 | E | After protected Windows confirmation, explicitly authorize phone DNS-only acceptance, strictly<45s; complete PASS required for mobile release | PENDING LIVE ACCEPTANCE |
 | F | After both devices and every affected client are healthy/authorized, separately consider phone/system-wide or tailnet DNS settings with recorded restoration plan | BLOCKED; no DNS-admin approval |
@@ -27,15 +27,15 @@ create a separate maintenance/recovery approval; invalidate the old baseline.
 
 ## Exact candidate identity and fresh baseline gate
 
-Code candidate reviewed before this docs update:
-`2a2aa580a2f85684c7072c35b2fdf38c5422d71e`.
+Starting verified candidate for this Gate D review:
+`6f7a15ad51878dc3b0e061df4f042aed2634a390`.
 The final documentation commit will have a different SHA; resolve the actual
 branch HEAD and review that full SHA before approval. No old approval carries over.
 
 Unchanged Unbound configuration SHA256:
 `d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634`.
 Current21-file service manifest SHA256:
-`435883ec91e3d4784991015352b75fba1dcbb147a2faa04a4df89f474702e254`.
+`29b84c8d37486b8882d5c1400cd91d47d6a35e25e3eef45851194774d4794e1f`.
 
 The existing baseline SHA256
 `cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b`
@@ -57,8 +57,8 @@ Check off all before requesting Gate D approval:
   trust-anchor/root-hints/config syntax and management policies verified.
 - [ ] Maintenance idle, package locks clear, known schedule>15min away, NTP
   synchronized, reboot flag clear; no update-policy alteration.
-- [ ] Actual current ARM/AppArmor and independent180s rollback readiness
-  evidence reviewed; backup restores original configuration/systemd settings.
+- [x] Native hosted ARM/AppArmor/cgroup restore and independent180s timer CI
+  completed; review exact receipts. Production recovery/permissions remain separate.
 - [ ] Final clean GitHub/Windows/VM commits match; source staging separately
   authorized, all config/baseline/service/review checksums match Git bytes.
 - [ ] Existing host/Tailscale/OCI ingress policy permits intended private DNS
@@ -142,7 +142,7 @@ historical recovery backup remain preserved. See GATE_C_REVIEW.md and
 FRESH_BASELINE_APPROVAL.md for exact independent lab and future capture scopes.
 Current local65-unit suite,9 actual shell guard scenarios,4 restore plus4 failure
 cases and real180s independent timers PASS in their stated x86/shim scope. Actual
-ARM/AppArmor/systemd-Unbound resource/recovery path remain NOT TESTED. No production
+Hosted ARM/AppArmor/isolated systemd-Unbound recovery PASS; production recovery remains PENDING. No production
 timeout resolution or device live success is claimed. New lock/snapshot/deadline/
 capture safeguards change the service bundle; older approvals do not carry over.
 
@@ -150,9 +150,9 @@ capture safeguards change the service bundle; older approvals do not carry over.
 
 See ARM_HOSTED_CI.md. Owner now authorizes the independent ubuntu-24.04-arm
 standard public-repository job; no separate physical machine is required. Existing
-tests remain. Architecture/profile/service/cgroup/timer/Unbound results stay NOT
-EXECUTED/PENDING until actual runner evidence exists. CI billing lock is separate
-from code/runtime failures. No paid/OCI/self-hosted fallback or billing/VPN change.
+tests remain. Architecture/profile/isolated service/cgroup/timer/Unbound results are now PASS
+with native hosted receipts. Earlier billing-lock observations were historical,
+not code/runtime failures; why scheduling resumed remains unknown. No paid/OCI/self-hosted fallback or billing/VPN change.
 Production recovery and fresh baseline/Windows/Android approvals remain separate.
 
 ## Actual hosted native ARM evidence supersedes preparation status
@@ -167,3 +167,13 @@ are historical: scheduling resumed without any Codex billing modification. The
 retained x86 job's missing /run/sshd runtime dependency is fixed in f4a6f15; its
 results are separate from native ARM success. Do not claim all CI or production
 readiness solely from these ARM receipts.
+
+## Current Gate D review
+
+See GATE_D_REVIEW.md and the superseding FRESH_BASELINE_APPROVAL.md for explicit
+R read-only inspection, S staging, C one-file two-sample capture and D deployment
+permissions. Native Gate C evidence is complete in its CI scope; no separate
+physical ARM lab is requested. Production recovery/UID/paths, residual dependencies,
+same-method policies/OCI/private path, anchor health, original DNSSEC timeout and
+fresh approved baseline/real Windows/Android acceptance remain blockers. No Oracle
+access occurred; next requested permission is R only, not staging or capture.
