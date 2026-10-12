@@ -1,5 +1,7 @@
 # Gate D pre-deployment review — no production authorization
 
+**2026-10-12 Scope C safety stop:** Owner/Codex aborted the authorized capture at commit `643623f3976e16fae43c873bb8ca5f58eb274b95` before host samples or remote writes because the first invalid sample would still trigger the 60-second sleep and second read. This is a confirmed collector fail-closed defect, not a successful capture. The corrected developer code requires independent tests, new exact-commit S authorization and a separate new-filename C authorization. Existing R/S evidence is historical only; no baseline promotion or D trial is authorized.
+
 Starting actual local/origin HEAD:6f7a15ad51878dc3b0e061df4f042aed2634a390.
 Native ARM and retained x86 CI passed at that SHA. Evidence is reconciled with
 ARM_CI_RESULTS.md and archived artifacts. No separate physical ARM lab request,

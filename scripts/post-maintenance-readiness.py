@@ -193,9 +193,16 @@ def main():
             save()
             print(json.dumps({'sample': index + 1, 'pid': row['fingerprint']['unit']['MainPID'],
                              'operational_failures': row['operational_failures'], 'reboot_required': row['reboot_required']}), flush=True)
+            # An invalid first sample is terminal for this authorized capture.
+            # Never wait 60 seconds or request the second sample after a failure.
+            if result['failures']:
+                break
             if index == 0:
                 time.sleep(args.interval)
-        if result['samples'][0]['fingerprint'] != result['samples'][1]['fingerprint']:
+        if not result['failures'] and len(result['samples']) != 2:
+            result['failures'].append('Incomplete two-sample capture')
+        if (len(result['samples']) == 2 and
+                result['samples'][0]['fingerprint'] != result['samples'][1]['fingerprint']):
             result['failures'].append('Service/host fingerprint changed during stability interval')
         result['capture_complete'] = not result['failures']
         result['deployment_ready'] = not result['failures'] and not args.capture

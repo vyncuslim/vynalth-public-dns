@@ -1,5 +1,7 @@
 # Fresh Oracle baseline: separate permissions, no execution yet
 
+**Gate C HOLD (2026-10-12):** The earlier collector at commit `643623f3976e16fae43c873bb8ca5f58eb274b95` failed independent fail-closed review before any sample or remote evidence-file creation. A first-sample validation failure incorrectly led to sleep and sample two. A corrected code commit does NOT inherit old S or C authorization: separately review/approve the precise new commit for S, then authorize C with a NEW unique filename. No baseline or deployment approval exists. Keep the aborted attempt and previous local logs unchanged.
+
 Native ARM64/AppArmor/cgroup/180s CI passed; no new physical ARM lab is needed.
 See GATE_D_REVIEW.md. This is preparation only: Oracle was not accessed. The old
 cbb29c44 baseline is historical/review-only, never silently reused or refreshed.
@@ -64,7 +66,7 @@ require a new itemized scope, not automatic bootstrap. S is not C or D.
 
 ## C: exact minimal two-sample capture after S review
 
-Approve the literal proposed filename below (or a newly reviewed unique name) and one local
+Approve a newly reviewed unique filename (the example command below is NOT an authorization) and one local
 retrieval. Parent directory must already exist, resolve within the approved checkout, and have reviewed ownership/mode; unexpected symlinks STOP. Exclusive creation rejects an
 existing file/symlink or absent parent before any sample, with no automatic retry.
 One new evidence file is updated through this run; failures retain partial data.
