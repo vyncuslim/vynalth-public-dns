@@ -1,0 +1,12 @@
+{
+  "listen": "100.95.65.20",
+  "dns_identity": {"address": "100.95.65.20", "hostname": "dns.vynalthai.com."},
+  "clients": ["100.85.132.14/32", "100.75.232.110/32"],
+  "ssh_clients": ["100.85.132.14/32"],
+  "tailscale": {"interface": "tailscale0", "udp_port": 41641},
+  "dhcp4": {"interface": "enp0s6", "server": "169.254.169.254"},
+  "preserve_existing_public_ssh": true,
+  "ip_ratelimit": 20,
+  "monthly_budget_myr": 0,
+  "ipv6": false
+}

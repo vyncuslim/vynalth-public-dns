@@ -1,0 +1,59 @@
+{
+  "recorded_utc": "2026-10-10T07:22:36.594537+00:00",
+  "kernel_running": {
+    "exit_code": 0,
+    "stdout": "6.17.0-1020-oracle",
+    "stderr": ""
+  },
+  "installed_kernels": {
+    "exit_code": 0,
+    "stdout": "linux-image-6.17.0-1020-oracle\t6.17.0-1020.20\nlinux-image-7.0.0-1013-oracle\t7.0.0-1013.13~24.04.1\nlinux-image-oracle\t7.0.0-1013.13~24.04.1\nlinux-image-unsigned-6.17.0-1020-oracle\t\nlinux-image-unsigned-7.0.0-1013-oracle",
+    "stderr": ""
+  },
+  "boot_links": {
+    "exit_code": 0,
+    "stdout": "/boot/vmlinuz-7.0.0-1013-oracle\n/boot/initrd.img-7.0.0-1013-oracle",
+    "stderr": ""
+  },
+  "kernel_files": [
+    "System.map-6.17.0-1020-oracle",
+    "config-6.17.0-1020-oracle",
+    "initrd.img-7.0.0-1013-oracle",
+    "vmlinuz-7.0.0-1013-oracle",
+    "vmlinuz-6.17.0-1020-oracle",
+    "initrd.img-6.17.0-1020-oracle",
+    "System.map-7.0.0-1013-oracle",
+    "config-7.0.0-1013-oracle"
+  ],
+  "grub_entries": [
+    "menuentry 'Ubuntu' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-129030ff-972d-4e63-af24-fe51edfa1c43' {",
+    "\tmenuentry 'Ubuntu, with Linux 7.0.0-1013-oracle' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-1013-oracle-advanced-129030ff-972d-4e63-af24-fe51edfa1c43' {",
+    "\tmenuentry 'Ubuntu, with Linux 7.0.0-1013-oracle (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-7.0.0-1013-oracle-recovery-129030ff-972d-4e63-af24-fe51edfa1c43' {",
+    "\tmenuentry 'Ubuntu, with Linux 6.17.0-1020-oracle' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-6.17.0-1020-oracle-advanced-129030ff-972d-4e63-af24-fe51edfa1c43' {",
+    "\tmenuentry 'Ubuntu, with Linux 6.17.0-1020-oracle (recovery mode)' --class ubuntu --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-6.17.0-1020-oracle-recovery-129030ff-972d-4e63-af24-fe51edfa1c43' {"
+  ],
+  "grub_default": [
+    "GRUB_DEFAULT=0"
+  ],
+  "scheduled_shutdown_exists": false,
+  "apt_policy": {
+    "exit_code": 0,
+    "stdout": "APT::Periodic \"\";\nAPT::Periodic::Update-Package-Lists \"1\";\nAPT::Periodic::Download-Upgradeable-Packages \"0\";\nAPT::Periodic::AutocleanInterval \"0\";\nAPT::Periodic::Unattended-Upgrade \"1\";",
+    "stderr": ""
+  },
+  "ssh_socket": {
+    "exit_code": 0,
+    "stdout": "Listen=0.0.0.0:22 (Stream)\nListen=[::]:22 (Stream)\nActiveState=active\nUnitFileState=enabled",
+    "stderr": ""
+  },
+  "old_timer_journal": {
+    "exit_code": 0,
+    "stdout": "2026-10-10T05:47:29+00:00 vynalthai-dns systemd[1]: Started vynalth-rollback.timer - /bin/bash /var/lib/vynalth-dns/rollback.sh.\n2026-10-10T05:49:15+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Deactivated successfully.\n2026-10-10T05:49:15+00:00 vynalthai-dns systemd[1]: Stopped vynalth-rollback.timer - /bin/bash /var/lib/vynalth-dns/rollback.sh.\n2026-10-10T05:49:15+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T05:49:15+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T05:49:15+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T05:51:09+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T05:52:07+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T06:23:20+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T06:23:20+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T06:52:47+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T06:52:47+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory\n2026-10-10T06:52:47+00:00 vynalthai-dns systemd[1]: vynalth-rollback.timer: Failed to open /run/systemd/transient/vynalth-rollback.timer: No such file or directory",
+    "stderr": ""
+  },
+  "retained_backup": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+}

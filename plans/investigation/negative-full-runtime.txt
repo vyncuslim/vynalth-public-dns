@@ -1,0 +1,7 @@
+unbound-checkconf: no errors in /tmp/vynalth-test-6u98s92e/unbound.conf
+fixture_pid=461 confinement=kernel
+fixture_pid=463 confinement=kernel
+fixture_pid=464 confinement=kernel
+PASS unrelated reverse responses unchanged with/without single-owner identity
+fixture_pid=465 confinement=kernel
+PASS: isolated PTR identity/unrelated reverse, UDP/TCP A/AAAA, DNSSEC valid/bogus/CD, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit

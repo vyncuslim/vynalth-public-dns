@@ -1,0 +1,91 @@
+{
+  "production_before": {
+    "pid": "984",
+    "invocation": "faf008c678734ea89643e0ff20348ea5",
+    "boot_id": "06c41b28-e22e-4540-8bd7-61b91fcaf465",
+    "config": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+    "nft": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "ssh": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344"
+  },
+  "commands": [
+    {
+      "name": "unit",
+      "argv": [
+        "/home/ubuntu/vynalth-public-dns/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "bundle",
+      "argv": [
+        "sha256sum",
+        "--check",
+        "plans/phase-b-service.sha256"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "syntax",
+      "argv": [
+        "unbound-checkconf",
+        "plans/phase-b-unbound.conf"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "runtime",
+      "argv": [
+        "/home/ubuntu/vynalth-public-dns/.venv/bin/python",
+        "tests/local_runtime.py",
+        "--require-apparmor"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "delayed_dnssec",
+      "argv": [
+        "/home/ubuntu/vynalth-public-dns/.venv/bin/python",
+        "tests/isolated_dnssec.py",
+        "--mode",
+        "fixture",
+        "--require-apparmor",
+        "--out",
+        "artifacts/candidate-dnssec.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "timer_guard",
+      "argv": [
+        "/home/ubuntu/vynalth-public-dns/.venv/bin/python",
+        "tests/timer_guard_lab.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "rollback_180",
+      "argv": [
+        "bash",
+        "tests/service_rollback_lab.sh"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "production_after": {
+    "pid": "984",
+    "invocation": "faf008c678734ea89643e0ff20348ea5",
+    "boot_id": "06c41b28-e22e-4540-8bd7-61b91fcaf465",
+    "config": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+    "nft": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "ssh": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344"
+  },
+  "pass": true
+}

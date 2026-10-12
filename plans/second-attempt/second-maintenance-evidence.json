@@ -1,0 +1,79 @@
+{
+  "unbound_package": {
+    "exit_code": 0,
+    "stdout": "unbound\t1.19.2-1ubuntu3.10\n",
+    "stderr": ""
+  },
+  "apt_upgrade_service": {
+    "exit_code": 0,
+    "stdout": "ExecMainStartTimestamp=Sat 2026-10-10 06:52:21 UTC\nActiveState=inactive\nSubState=dead\n",
+    "stderr": ""
+  },
+  "apt_history_matching_window": [
+    "Start-Date: 2026-10-10  06:52:39\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libglib2.0-bin:arm64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), gir1.2-glib-2.0:arm64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), libglib2.0-data:arm64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), libglib2.0-0t64:arm64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9)\nEnd-Date: 2026-10-10  06:52:40",
+    "Start-Date: 2026-10-10  06:52:49\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: linux-tools-common:arm64 (6.8.0-139.139, 6.8.0-146.146)\nEnd-Date: 2026-10-10  06:52:49",
+    "Start-Date: 2026-10-10  06:52:56\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: perl:arm64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), perl-base:arm64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), perl-modules-5.38:arm64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), libperl5.38t64:arm64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6)\nEnd-Date: 2026-10-10  06:52:59",
+    "Start-Date: 2026-10-10  06:53:06\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: python3-jwt:arm64 (2.7.0-1ubuntu0.1, 2.7.0-1ubuntu0.2)\nEnd-Date: 2026-10-10  06:53:06",
+    "Start-Date: 2026-10-10  06:53:13\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libpng16-16t64:arm64 (1.6.43-5ubuntu0.6, 1.6.43-5ubuntu0.7)\nEnd-Date: 2026-10-10  06:53:13",
+    "Start-Date: 2026-10-10  06:53:20\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: sg3-utils:arm64 (1.46-3ubuntu4, 1.46-3ubuntu4.1), libsgutils2-1.46-2:arm64 (1.46-3ubuntu4, 1.46-3ubuntu4.1), sg3-utils-udev:arm64 (1.46-3ubuntu4, 1.46-3ubuntu4.1)\nEnd-Date: 2026-10-10  06:53:35",
+    "Start-Date: 2026-10-10  06:53:42\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libpcap0.8t64:arm64 (1.10.4-4.1ubuntu3, 1.10.4-4.1ubuntu3.1)\nEnd-Date: 2026-10-10  06:53:42",
+    "Start-Date: 2026-10-10  06:53:49\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libexpat1:arm64 (2.6.1-2ubuntu0.4, 2.6.1-2ubuntu0.6)\nEnd-Date: 2026-10-10  06:53:49",
+    "Start-Date: 2026-10-10  06:53:56\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: rsyslog:arm64 (8.2312.0-3ubuntu9.3, 8.2312.0-3ubuntu9.4)\nEnd-Date: 2026-10-10  06:53:58",
+    "Start-Date: 2026-10-10  06:54:05\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libisns0t64:arm64 (0.101-0.3build3, 0.101-0.3ubuntu0.1)\nEnd-Date: 2026-10-10  06:54:05",
+    "Start-Date: 2026-10-10  06:54:12\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: dracut-install:arm64 (060+5-1ubuntu3.3, 060+5-1ubuntu3.4)\nEnd-Date: 2026-10-10  06:54:12",
+    "Start-Date: 2026-10-10  06:54:19\nCommandline: /usr/bin/unattended-upgrade\nInstall: linux-image-7.0.0-1013-oracle:arm64 (7.0.0-1013.13~24.04.1, automatic), libdebuginfod1t64:arm64 (0.190-1.1ubuntu0.1, automatic), linux-tools-7.0.0-1013-oracle:arm64 (7.0.0-1013.13~24.04.1, automatic), libdebuginfod-common:arm64 (0.190-1.1ubuntu0.1, automatic), libllvm19:arm64 (1:19.1.1-1ubuntu1~24.04.2, automatic), linux-oracle-7.0-tools-7.0.0-1013:arm64 (7.0.0-1013.13~24.04.1, automatic), linux-headers-7.0.0-1013-oracle:arm64 (7.0.0-1013.13~24.04.1, automatic), linux-modules-7.0.0-1013-oracle:arm64 (7.0.0-1013.13~24.04.1, automatic), linux-oracle-7.0-headers-7.0.0-1013:arm64 (7.0.0-1013.13~24.04.1, automatic)\nUpgrade: linux-headers-oracle:arm64 (6.17.0-1020.20, 7.0.0-1013.13~24.04.1), linux-image-oracle:arm64 (6.17.0-1020.20, 7.0.0-1013.13~24.04.1), linux-oracle:arm64 (6.17.0-1020.20, 7.0.0-1013.13~24.04.1)\nEnd-Date: 2026-10-10  06:54:55",
+    "Start-Date: 2026-10-10  06:55:03\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: python3-requests:arm64 (2.31.0+dfsg-1ubuntu1.1, 2.31.0+dfsg-1ubuntu1.2)\nEnd-Date: 2026-10-10  06:55:04",
+    "Start-Date: 2026-10-10  06:55:12\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libfreetype6:arm64 (2.13.2+dfsg-1ubuntu0.1, 2.13.2+dfsg-1ubuntu0.2)\nEnd-Date: 2026-10-10  06:55:12",
+    "Start-Date: 2026-10-10  06:55:21\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libarchive13t64:arm64 (3.7.2-2ubuntu0.8, 3.7.2-2ubuntu0.9)\nEnd-Date: 2026-10-10  06:55:21",
+    "Start-Date: 2026-10-10  06:55:30\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: u-boot-tools:arm64 (2025.10-0ubuntu0.24.04.2, 2025.10-0ubuntu0.24.04.3)\nEnd-Date: 2026-10-10  06:55:31",
+    "Start-Date: 2026-10-10  06:55:39\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libsqlite3-0:arm64 (3.45.1-1ubuntu2.7, 3.45.1-1ubuntu2.8)\nEnd-Date: 2026-10-10  06:55:39",
+    "Start-Date: 2026-10-10  06:55:48\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libxml2:arm64 (2.9.14+dfsg-1.3ubuntu3.8, 2.9.14+dfsg-1.3ubuntu3.10)\nEnd-Date: 2026-10-10  06:55:48",
+    "Start-Date: 2026-10-10  06:55:57\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: libssl3t64:arm64 (3.0.13-0ubuntu3.15, 3.0.13-0ubuntu3.16), openssl:arm64 (3.0.13-0ubuntu3.15, 3.0.13-0ubuntu3.16)\nEnd-Date: 2026-10-10  06:55:58",
+    "Start-Date: 2026-10-10  06:56:10\nCommandline: /usr/bin/unattended-upgrade\nUpgrade: sudo:arm64 (1.9.15p5-3ubuntu5.24.04.2, 1.9.15p5-3ubuntu5.24.04.4)\nEnd-Date: 2026-10-10  06:56:11\n"
+  ],
+  "reboot_required": true,
+  "reboot_required_packages": "linux-image-7.0.0-1013-oracle\nlinux-base\n",
+  "unbound_lifecycle": {
+    "exit_code": 0,
+    "stdout": "Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: service stopped (unbound 1.19.2).\nOct 10 06:53:53 vynalthai-dns systemd[1]: Stopping unbound.service - Unbound DNS server...\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: server stats for thread 0: 15 queries, 9 answers from cache, 6 recursions, 0 prefetch, 0 rejected by ip ratelimiting\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: server stats for thread 0: requestlist max 0 avg 0 exceeded 2 jostled 0\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: average recursion processing time 0.637237 sec\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: histogram of recursion processing times\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: [25%]=0.004096 median[50%]=0.016384 [75%]=1\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: lower(secs) upper(secs) recursions\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.002048    0.004096 1\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.008192    0.016384 1\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.524288    1.000000 1\nOct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    1.000000    2.000000 1\nOct 10 06:53:53 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.\nOct 10 06:53:53 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.\nOct 10 06:53:53 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...\nOct 10 06:53:53 vynalthai-dns (unbound)[24650]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS\nOct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 0: subnetcache\nOct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 1: validator\nOct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 2: iterator\nOct 10 06:53:53 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.\nOct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] info: start of service (unbound 1.19.2).\nOct 10 06:54:44 vynalthai-dns unbound[24650]: [24650:0] info: generate keytag query _ta-4f66-9728. NULL IN\nOct 10 06:56:04 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.\nOct 10 06:56:04 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.\nOct 10 06:56:04 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...\nOct 10 06:56:04 vynalthai-dns (unbound)[34123]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS\nOct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 0: subnetcache\nOct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 1: validator\nOct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 2: iterator\nOct 10 06:56:04 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.\nOct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] info: start of service (unbound 1.19.2).\n",
+    "stderr": ""
+  },
+  "maintenance_log_tail": {
+    "exit_code": 0,
+    "stdout": "2026-10-10 02:21:36,044 INFO Starting unattended upgrades script\n2026-10-10 02:21:36,044 INFO Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security\n2026-10-10 02:21:36,044 INFO Initial blacklist: \n2026-10-10 02:21:36,044 INFO Initial whitelist (not strict): \n2026-10-10 06:52:21,627 INFO Starting unattended upgrades script\n2026-10-10 06:52:21,628 INFO Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security\n2026-10-10 06:52:21,628 INFO Initial blacklist: \n2026-10-10 06:52:21,628 INFO Initial whitelist (not strict): \n2026-10-10 06:52:38,931 INFO Packages that will be upgraded: dracut-install gir1.2-glib-2.0 libarchive13t64 libexpat1 libfreetype6 libglib2.0-0t64 libglib2.0-bin libglib2.0-data libisns0t64 libpcap0.8t64 libperl5.38t64 libpng16-16t64 libsgutils2-1.46-2 libsqlite3-0 libssl3t64 libxml2 linux-headers-oracle linux-image-oracle linux-oracle linux-tools-common openssl perl perl-base perl-modules-5.38 python3-jwt python3-requests rsyslog sg3-utils sg3-utils-udev sudo u-boot-tools\n2026-10-10 06:52:38,931 INFO Writing dpkg log to /var/log/unattended-upgrades/unattended-upgrades-dpkg.log\n2026-10-10 06:56:18,615 INFO All upgrades installed\n",
+    "stderr": ""
+  },
+  "needrestart_excerpt": [
+    "(Reading database ... 50%",
+    "(Reading database ... 55%",
+    "(Reading database ... 60%",
+    "(Reading database ... 65%",
+    "(Reading database ... 70%",
+    "(Reading database ... 75%",
+    "(Reading database ... 80%",
+    "(Reading database ... 85%",
+    "(Reading database ... 90%",
+    "(Reading database ... 95%",
+    "(Reading database ... 100%",
+    "(Reading database ... 111438 files and directories currently installed.)",
+    "Preparing to unpack .../dracut-install_060+5-1ubuntu3.4_arm64.deb ...",
+    "Unpacking dracut-install (060+5-1ubuntu3.4) over (060+5-1ubuntu3.3) ...",
+    "Setting up dracut-install (060+5-1ubuntu3.4) ...",
+    "",
+    "Running kernel seems to be up-to-date.",
+    "",
+    "Restarting services...",
+    "",
+    "Service restarts being deferred:",
+    " systemctl restart apt-daily-upgrade.service",
+    " /etc/needrestart/restart.d/dbus.service",
+    " systemctl restart unattended-upgrades.service"
+  ],
+  "unbound_pid": {
+    "exit_code": 0,
+    "stdout": "MainPID=34123\nNRestarts=0\nExecMainStartTimestamp=Sat 2026-10-10 06:56:04 UTC\n",
+    "stderr": ""
+  },
+  "readonly": true,
+  "agent_started_upgrade_or_restarted_service": false
+}

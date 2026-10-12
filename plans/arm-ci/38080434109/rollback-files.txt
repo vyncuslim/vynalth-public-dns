@@ -1,0 +1,15 @@
+unbound.conf: OK
+unbound-private-limits.conf: OK
+PASS actual file restore: prior=present marker=present; service calls stubbed; nft prohibited
+unbound.conf: OK
+unbound-private-limits.conf: OK
+PASS actual file restore: prior=present marker=absent; service calls stubbed; nft prohibited
+unbound.conf: OK
+PASS actual file restore: prior=absent marker=present; service calls stubbed; nft prohibited
+unbound.conf: OK
+PASS actual file restore: prior=absent marker=absent; service calls stubbed; nft prohibited
+PASS no pending snapshot: timer callback does not touch service
+PASS recovery failure retained pending evidence: missing-manifest
+PASS recovery failure retained pending evidence: corrupt-config
+PASS recovery failure retained pending evidence: extra-limits
+PASS recovery failure retained pending evidence: restart-failed

@@ -1,0 +1,183 @@
+{
+  "pass": true,
+  "scope": "local/CI network namespace; synthetic client IPs",
+  "config_sha256": "d6db3048b2c8dce15bf3ebe50be89ce12680345f48ce72eb466b715d29317634",
+  "clients": {
+    "windows": {
+      "source": "100.85.132.14",
+      "pass": true,
+      "ptr": "dns.vynalthai.com.",
+      "unrelated_reverse": "NXDOMAIN unchanged",
+      "queries": [
+        {
+          "type": "A",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0034341980000007766
+        },
+        {
+          "type": "AAAA",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0032794660000003972
+        },
+        {
+          "name": "valid.signed-fixture.test.",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "AD": true,
+          "elapsed_seconds": 0.009860996000000455
+        },
+        {
+          "name": "bogus.signed-fixture.test.",
+          "tcp": false,
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "elapsed_seconds": 0.011503077000000417
+        },
+        {
+          "type": "A",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0018349850000003443
+        },
+        {
+          "type": "AAAA",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0008343429999992935
+        },
+        {
+          "name": "valid.signed-fixture.test.",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "AD": true,
+          "elapsed_seconds": 0.001743468000000803
+        },
+        {
+          "name": "bogus.signed-fixture.test.",
+          "tcp": true,
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "elapsed_seconds": 0.0008676409999992529
+        }
+      ],
+      "warm_cache_hit_delta": 2.0
+    },
+    "oppo_android": {
+      "source": "100.75.232.110",
+      "pass": true,
+      "ptr": "dns.vynalthai.com.",
+      "unrelated_reverse": "NXDOMAIN unchanged",
+      "queries": [
+        {
+          "type": "A",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0011448469999990607
+        },
+        {
+          "type": "AAAA",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0006999090000014974
+        },
+        {
+          "name": "valid.signed-fixture.test.",
+          "tcp": false,
+          "rcode": "NOERROR",
+          "AD": true,
+          "elapsed_seconds": 0.0009509720000000499
+        },
+        {
+          "name": "bogus.signed-fixture.test.",
+          "tcp": false,
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "elapsed_seconds": 0.0007860869999998243
+        },
+        {
+          "type": "A",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.0017356020000001138
+        },
+        {
+          "type": "AAAA",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "elapsed_seconds": 0.001502238999998795
+        },
+        {
+          "name": "valid.signed-fixture.test.",
+          "tcp": true,
+          "rcode": "NOERROR",
+          "AD": true,
+          "elapsed_seconds": 0.000954847999999231
+        },
+        {
+          "name": "bogus.signed-fixture.test.",
+          "tcp": true,
+          "rcode": "SERVFAIL",
+          "AD": false,
+          "elapsed_seconds": 0.0007406050000007269
+        }
+      ],
+      "warm_cache_hit_delta": 2.0
+    }
+  },
+  "denied": [
+    {
+      "source": "100.75.232.111",
+      "tcp": false,
+      "type": "A",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "100.75.232.111",
+      "tcp": false,
+      "type": "PTR",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "100.75.232.111",
+      "tcp": true,
+      "type": "A",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "100.75.232.111",
+      "tcp": true,
+      "type": "PTR",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "198.51.100.44",
+      "tcp": false,
+      "type": "A",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "198.51.100.44",
+      "tcp": false,
+      "type": "PTR",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "198.51.100.44",
+      "tcp": true,
+      "type": "A",
+      "rcode": "REFUSED"
+    },
+    {
+      "source": "198.51.100.44",
+      "tcp": true,
+      "type": "PTR",
+      "rcode": "REFUSED"
+    }
+  ],
+  "live_android": "PENDING LIVE ACCEPTANCE",
+  "app_armor": "kernel",
+  "app_armor_test": "NOT TESTED: enforcing profile unavailable; never disabled",
+  "forwarders": []
+}

@@ -1,0 +1,13 @@
+{
+  "BackendState": "Running",
+  "self_ips": [
+    "100.85.132.14",
+    "fd7a:115c:a1e0::dc2c:8410"
+  ],
+  "self_online": true,
+  "server_ips": [
+    "100.95.65.20",
+    "fd7a:115c:a1e0::a2c:4115"
+  ],
+  "server_online": true
+}

@@ -1,0 +1,5 @@
+unbound-checkconf: no errors in /var/lib/unbound/vynalth-test-m9z_ryra/unbound.conf
+fixture_pid=2589 confinement=unbound (enforce)
+fixture_pid=2591 confinement=unbound (enforce)
+fixture_pid=2592 confinement=unbound (enforce)
+PASS: isolated PTR identity/unrelated reverse, UDP/TCP A/AAAA, DNSSEC valid/bogus/CD, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit

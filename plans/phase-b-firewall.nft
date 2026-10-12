@@ -1,0 +1,18 @@
+table inet vynalth_dns {
+ chain input {
+  type filter hook input priority -10; policy drop;
+  iifname "lo" accept
+  ct state invalid drop
+  ct state established,related accept
+  ip protocol icmp accept
+  meta l4proto ipv6-icmp accept
+  iifname != "tailscale0" udp dport 41641 accept
+  iifname "enp0s6" ip saddr 169.254.169.254 udp sport 67 udp dport 68 accept
+  iifname != "tailscale0" tcp dport 22 ct state new accept comment "preserve existing SSH pending recovery review"
+  iifname "tailscale0" ip saddr 100.85.132.14/32 tcp dport 22 ct state new accept
+  iifname "tailscale0" ip saddr 100.85.132.14/32 ip daddr 100.95.65.20 udp dport 53 limit rate 20/second burst 40 packets accept
+  iifname "tailscale0" ip saddr 100.85.132.14/32 ip daddr 100.95.65.20 tcp dport 53 limit rate 20/second burst 40 packets accept
+  iifname "tailscale0" ip saddr 100.75.232.110/32 ip daddr 100.95.65.20 udp dport 53 limit rate 20/second burst 40 packets accept
+  iifname "tailscale0" ip saddr 100.75.232.110/32 ip daddr 100.95.65.20 tcp dport 53 limit rate 20/second burst 40 packets accept
+ }
+}

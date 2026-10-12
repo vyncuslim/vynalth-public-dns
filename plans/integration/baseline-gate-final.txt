@@ -1,0 +1,4 @@
+Updated direct read-only verify-post-boot.py invocation: exit0
+PASS pinned post-boot baseline (no refresh); deployment requires separate authorization
+Expected baseline SHA256: cbb29c44eebd8d3423dffffe99009c1f3cbaa2e5325439b81a7a73a3aa84820b
+Not human approval and not a deployment.

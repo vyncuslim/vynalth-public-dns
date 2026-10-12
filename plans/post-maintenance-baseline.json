@@ -1,0 +1,69 @@
+{
+  "review_only": true,
+  "deployment_blocked": "Pending kernel reboot and independent recovery verification; a new boot requires new baseline review.",
+  "observed_source_commit": "0d4d523bdd8b75cf58ea2f9108e2f1c73e16afa7",
+  "recorded_utc": "2026-10-10T07:18:00.631618+00:00",
+  "fingerprint": {
+    "hostname": "vynalthai-dns",
+    "architecture": "aarch64",
+    "kernel": "6.17.0-1020-oracle",
+    "boot_id": "3ecc3924-123d-4673-8144-ee3db37fdf29",
+    "unit": {
+      "MainPID": "34123",
+      "NRestarts": "0",
+      "ExecMainStartTimestampMonotonic": "51164758131",
+      "MemoryMax": "infinity",
+      "TasksMax": "6964",
+      "LimitNOFILE": "524288",
+      "ActiveState": "active",
+      "SubState": "running",
+      "FragmentPath": "/usr/lib/systemd/system/unbound.service",
+      "DropInPaths": "",
+      "InvocationID": "2cad7a7d4117419398f15349dcf710f5"
+    },
+    "apparmor": "unbound (enforce)",
+    "files_sha256": {
+      "/etc/unbound/unbound.conf": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+      "/etc/unbound/unbound.conf.d/remote-control.conf": "1477242c56d9b5c78be39ce53f0b88e98bfe0408be467dc4b6fde18b6b8cc106",
+      "/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf": "00db494e7801e7f7010117531d42abdc6678dd9095c66bfbdb2a00aa32633b2c",
+      "/usr/sbin/unbound": "4ed531424c0b8ac45d3f15db4bd5ebee4bb33eaefc4e3feed37f8ae5f755c557",
+      "/usr/lib/systemd/system/unbound.service": "468d95602363585004d33aabe7c74e4b171665ea0f445ed7750be1c3177c2d9e",
+      "/usr/sbin/sshd": "bc370f3180a806376ddf8a010559e845d847bf5115022ff5468310f7a6f464ce",
+      "/usr/sbin/tailscaled": "6367abc3ffd608ed64a762928444ee53ac4e99bf19baabb0321852d7f02b10b6",
+      "/etc/apparmor.d/usr.sbin.unbound": "bc26d3c8399d5ba94b8725dbda3d1e4cf0ab1867714c048786836d913e1b0b45",
+      "/usr/share/dns/root.hints": "3291b6a6ee911909739d1a2fca945479326f34e31acfcf6eb2914ff6f1735d34",
+      "/etc/apparmor.d/local/usr.sbin.unbound": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "package_versions": "libc6:arm64\t2.39-0ubuntu8.9\nlibssl3t64:arm64\t3.0.13-0ubuntu3.16\nopenssh-server\t1:9.6p1-3ubuntu13.19\nsystemd\t255.4-1ubuntu8.17\ntailscale\t1.104.1\nunbound\t1.19.2-1ubuntu3.10",
+    "listeners": [
+      [
+        "tcp",
+        "127.0.0.1:53"
+      ],
+      [
+        "tcp",
+        "[::1]:53"
+      ],
+      [
+        "udp",
+        "127.0.0.1:53"
+      ],
+      [
+        "udp",
+        "[::1]:53"
+      ]
+    ],
+    "nft_sha256": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "sshd_sha256": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344",
+    "tailscale_ipv4": "100.95.65.20",
+    "tailscaled_active": "active",
+    "ssh_active": "active",
+    "boot_activation": {
+      "tailscaled.service": "enabled",
+      "unbound.service": "enabled",
+      "ssh.service": "disabled",
+      "ssh.socket": "enabled"
+    },
+    "forwards": ""
+  }
+}

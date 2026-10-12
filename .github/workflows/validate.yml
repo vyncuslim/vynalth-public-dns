@@ -1,0 +1,109 @@
+name: Validate DNS development policy
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y unbound dns-root-data nftables shellcheck
+      - name: Prepare disposable runner SSH syntax-check directory (no service/policy change)
+        run: sudo install -d -o root -g root -m 0755 /run/sshd
+      - run: pip install -r requirements-test.txt -r requirements-discovery.txt
+      - run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python scripts/render.py config.example.json
+      - run: sudo install -o unbound -g unbound /usr/share/dns/root.key /var/lib/unbound/root.key && unbound-checkconf artifacts/rendered/unbound.conf
+      - run: shellcheck scripts/*.sh tests/*.sh
+      - run: sudo $(which python) tests/local_runtime.py --require-apparmor
+      - run: sudo $(which python) tests/two_client_runtime.py --require-apparmor --out artifacts/two-client-runtime.json
+      - run: sudo $(which python) tests/negative_runtime.py --require-apparmor --out artifacts/negative-runtime.json
+      - run: sudo $(which python) tests/isolated_dnssec.py --mode fixture --discard-timeout 15000 --legacy-comparison --require-apparmor --out artifacts/dnssec-fixture.json
+      - run: sudo bash tests/firewall_lab.sh
+      - run: sudo bash tests/tailscale_firewall_lab.sh
+      - run: sudo bash tests/service_rollback_lab.sh
+      - run: sudo $(which python) tests/timer_guard_lab.py
+      - run: sudo $(which python) tests/private_transaction_lab.py
+      - run: sudo bash tests/local_rollback_files.sh
+      - run: sudo $(which python) tests/gate_c_deploy_lab.py --authorized-independent-lab
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: '1.9.8'
+      - run: terraform -chdir=terraform fmt -check && terraform -chdir=terraform init -backend=false && terraform -chdir=terraform validate
+      - run: python -m compileall -q scripts tests
+  gate-c-arm64:
+    # Standard public-repository runner only; never larger/self-hosted/OCI runners.
+    if: github.event.repository.private == false
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Initialize evidence and immutable source hashes
+        run: |
+          mkdir -p artifacts/arm-gate-c
+          printf '%s\n' 'ARM tests: NOT EXECUTED until individual logged steps succeed.' 'Production recovery: PENDING; no Oracle/VPN access.' > artifacts/arm-gate-c/status.txt
+          git rev-parse HEAD > artifacts/arm-gate-c/commit.txt
+          sha256sum --check plans/phase-b-service.sha256 | tee artifacts/arm-gate-c/service-manifest.txt
+          sha256sum --check plans/gate-c-review.sha256 | tee artifacts/arm-gate-c/review-manifest.txt
+          uname -a | tee artifacts/arm-gate-c/kernel.txt
+          test "$(uname -m)" = aarch64
+          cat /etc/os-release | tee artifacts/arm-gate-c/os.txt
+          grep -qx 'VERSION_ID="24.04"' /etc/os-release
+          test "$(cat /proc/1/comm)" = systemd
+          systemctl --version | tee artifacts/arm-gate-c/systemd.txt
+      - name: Install ephemeral runner test dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unbound dns-root-data dnsutils iproute2 apparmor nftables shellcheck
+          python -m pip install -r requirements-test.txt -r requirements-discovery.txt
+          dpkg-query -W unbound apparmor systemd | tee artifacts/arm-gate-c/packages.txt
+          unbound -V 2>&1 | tee artifacts/arm-gate-c/unbound-version.txt
+      - name: Fail-closed ARM and AppArmor prerequisites
+        run: |
+          sudo aa-status | tee artifacts/arm-gate-c/apparmor.txt
+          sudo "$(which python)" scripts/gate-c-preflight.py --authorized-independent-lab --out artifacts/arm-gate-c/capabilities.json
+      - name: Unit and syntax checks
+        run: |
+          python -m unittest discover -s tests -p 'test_*.py' -v 2>&1 | tee artifacts/arm-gate-c/unit.txt
+          python -m compileall -q scripts tests
+          shellcheck scripts/*.sh tests/*.sh
+      - name: Actual enforcing Unbound DNSSEC ACL PTR and negative response tests
+        run: |
+          sudo "$(which python)" tests/local_runtime.py --require-apparmor 2>&1 | tee artifacts/arm-gate-c/runtime.txt
+          sudo "$(which python)" tests/two_client_runtime.py --require-apparmor --out artifacts/arm-gate-c/two-client.json 2>&1 | tee artifacts/arm-gate-c/two-client.txt
+          sudo "$(which python)" tests/negative_runtime.py --require-apparmor --out artifacts/arm-gate-c/negative.json 2>&1 | tee artifacts/arm-gate-c/negative.txt
+      - name: Actual unique service cgroup limits and isolated restore
+        run: sudo --preserve-env=GITHUB_ACTIONS,RUNNER_ARCH "$(which python)" tests/arm_service_recovery.py --out artifacts/arm-gate-c/service-recovery.json 2>&1 | tee artifacts/arm-gate-c/service-recovery.txt
+      - name: Shell guard and file recovery contracts (explicit service shims)
+        run: |
+          sudo "$(which python)" tests/gate_c_deploy_lab.py --authorized-independent-lab 2>&1 | tee artifacts/arm-gate-c/deploy-shims.txt
+          sudo bash tests/local_rollback_files.sh 2>&1 | tee artifacts/arm-gate-c/rollback-files.txt
+      - name: Real independent 180-second disposable timers (service shims)
+        run: sudo /usr/bin/python3 tests/gate_c_rollback_lab.py --authorized-independent-lab --out artifacts/arm-gate-c/timers.json 2>&1 | tee artifacts/arm-gate-c/timers.txt
+      - name: Record completed lab scope
+        run: |
+          printf '%s\n' 'All preceding ARM CI steps completed successfully; inspect individual receipts.' 'Production recovery and live Windows/Android acceptance remain PENDING.' >> artifacts/arm-gate-c/status.txt
+      - name: Preserve logs and hashes even on failure
+        if: always()
+        run: |
+          mkdir -p artifacts/arm-gate-c
+          echo 'job.status=${{ job.status }}' >> artifacts/arm-gate-c/status.txt
+          find artifacts/arm-gate-c -type f ! -name evidence.sha256 -print0 | sort -z | xargs -0 sha256sum > artifacts/arm-gate-c/evidence.sha256
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gate-c-arm64-${{ github.run_id }}-${{ github.run_attempt }}
+          path: artifacts/arm-gate-c/
+          retention-days: 14
+# No credentials, deploy, Terraform apply, Spectrum mutation, or live DNS writes.

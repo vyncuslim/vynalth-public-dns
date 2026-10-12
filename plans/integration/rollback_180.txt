@@ -1,0 +1,5 @@
+Waiting for isolated timer vynalth-rollback-test-2658; production PID=984
+PASS actual timer after 181s: exact config/settings restored; absent drop-in removed; production PID unchanged
+Service daemon-reload/restart calls were stubbed inside isolated mounts; production recovery remains unexecuted.
+Running timer as unit: vynalth-rollback-test-2658.timer
+Will run service as unit: vynalth-rollback-test-2658.service

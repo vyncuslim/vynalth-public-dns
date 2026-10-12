@@ -1,0 +1,96 @@
+{
+  "recorded_utc": "2026-10-10T06:24:07.576713+00:00",
+  "package_version": {
+    "exit_code": 0,
+    "stdout": "1.19.2-1ubuntu3.10",
+    "stderr": ""
+  },
+  "time_sync": {
+    "exit_code": 0,
+    "stdout": "NTPSynchronized=yes\n",
+    "stderr": ""
+  },
+  "memory": {
+    "exit_code": 0,
+    "stdout": "               total        used        free      shared  buff/cache   available\nMem:            5903         562        3403           5        2139        5340\nSwap:              0           0           0\n",
+    "stderr": ""
+  },
+  "disk": {
+    "exit_code": 0,
+    "stdout": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1        45G  3.1G   41G   8% /\n",
+    "stderr": ""
+  },
+  "service_memory": {
+    "exit_code": 0,
+    "stdout": "NRestarts=0\nMemoryCurrent=8937472\nDropInPaths=\n",
+    "stderr": ""
+  },
+  "proc_limits": [
+    "Max open files            4152                 4152                 files     "
+  ],
+  "root_anchor_metadata": [
+    ";;id: . 1",
+    ";;last_queried: 1791612914 ;;Sat Oct 10 06:15:14 2026",
+    ";;last_success: 1791612914 ;;Sat Oct 10 06:15:14 2026",
+    ";;next_probe_time: 1791655795 ;;Sat Oct 10 18:09:55 2026",
+    ";;query_failed: 0",
+    ";;query_interval: 43200",
+    ";;retry_time: 8640"
+  ],
+  "root_files": {
+    "exit_code": 0,
+    "stdout": "unbound unbound 644 1248 /var/lib/unbound/root.key\nroot root 644 3311 /usr/share/dns/root.hints\n",
+    "stderr": ""
+  },
+  "baseline_checksums": {
+    "exit_code": 0,
+    "stdout": "/etc/unbound/unbound.conf: OK\n/etc/unbound/unbound.conf.d/remote-control.conf: OK\n/etc/unbound/unbound.conf.d/root-auto-trust-anchor-file.conf: OK\n",
+    "stderr": ""
+  },
+  "unbound_journal": {
+    "exit_code": 0,
+    "stdout": "Oct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: service stopped (unbound 1.19.2).\nOct 10 05:47:29 vynalthai-dns systemd[1]: Stopping unbound.service - Unbound DNS server...\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: server stats for thread 0: 21 queries, 9 answers from cache, 12 recursions, 0 prefetch, 0 rejected by ip ratelimiting\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: server stats for thread 0: requestlist max 4 avg 0.333333 exceeded 3 jostled 0\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: average recursion processing time 0.542767 sec\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: histogram of recursion processing times\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: [25%]=0.006656 median[50%]=0.196608 [75%]=0.881072\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info: lower(secs) upper(secs) recursions\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.001024    0.002048 1\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.004096    0.008192 2\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.008192    0.016384 1\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.131072    0.262144 1\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.262144    0.524288 1\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    0.524288    1.000000 1\nOct 10 05:47:29 vynalthai-dns unbound[8771]: [8771:0] info:    1.000000    2.000000 2\nOct 10 05:47:29 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.\nOct 10 05:47:29 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.\nOct 10 05:47:29 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...\nOct 10 05:47:29 vynalthai-dns (unbound)[13235]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS\nOct 10 05:47:29 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.\nOct 10 05:47:29 vynalthai-dns unbound[13235]: [13235:0] info: start of service (unbound 1.19.2).\nOct 10 05:47:37 vynalthai-dns unbound[13235]: [13235:0] info: service stopped (unbound 1.19.2).\nOct 10 05:47:37 vynalthai-dns systemd[1]: Stopping unbound.service - Unbound DNS server...\nOct 10 05:47:37 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.\nOct 10 05:47:37 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.\nOct 10 05:47:37 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...\nOct 10 05:47:37 vynalthai-dns (unbound)[13423]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS\nOct 10 05:47:37 vynalthai-dns unbound[13423]: [13423:0] notice: init module 0: subnetcache\nOct 10 05:47:37 vynalthai-dns unbound[13423]: [13423:0] notice: init module 1: validator\nOct 10 05:47:37 vynalthai-dns unbound[13423]: [13423:0] notice: init module 2: iterator\nOct 10 05:47:37 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.\nOct 10 05:47:37 vynalthai-dns unbound[13423]: [13423:0] info: start of service (unbound 1.19.2).\nOct 10 06:15:14 vynalthai-dns unbound[13423]: [13423:0] info: generate keytag query _ta-4f66-9728. NULL IN\n",
+    "stderr": ""
+  },
+  "kernel_matching_events": {
+    "exit_code": 0,
+    "matches": []
+  },
+  "package_security_backport": [
+    "    - debian/patches/CVE-2024-33655.patch: fix for the DNSBomb",
+    "    - CVE-2024-33655"
+  ],
+  "options": {
+    "discard-timeout": {
+      "exit_code": 0,
+      "stdout": "1900\n",
+      "stderr": ""
+    },
+    "wait-limit": {
+      "exit_code": 0,
+      "stdout": "1000\n",
+      "stderr": ""
+    },
+    "wait-limit-cookie": {
+      "exit_code": 0,
+      "stdout": "10000\n",
+      "stderr": ""
+    },
+    "val-max-restart": {
+      "exit_code": 0,
+      "stdout": "5\n",
+      "stderr": ""
+    },
+    "val-bogus-ttl": {
+      "exit_code": 0,
+      "stdout": "60\n",
+      "stderr": ""
+    },
+    "serve-expired": {
+      "exit_code": 0,
+      "stdout": "no\n",
+      "stderr": ""
+    }
+  },
+  "read_only": true
+}

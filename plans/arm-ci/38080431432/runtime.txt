@@ -1,0 +1,7 @@
+unbound-checkconf: no errors in /var/lib/unbound/vynalth-test-9qfpcb9q/unbound.conf
+fixture_pid=3003 confinement=unbound (enforce)
+fixture_pid=3006 confinement=unbound (enforce)
+fixture_pid=3007 confinement=unbound (enforce)
+PASS unrelated reverse responses unchanged with/without single-owner identity
+fixture_pid=3008 confinement=unbound (enforce)
+PASS: isolated PTR identity/unrelated reverse, UDP/TCP A/AAAA, DNSSEC valid/bogus/CD, NXDOMAIN, ACL, truncation/TCP fallback, cache, rebinding, local authority outage/recovery, restart, bounded rate limit

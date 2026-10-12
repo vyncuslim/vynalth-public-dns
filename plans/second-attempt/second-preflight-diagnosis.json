@@ -1,0 +1,77 @@
+{
+  "config_sha256": {
+    "pass": true,
+    "actual": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+    "expected": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8"
+  },
+  "apparmor": {
+    "pass": true,
+    "actual": "unbound (enforce)",
+    "expected": "unbound (enforce)"
+  },
+  "nft_sha256": {
+    "pass": true,
+    "actual": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "expected": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9"
+  },
+  "sshd_sha256": {
+    "pass": true,
+    "actual": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344",
+    "expected": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344"
+  },
+  "tailscale_ipv4": {
+    "pass": true,
+    "actual": "100.95.65.20",
+    "expected": "100.95.65.20"
+  },
+  "tailscaled_active": {
+    "pass": true,
+    "actual": "active",
+    "expected": "active"
+  },
+  "unit": {
+    "pass": false,
+    "actual": {
+      "MainPID": "34123",
+      "NRestarts": "0",
+      "MemoryMax": "infinity",
+      "TasksMax": "6964",
+      "LimitNOFILE": "524288",
+      "ActiveState": "active"
+    },
+    "expected": {
+      "MainPID": "13423",
+      "NRestarts": "0",
+      "MemoryMax": "infinity",
+      "TasksMax": "6964",
+      "LimitNOFILE": "524288",
+      "ActiveState": "active"
+    }
+  },
+  "ssh_connection": "100.85.132.14 29105 100.95.65.20 22",
+  "snapshot_timer": [
+    false,
+    false
+  ],
+  "listener_baseline": {
+    "endpoints": [
+      [
+        "tcp",
+        "127.0.0.1:53"
+      ],
+      [
+        "tcp",
+        "[::1]:53"
+      ],
+      [
+        "udp",
+        "127.0.0.1:53"
+      ],
+      [
+        "udp",
+        "[::1]:53"
+      ]
+    ],
+    "pass": true
+  }
+}

@@ -1,0 +1,48 @@
+#cloud-config
+ssh_pwauth: false
+disable_root: true
+package_update: true
+packages:
+  - unbound
+  - dns-root-data
+  - dnsutils
+  - nftables
+  - python3
+  - unattended-upgrades
+write_files:
+  - path: /etc/ssh/sshd_config.d/00-vynalth.conf
+    permissions: '0600'
+    content: |
+      PasswordAuthentication no
+      KbdInteractiveAuthentication no
+      PermitRootLogin no
+      PubkeyAuthentication yes
+      AllowUsers ubuntu
+      X11Forwarding no
+      AllowTcpForwarding no
+  - path: /etc/apt/apt.conf.d/52vynalth-security
+    content: |
+      Unattended-Upgrade::Automatic-Reboot "false";
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+  - path: /etc/systemd/journald.conf.d/vynalth.conf
+    content: |
+      [Journal]
+      SystemMaxUse=64M
+      MaxRetentionSec=7day
+  - path: /etc/unbound/unbound.conf.d/00-vynalth-bootstrap.conf
+    content: |
+      server:
+        interface: 127.0.0.1
+        access-control: 0.0.0.0/0 refuse
+        access-control: 127.0.0.0/8 allow
+        do-ip6: no
+        log-queries: no
+        log-replies: no
+        verbosity: 0
+runcmd:
+  - [sshd, -t]
+  - [systemctl, restart, ssh]
+  - [unbound-checkconf]
+  - [systemctl, enable, --now, unbound]
+# No public listener or firewall changes in bootstrap; deployment requires review.

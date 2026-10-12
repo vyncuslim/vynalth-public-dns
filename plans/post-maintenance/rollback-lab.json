@@ -1,0 +1,35 @@
+{
+  "started_utc": "2026-10-10T07:12:08.370849+00:00",
+  "production_before": {
+    "pid": "34123",
+    "invocation": "2cad7a7d4117419398f15349dcf710f5",
+    "config": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+    "nft": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "ssh": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344"
+  },
+  "production_after": {
+    "pid": "34123",
+    "invocation": "2cad7a7d4117419398f15349dcf710f5",
+    "config": "8808b474175ff8eeebecbf407f9091fd73f65c4a43a6ee212e8ae2d9f80778f8",
+    "nft": "ab2fe6d9f0cd70d6bdd543f40e84589f6a72df3c0db5511d043e5ab7701f10e9",
+    "ssh": "6a343a5d48e53f841c95fd70c02411548d4c4e5097892d048a16b05b554c1344"
+  },
+  "canceled_timer": {
+    "unit": "vynalth-transient-reuse-lab-35736",
+    "armed": "",
+    "active": "NextElapseUSecMonotonic=14h 31min 48.417732s\nActiveState=active\nFragmentPath=/run/systemd/transient/vynalth-transient-reuse-lab-35736.timer",
+    "after_cancel": "LoadState=not-found\nActiveState=inactive\nFragmentPath=",
+    "same_name_rearm": "",
+    "rearm_marker_observed": true,
+    "journal": "Oct 10 07:12:08 vynalthai-dns systemd[1]: Started vynalth-transient-reuse-lab-35736.timer - /usr/bin/touch /var/lib/unbound/vynalth-transient-lrequ1xl/fired.\nOct 10 07:12:08 vynalthai-dns systemd[1]: vynalth-transient-reuse-lab-35736.timer: Deactivated successfully.\nOct 10 07:12:08 vynalthai-dns systemd[1]: Stopped vynalth-transient-reuse-lab-35736.timer - /usr/bin/touch /var/lib/unbound/vynalth-transient-lrequ1xl/fired.\nOct 10 07:12:08 vynalthai-dns systemd[1]: Started vynalth-transient-reuse-lab-35736.timer - /usr/bin/touch /var/lib/unbound/vynalth-transient-lrequ1xl/fired.\nOct 10 07:12:10 vynalthai-dns systemd[1]: Started vynalth-transient-reuse-lab-35736.service - /usr/bin/touch /var/lib/unbound/vynalth-transient-lrequ1xl/fired.\nOct 10 07:12:10 vynalthai-dns systemd[1]: vynalth-transient-reuse-lab-35736.service: Deactivated successfully.\nOct 10 07:12:10 vynalthai-dns systemd[1]: vynalth-transient-reuse-lab-35736.timer: Deactivated successfully."
+  },
+  "real_180s_lab": {
+    "unit": "vynalth-rollback-test-35782",
+    "active_properties": "TimersMonotonic={ OnActiveUSec=3min ; next_elapse=14h 31min 51.033542s }\nNextElapseUSecMonotonic=14h 31min 51.033542s\nAccuracyUSec=1s\nActiveState=active",
+    "exit_code": 0,
+    "elapsed_seconds": 181.385918,
+    "stdout": "Running timer as unit: vynalth-rollback-test-35782.timer\nWill run service as unit: vynalth-rollback-test-35782.service\nWaiting for isolated timer vynalth-rollback-test-35782; production PID=34123\nPASS actual timer after 182s: exact config/settings restored; absent drop-in removed; production PID unchanged\nService daemon-reload/restart calls were stubbed inside isolated mounts; production recovery remains unexecuted.\n",
+    "journal": "Oct 10 07:12:11 vynalthai-dns systemd[1]: Started vynalth-rollback-test-35782.timer - /usr/bin/unshare --mount /bin/bash /home/ubuntu/vynalth-public-dns/tests/service_rollback_lab.sh --inside /var/lib/unbound/vynalth-rollback-test.9hFkWv.\nOct 10 07:15:11 vynalthai-dns systemd[1]: Started vynalth-rollback-test-35782.service - /usr/bin/unshare --mount /bin/bash /home/ubuntu/vynalth-public-dns/tests/service_rollback_lab.sh --inside /var/lib/unbound/vynalth-rollback-test.9hFkWv.\nOct 10 07:15:11 vynalthai-dns systemd[1]: vynalth-rollback-test-35782.service: Deactivated successfully.\nOct 10 07:15:11 vynalthai-dns systemd[1]: vynalth-rollback-test-35782.timer: Deactivated successfully."
+  },
+  "pass": true
+}

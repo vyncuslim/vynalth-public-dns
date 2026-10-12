@@ -1,0 +1,1 @@
+PASS bash syntax: deploy-private/confirm/rollback

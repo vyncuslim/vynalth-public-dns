@@ -1,0 +1,3 @@
+unbound-checkconf: no errors in /var/lib/unbound/vynalth-arm-ci-8fpz9jjr/etc/unbound.conf
+unbound.conf: OK
+unbound-private-limits.conf: OK

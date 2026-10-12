@@ -1,0 +1,11 @@
+{"sample": 1, "pid": "1", "operational_failures": [], "reboot_required": false}
+{"sample": 2, "pid": "2", "operational_failures": [], "reboot_required": false}
+{"capture_complete": false, "deployment_ready": false, "failures": ["Service/host fingerprint changed during stability interval"]}
+{"sample": 1, "pid": "1", "operational_failures": [], "reboot_required": false}
+{"sample": 2, "pid": "1", "operational_failures": [], "reboot_required": false}
+{"capture_complete": true, "deployment_ready": false, "failures": []}
+....................................................................
+----------------------------------------------------------------------
+Ran 68 tests in 0.157s
+
+OK

@@ -1,0 +1,14 @@
+Oct 10 19:37:42 runnervmy3dvn systemd[1]: Started vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service.
+Oct 10 19:37:42 runnervmy3dvn unshare[3162]: [1791661062] unbound[3162:0] info: start of service (unbound 1.19.2).
+Oct 10 19:37:43 runnervmy3dvn unshare[3162]: [1791661063] unbound[3162:0] info: service stopped (unbound 1.19.2).
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Stopping vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service...
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service: Deactivated successfully.
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Stopped vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service.
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Started vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service.
+Oct 10 19:37:43 runnervmy3dvn unshare[3253]: [1791661063] unbound[3253:0] info: start of service (unbound 1.19.2).
+Oct 10 19:37:43 runnervmy3dvn unshare[3253]: [1791661063] unbound[3253:0] info: service stopped (unbound 1.19.2).
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Stopping vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service...
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service: Deactivated successfully.
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Stopped vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service.
+Oct 10 19:37:43 runnervmy3dvn systemd[1]: Started vynalth-arm-ci-83a1914710fc49f1a5988d58630cb4e5.service.
+Oct 10 19:37:43 runnervmy3dvn unshare[3360]: [1791661063] unbound[3360:0] info: start of service (unbound 1.19.2).

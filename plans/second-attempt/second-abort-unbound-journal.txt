@@ -1,0 +1,31 @@
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: service stopped (unbound 1.19.2).
+Oct 10 06:53:53 vynalthai-dns systemd[1]: Stopping unbound.service - Unbound DNS server...
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: server stats for thread 0: 15 queries, 9 answers from cache, 6 recursions, 0 prefetch, 0 rejected by ip ratelimiting
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: server stats for thread 0: requestlist max 0 avg 0 exceeded 2 jostled 0
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: average recursion processing time 0.637237 sec
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: histogram of recursion processing times
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: [25%]=0.004096 median[50%]=0.016384 [75%]=1
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info: lower(secs) upper(secs) recursions
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.002048    0.004096 1
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.008192    0.016384 1
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    0.524288    1.000000 1
+Oct 10 06:53:53 vynalthai-dns unbound[13423]: [13423:0] info:    1.000000    2.000000 1
+Oct 10 06:53:53 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.
+Oct 10 06:53:53 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.
+Oct 10 06:53:53 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...
+Oct 10 06:53:53 vynalthai-dns (unbound)[24650]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS
+Oct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 0: subnetcache
+Oct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 1: validator
+Oct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] notice: init module 2: iterator
+Oct 10 06:53:53 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.
+Oct 10 06:53:53 vynalthai-dns unbound[24650]: [24650:0] info: start of service (unbound 1.19.2).
+Oct 10 06:54:44 vynalthai-dns unbound[24650]: [24650:0] info: generate keytag query _ta-4f66-9728. NULL IN
+Oct 10 06:56:04 vynalthai-dns systemd[1]: unbound.service: Deactivated successfully.
+Oct 10 06:56:04 vynalthai-dns systemd[1]: Stopped unbound.service - Unbound DNS server.
+Oct 10 06:56:04 vynalthai-dns systemd[1]: Starting unbound.service - Unbound DNS server...
+Oct 10 06:56:04 vynalthai-dns (unbound)[34123]: unbound.service: Referenced but unset environment variable evaluates to an empty string: DAEMON_OPTS
+Oct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 0: subnetcache
+Oct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 1: validator
+Oct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] notice: init module 2: iterator
+Oct 10 06:56:04 vynalthai-dns systemd[1]: Started unbound.service - Unbound DNS server.
+Oct 10 06:56:04 vynalthai-dns unbound[34123]: [34123:0] info: start of service (unbound 1.19.2).
