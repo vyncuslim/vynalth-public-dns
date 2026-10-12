@@ -170,15 +170,21 @@ def main():
         parser.error('Capture requires an already approved existing output directory')
     if not args.capture:
         args.out.parent.mkdir(parents=True, exist_ok=True)
-    try:
-        output = args.out.open('x' if args.capture else 'w', encoding='utf-8')
-    except FileExistsError:
+    # Reject existing evidence, including a dangling symlink, before any host read.
+    # The final exclusive open also protects against races during first sampling.
+    if args.capture and os.path.lexists(args.out):
         parser.error('Capture output already exists; never overwrite or retry automatically')
+    output = None
+
     def save():
+        nonlocal output
+        if output is None:
+            output = args.out.open('x' if args.capture else 'w', encoding='utf-8')
         output.seek(0)
         json.dump(result, output, indent=2)
         output.truncate()
         output.flush()
+
     try:
         for index in range(2):
             row = sample(args.ssh_connection)
@@ -190,6 +196,11 @@ def main():
                 result['failures'].append('Pending reboot: maintenance approval required')
             if expected is not None and row['fingerprint'] != expected:
                 result['failures'].append('Pinned baseline drift: new review required, never auto-refresh')
+
+            # STOP before creating evidence, sleeping, or starting sample #2.
+            if index == 0 and result['failures']:
+                raise RuntimeError('First sample rejected; immediate STOP')
+
             save()
             print(json.dumps({'sample': index + 1, 'pid': row['fingerprint']['unit']['MainPID'],
                              'operational_failures': row['operational_failures'], 'reboot_required': row['reboot_required']}), flush=True)
@@ -202,8 +213,11 @@ def main():
     except Exception as exc:
         result['failures'].append(type(exc).__name__ + ': ' + str(exc))
     finally:
-        save()
-        output.close()
+        # Only an approved first sample can cause this file to exist.
+        # Preserve partial evidence after a failure during the second sample.
+        if output is not None:
+            save()
+            output.close()
     print(json.dumps({'capture_complete': result['capture_complete'], 'deployment_ready': result['deployment_ready'], 'failures': result['failures']}), flush=True)
     raise SystemExit(0 if (result['capture_complete'] if args.capture else result['deployment_ready']) else 1)
 
